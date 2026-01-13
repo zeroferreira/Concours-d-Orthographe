@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Permisos para dispositivos móviles -->
   <meta name="permissions" content="microphone">
+  <meta http-equiv="Permissions-Policy" content="microphone=(self)">
   <meta name="mobile-web-app-capable" content="yes">
   <title>Jeu d'Orthographe - Français</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -310,7 +311,7 @@
       // Aplicar configuración base
       recognitionInstance.continuous = config.continuous;
       recognitionInstance.interimResults = config.interimResults;
-      recognitionInstance.lang = 'en-US';
+      recognitionInstance.lang = (window.SPELLING_DATA && window.SPELLING_DATA.language) ? window.SPELLING_DATA.language : 'fr-FR';
       recognitionInstance.maxAlternatives = config.maxAlternatives;
       
       // Configuraciones específicas por dispositivo
@@ -323,7 +324,7 @@
         // Configurar gramática si está disponible
         try {
           const grammarList = new (window.SpeechGrammarList || window.webkitSpeechGrammarList)();
-          const alphabet = 'a b c d e f g h i j k l m n o p q r s t u v w x y z alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima mike november oscar papa quebec romeo sierra tango uniform victor whiskey xray yankee zulu delete clear backspace reset';
+          const alphabet = 'a b c d e f g h i j k l m n o p q r s t u v w x y z ah be ce de e eu ef ge ache i ji ka elle emme enne o pe cu erre esse te u ve doubleve igrec zede alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima mike november oscar papa quebec romeo sierra tango uniform victor whiskey xray yankee zulu delete clear backspace reset efface effacer supprimer';
           const grammar = '#JSGF V1.0; grammar letters; public <letter> = ' + alphabet + ';';
           grammarList.addFromString(grammar, 1);
           recognitionInstance.grammars = grammarList;
@@ -385,64 +386,28 @@
       let lastFinalTranscript = '';
       
       recognitionInstance.onresult = (event) => {
-        console.log('📝 Resultado recibido:', event.results);
-        
-        let interimTranscript = '';
-        let finalTranscript = '';
-        
-        // Procesar todos los resultados
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const transcript = event.results[i][0].transcript;
-          
-          if (event.results[i].isFinal) {
-            finalTranscript += transcript;
-          } else {
-            interimTranscript += transcript;
-          }
+        const results = event.results;
+        const lastIdx = results.length - 1;
+        if (lastIdx < 0) return;
+        const res = results[lastIdx];
+        if (!res || !res[0]) return;
+
+        const transcript = (res[0].transcript || '').trim();
+        const confidence = typeof res[0].confidence === 'number' ? res[0].confidence : 0;
+        setRecognitionConfidence(confidence);
+        setLastRecognizedText(transcript);
+
+        if (!res.isFinal) return;
+
+        const result = processSpokenInput(transcript);
+        if (result === 'DELETE') {
+          setSpokenText(prev => prev.slice(0, -1));
+        } else if (result === 'CLEAR') {
+          setSpokenText('');
+        } else if (result) {
+          setSpokenText(prev => prev + result);
         }
-        
-        // Procesar resultados intermedios
-        if (interimTranscript) {
-          const currentText = interimTranscript.toLowerCase().trim();
-          console.log('🔄 Texto intermedio:', currentText);
-          
-          if (currentText.length > lastProcessedLength) {
-            const newPortion = currentText.substring(lastProcessedLength);
-            const result = processSpokenInput(newPortion);
-            
-            if (result === 'DELETE') {
-              setSpokenText(prev => prev.slice(0, -1));
-              console.log('🗑️ Eliminando última letra');
-            } else if (result === 'CLEAR') {
-              setSpokenText('');
-              console.log('🧹 Limpiando texto');
-            } else if (result) {
-              setSpokenText(prev => prev + result);
-              console.log('🔤 Letras agregadas:', result);
-            }
-            lastProcessedLength = currentText.length;
-          }
-        }
-        
-        // Procesar resultados finales
-        if (finalTranscript) {
-          const currentText = finalTranscript.toLowerCase().trim();
-          console.log('✅ Texto final:', currentText);
-          
-          if (currentText.length > lastProcessedLength) {
-            const newPortion = currentText.substring(lastProcessedLength);
-            const result = processSpokenInput(newPortion);
-            
-            if (result === 'DELETE') {
-              setSpokenText(prev => prev.slice(0, -1));
-            } else if (result === 'CLEAR') {
-              setSpokenText('');
-            } else if (result) {
-              setSpokenText(prev => prev + result);
-            }
-          }
-          lastProcessedLength = 0;
-        }
+        lastProcessedLength = 0;
       };
       
       recognitionInstance.onerror = (event) => {
@@ -628,26 +593,15 @@
       alert(helpMessage);
     };
 
-    // Función de toggle mejorada
-    const toggleListening = async () => {
-      console.log('🔘 Toggle - Estado actual:', isListening);
-      
-      if (!recognition) {
-        try {
-          // Para móviles, solicitar permisos primero
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-          
-          if (isMobile) {
-            // En móviles, intentar obtener permisos de micrófono primero
-            try {
-              await navigator.mediaDevices.getUserMedia({ audio: true });
-              console.log('✅ Permisos de micrófono obtenidos');
-            } catch (permError) {
-              console.error('❌ Error de permisos:', permError);
-              alert('Para usar el reconocimiento de voz en móvil:\n\n1. Permite el acceso al micrófono\n2. Usa Chrome en Android o Safari en iOS\n3. Asegúrate de tener conexión a internet');
-              return;
-            }
-          }
+      // Función de toggle mejorada
+      const toggleListening = async () => {
+        console.log('🔘 Toggle - Estado actual:', isListening);
+        
+        if (!recognition) {
+          try {
+          const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          stream.getTracks().forEach(track => track.stop());
+          console.log('✅ Permisos de micrófono obtenidos');
           
           // Crear nuevo reconocimiento
           const newRecognition = initSpeechRecognition();
@@ -1182,149 +1136,171 @@
         return sequences;
       };
 
+      const normalizeForCompare = (text) => {
+        return (text || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[’']/g, '')
+          .replace(/[^a-z]/g, '');
+      };
+
+      const enhancedFrenchLetterMap = {
+        a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h', i: 'i', j: 'j',
+        k: 'k', l: 'l', m: 'm', n: 'n', o: 'o', p: 'p', q: 'q', r: 'r', s: 's', t: 't',
+        u: 'u', v: 'v', w: 'w', x: 'x', y: 'y', z: 'z',
+
+        ah: 'a',
+        be: 'b',
+        ce: 'c',
+        de: 'd',
+        eu: 'e',
+        ef: 'f', effe: 'f',
+        ge: 'g',
+        ache: 'h',
+        ji: 'j',
+        ka: 'k',
+        elle: 'l',
+        emme: 'm',
+        enne: 'n',
+        pe: 'p',
+        cu: 'q',
+        erre: 'r',
+        esse: 's',
+        te: 't',
+        ve: 'v',
+        doubleve: 'w',
+        iks: 'x',
+        igrec: 'y',
+        zede: 'z',
+
+        ay: 'a', bee: 'b', see: 'c', sea: 'c', dee: 'd', ee: 'e', eff: 'f', gee: 'g',
+        aitch: 'h', eye: 'i', jay: 'j', kay: 'k', el: 'l', em: 'm', en: 'n', oh: 'o',
+        pee: 'p', cue: 'q', are: 'r', ess: 's', tea: 't', you: 'u', vee: 'v',
+        doubleyou: 'w', ex: 'x', why: 'y', zed: 'z', zee: 'z',
+
+        alpha: 'a', bravo: 'b', charlie: 'c', delta: 'd', echo: 'e', foxtrot: 'f',
+        golf: 'g', hotel: 'h', india: 'i', juliet: 'j', kilo: 'k', lima: 'l', mike: 'm',
+        november: 'n', oscar: 'o', papa: 'p', quebec: 'q', romeo: 'r', sierra: 's',
+        tango: 't', uniform: 'u', victor: 'v', whiskey: 'w', xray: 'x', yankee: 'y', zulu: 'z',
+
+        delete: 'DELETE', backspace: 'DELETE', clear: 'CLEAR', reset: 'CLEAR',
+        supprimer: 'DELETE', efface: 'DELETE', effacer: 'CLEAR'
+      };
+
       // Función para detectar si el input parece deletreo
       const isLikelySpelling = (transcript) => {
-        const words = transcript.toLowerCase().split(/\s+/);
-        
-        // Criterios para detectar deletreo:
-        // 1. Palabras cortas (1-3 caracteres típicamente)
-        // 2. Pausas entre palabras (indicativo de deletreo)
-        // 3. Patrones conocidos de pronunciación de letras
-        
-        let spellingIndicators = 0;
-        
-        for (const word of words) {
-          // Palabras de 1-3 caracteres son más probables de ser deletreo
-          if (word.length <= 3) spellingIndicators++;
-          
-          // Palabras que suenan como letras
-          if (['ay', 'bee', 'see', 'dee', 'ee', 'eff', 'gee', 'aitch', 'eye', 'jay'].includes(word)) {
-            spellingIndicators += 2;
-          }
-          
-          // Alfabeto NATO
-          if (['alpha', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot'].includes(word)) {
-            spellingIndicators += 2;
+        const cleaned = (transcript || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[’']/g, ' ')
+          .replace(/[^a-z\s-]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        if (!cleaned) return false;
+
+        const tokens = cleaned
+          .replace(/\bdouble\s+ve\b/g, 'doubleve')
+          .replace(/\bi\s+grec\b/g, 'igrec')
+          .split(/\s+/)
+          .filter(Boolean);
+
+        if (!tokens.length) return false;
+
+        let recognized = 0;
+        let unknownLong = 0;
+        for (const token of tokens) {
+          if (enhancedFrenchLetterMap[token] || (token.length === 1 && /[a-z]/.test(token))) {
+            recognized++;
+          } else if (token.length > 1) {
+            unknownLong++;
           }
         }
-        
-        // Si más del 70% de las palabras parecen deletreo, procesar
-        const spellingRatio = spellingIndicators / words.length;
-        return spellingRatio > 0.7;
+
+        if (recognized === 0) return false;
+        if (unknownLong > 0 && recognized / tokens.length < 0.8) return false;
+        return recognized / tokens.length >= 0.6;
       };
 
       // Función para detectar si el input contiene palabras completas
       const containsCompleteWords = (transcript) => {
-        const commonWords = [
-          // Palabras comunes que no son deletreo
-          'hello', 'hi', 'yes', 'no', 'okay', 'ok', 'thanks', 'please',
-          'start', 'begin', 'ready', 'done', 'finished', 'next', 'again',
-          'good', 'bad', 'great', 'nice', 'well', 'fine', 'stop', 'wait',
-          'help', 'sorry', 'excuse', 'what', 'when', 'where', 'how', 'why',
-          'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of',
-          'with', 'by', 'from', 'up', 'about', 'into', 'through', 'during',
-          'before', 'after', 'above', 'below', 'between', 'among', 'under',
-          'over', 'inside', 'outside', 'is', 'are', 'was', 'were', 'be',
-          'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did',
-          'will', 'would', 'could', 'should', 'may', 'might', 'can', 'must',
-          'shall', 'this', 'that', 'these', 'those', 'some', 'any', 'many',
-          'much', 'few', 'little', 'all', 'both', 'each', 'every', 'either',
-          'neither', 'one', 'two', 'three', 'four', 'five', 'first', 'second',
-          'third', 'last', 'other', 'another', 'same', 'different', 'new',
-          'old', 'big', 'small', 'long', 'short', 'high', 'low', 'right',
-          'wrong', 'true', 'false', 'goodbye', 'maybe', 'perhaps', 'probably',
-          'definitely', 'actually', 'really', 'very', 'quite', 'rather',
-          'pretty', 'fairly', 'extremely', 'completely', 'totally', 'absolutely'
-        ];
-        
-        const words = transcript.toLowerCase().split(/\s+/);
-        
-        // Si detecta palabras completas de más de 3 letras, probablemente no es deletreo
-        for (const word of words) {
-          if (word.length > 3 && commonWords.includes(word)) {
-            console.log('🚫 Palabra completa detectada, ignorando:', word);
+        const cleaned = (transcript || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[’']/g, ' ')
+          .replace(/[^a-z\s-]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        if (!cleaned) return false;
+
+        const tokens = cleaned
+          .replace(/\bdouble\s+ve\b/g, 'doubleve')
+          .replace(/\bi\s+grec\b/g, 'igrec')
+          .split(/\s+/)
+          .filter(Boolean);
+
+        if (currentWord && currentWord.word) {
+          const target = normalizeForCompare(currentWord.word);
+          const merged = normalizeForCompare(cleaned);
+          const letterishCount = tokens.filter(t => enhancedFrenchLetterMap[t] || (t.length === 1 && /[a-z]/.test(t))).length;
+          if (letterishCount < 2 && merged === target) {
             return true;
           }
         }
-        
-        // Detectar frases típicas de conversación
-        const conversationPhrases = [
-          'how are you', 'what is this', 'i dont know', 'i don\'t know',
-          'can you help', 'thank you', 'excuse me', 'i\'m sorry',
-          'what do you', 'how do you', 'where is the', 'what time is',
-          'good morning', 'good afternoon', 'good evening', 'good night',
-          'see you later', 'talk to you', 'nice to meet'
-        ];
-        
-        const fullText = transcript.toLowerCase();
-        for (const phrase of conversationPhrases) {
-          if (fullText.includes(phrase)) {
-            console.log('🚫 Frase conversacional detectada, ignorando:', phrase);
+
+        for (const token of tokens) {
+          if (token.length >= 4 && !enhancedFrenchLetterMap[token]) {
             return true;
           }
         }
-        
+
         return false;
       };
 
       // Función simplificada SOLO para deletreo
       const processSpokenInput = (transcript) => {
         console.log('🔤 Procesando input:', transcript);
+
+        if (containsCompleteWords(transcript)) {
+          console.log('🚫 Input ignorado por contener palabras completas o conversación');
+          return '';
+        }
         
         // Verificar si parece deletreo
         if (!isLikelySpelling(transcript)) {
           console.log('🚫 No parece deletreo, ignorando:', transcript);
           return '';
         }
-        
-        // Filtrar palabras completas y conversación
-        if (containsCompleteWords(transcript)) {
-          console.log('🚫 Input ignorado por contener palabras completas o conversación');
-          return '';
-        }
-        
-        // Mapeo mejorado de letras
-        const letterMap = {
-          // Letras básicas
-          'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f', 'g': 'g', 'h': 'h',
-          'i': 'i', 'j': 'j', 'k': 'k', 'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'p': 'p',
-          'q': 'q', 'r': 'r', 's': 's', 't': 't', 'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x',
-          'y': 'y', 'z': 'z',
-          
-          // Pronunciaciones comunes
-          'ay': 'a', 'bee': 'b', 'see': 'c', 'sea': 'c', 'dee': 'd', 'ee': 'e',
-          'eff': 'f', 'gee': 'g', 'aitch': 'h', 'eye': 'i', 'jay': 'j', 'kay': 'k',
-          'el': 'l', 'em': 'm', 'en': 'n', 'oh': 'o', 'pee': 'p', 'cue': 'q',
-          'are': 'r', 'ess': 's', 'tea': 't', 'you': 'u', 'vee': 'v',
-          'double you': 'w', 'doubleyou': 'w', 'ex': 'x', 'why': 'y', 'zee': 'z', 'zed': 'z',
-          
-          // Alfabeto fonético NATO
-          'alpha': 'a', 'bravo': 'b', 'charlie': 'c', 'delta': 'd', 'echo': 'e',
-          'foxtrot': 'f', 'golf': 'g', 'hotel': 'h', 'india': 'i', 'juliet': 'j',
-          'kilo': 'k', 'lima': 'l', 'mike': 'm', 'november': 'n', 'oscar': 'o',
-          'papa': 'p', 'quebec': 'q', 'romeo': 'r', 'sierra': 's', 'tango': 't',
-          'uniform': 'u', 'victor': 'v', 'whiskey': 'w', 'xray': 'x', 'x-ray': 'x',
-          'yankee': 'y', 'zulu': 'z',
-          
-          // Comandos especiales
-          'delete': 'DELETE', 'backspace': 'DELETE', 'clear': 'CLEAR', 'reset': 'CLEAR'
-        };
-        
-        const words = transcript.toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/);
+
+        const cleaned = (transcript || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[’']/g, ' ')
+          .replace(/[^a-z\s-]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+        const words = cleaned
+          .replace(/\bdouble\s+ve\b/g, 'doubleve')
+          .replace(/\bi\s+grec\b/g, 'igrec')
+          .split(/\s+/)
+          .filter(Boolean);
+
         let letters = '';
         
         for (const word of words) {
           const cleanWord = word.trim();
           
-          if (letterMap[cleanWord]) {
-            if (cleanWord === 'delete' || cleanWord === 'backspace') {
-              return 'DELETE';
-            } else if (cleanWord === 'clear' || cleanWord === 'reset') {
-              return 'CLEAR';
-            } else {
-              letters += letterMap[cleanWord];
-              console.log('🔤 Letra detectada:', cleanWord, '->', letterMap[cleanWord]);
-            }
+          if (enhancedFrenchLetterMap[cleanWord]) {
+            if (['delete', 'backspace', 'supprimer', 'efface'].includes(cleanWord)) return 'DELETE';
+            if (['clear', 'reset', 'recommence', 'nouveau', 'effacer'].includes(cleanWord)) return 'CLEAR';
+            letters += enhancedFrenchLetterMap[cleanWord];
+            console.log('🔤 Letra detectada:', cleanWord, '->', enhancedFrenchLetterMap[cleanWord]);
           } else if (cleanWord.length === 1 && /[a-z]/.test(cleanWord)) {
             letters += cleanWord;
             console.log('🔤 Letra directa:', cleanWord);
@@ -1337,7 +1313,7 @@
 
     // Función para verificar la palabra
       const checkSpelling = () => {
-        if (currentWord && spokenText.toLowerCase() === currentWord.word.toLowerCase()) {
+        if (currentWord && normalizeForCompare(spokenText) === normalizeForCompare(currentWord.word)) {
           setIsCorrect(true);
           // Detener reconocimiento de voz si está activo
           if (isListening && recognition) {
@@ -5212,6 +5188,7 @@
 
         const targetWord = currentWord.word.toLowerCase();
         const spoken = spokenText.toLowerCase();
+        const normalizeChar = (ch) => (ch || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const letters = [];
 
         for (let i = 0; i < Math.max(targetWord.length, spoken.length); i++) {
@@ -5221,7 +5198,7 @@
           let letterClass = 'inline-block text-lg sm:text-xl lg:text-2xl font-mono font-bold mx-1 px-2 py-2 rounded-lg transition-all duration-300 ';
           
           if (i < spoken.length) {
-            if (spokenLetter === targetLetter) {
+            if (normalizeChar(spokenLetter) === normalizeChar(targetLetter)) {
               letterClass += 'text-green-700 bg-green-100 border-2 border-green-300';
             } else {
               letterClass += 'text-red-700 bg-red-100 border-2 border-red-300 animate-pulse';
