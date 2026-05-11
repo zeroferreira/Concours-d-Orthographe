@@ -5614,7 +5614,7 @@
             
             if (i < spoken.length && i < target.length) {
               // Ambas letras existen - comparar
-              displayLetter = spokenLetter.toUpperCase();
+              displayLetter = spokenLetter;
               if (spokenLetter === targetLetter) {
                 letterClass += 'text-green-800 bg-green-200 border-green-400';
               } else {
@@ -5622,11 +5622,11 @@
               }
             } else if (i < spoken.length) {
               // Letra extra deletreada
-              displayLetter = spokenLetter.toUpperCase();
+              displayLetter = spokenLetter;
               letterClass += 'text-red-800 bg-red-200 border-red-400';
             } else {
               // Letra faltante (mostrar la letra objetivo)
-              displayLetter = targetLetter.toUpperCase();
+              displayLetter = targetLetter;
               letterClass += 'text-gray-600 bg-gray-200 border-gray-400';
             }
             
@@ -5844,7 +5844,7 @@
             React.createElement('span', {
               key: i,
               className: letterClass
-            }, spokenLetter.toUpperCase() || '_')
+            }, spokenLetter || '_')
           );
         }
 

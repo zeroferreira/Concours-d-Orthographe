@@ -5282,7 +5282,7 @@
             React.createElement('span', {
               key: i,
               className: letterClass
-            }, spokenLetter.toUpperCase() || '_')
+            }, spokenLetter || '_')
           );
         }
 
@@ -5487,7 +5487,7 @@
                                       spokenText && React.createElement('div', { className: 'text-center' },
                                         React.createElement('div', { className: 'text-xs font-medium text-gray-600 mb-1' }, 'Actuel'),
                                         React.createElement('div', { className: 'current-spelling' },
-                                          React.createElement('strong', { className: 'text-blue-600 text-sm font-mono' }, spokenText.toUpperCase())
+                                          React.createElement('strong', { className: 'text-blue-600 text-sm font-mono' }, spokenText)
                                         )
                                       ),
                                       // Target (Centro)
@@ -5511,7 +5511,7 @@
                                                     'bg-red-200 text-red-800 incorrect') : 
                                                   'bg-gray-200 text-gray-600 pending'
                                               }`
-                                            }, letter.toUpperCase())
+                                            }, letter)
                                           )
                                         )
                                       )

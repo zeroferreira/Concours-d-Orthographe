@@ -4622,7 +4622,7 @@
             React.createElement('span', {
               key: i,
               className: letterClass
-            }, spokenLetter.toUpperCase() || '_')
+            }, spokenLetter || '_')
           );
         }
 
@@ -4742,7 +4742,7 @@
                             React.createElement('div', { className: 'text-xs font-medium text-gray-600 mb-1' }, 'Aktuell'),
                             React.createElement('div', { className: 'current-spelling' },
                               React.createElement('div', { className: 'text-sm font-mono text-gray-800 min-h-[1.5rem] flex items-center justify-center' }, 
-                                spokenText.toUpperCase() || '-'
+                                spokenText || '-'
                               )
                             )
                           ),
@@ -4770,7 +4770,7 @@
                                       : 'bg-gray-100 border-gray-300 text-gray-500'
                                   }`
                                 }, 
-                                  index < spokenText.length ? spokenText[index].toUpperCase() : letter.toUpperCase()
+                                  index < spokenText.length ? (spokenText[index] || '') : (letter || '')
                                 )
                               )
                             )
