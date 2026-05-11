@@ -545,7 +545,8 @@
       'löschen': 'DELETE', 'loeschen': 'DELETE', 'loschen': 'DELETE',
       'zurück': 'DELETE', 'zurueck': 'DELETE', 'entfernen': 'DELETE',
       'leer': 'CLEAR', 'neu': 'CLEAR', 'anfang': 'CLEAR', 'von vorn': 'CLEAR', 'vonvorn': 'CLEAR',
-      'delete': 'DELETE', 'backspace': 'DELETE', 'clear': 'CLEAR', 'reset': 'CLEAR'
+      'delete': 'DELETE', 'backspace': 'DELETE', 'clear': 'CLEAR', 'reset': 'CLEAR',
+      'groß': 'CAPITAL', 'gross': 'CAPITAL', 'capital': 'CAPITAL'
     };
 
     const normalizeForCompare = (text) => {
@@ -671,18 +672,36 @@
         .filter(Boolean);
 
       let letters = '';
+      let nextUpper = false;
       
       for (const word of words) {
         const cleanWord = word.trim();
+        if (!cleanWord) continue;
         
         if (enhancedGermanLetterMap[cleanWord]) {
-          if (enhancedGermanLetterMap[cleanWord] === 'DELETE') return 'DELETE';
-          if (enhancedGermanLetterMap[cleanWord] === 'CLEAR') return 'CLEAR';
-          letters += enhancedGermanLetterMap[cleanWord];
-          console.log('🔤 Letra detectada:', cleanWord, '->', enhancedGermanLetterMap[cleanWord]);
+          const mappedValue = enhancedGermanLetterMap[cleanWord];
+          if (mappedValue === 'DELETE') return 'DELETE';
+          if (mappedValue === 'CLEAR') return 'CLEAR';
+          if (mappedValue === 'CAPITAL') {
+            nextUpper = true;
+            continue;
+          }
+          
+          let charToAdd = mappedValue;
+          if (nextUpper && charToAdd.length === 1) {
+            charToAdd = charToAdd.toUpperCase();
+            nextUpper = false;
+          }
+          letters += charToAdd;
+          console.log('🔤 Letra detectada:', cleanWord, '->', charToAdd);
         } else if (cleanWord.length === 1 && /[a-zäöüß]/.test(cleanWord)) {
-          letters += cleanWord;
-          console.log('🔤 Letra directa:', cleanWord);
+          let charToAdd = cleanWord;
+          if (nextUpper) {
+            charToAdd = charToAdd.toUpperCase();
+            nextUpper = false;
+          }
+          letters += charToAdd;
+          console.log('🔤 Letra directa:', cleanWord, '->', charToAdd);
         }
       }
       
@@ -5671,6 +5690,17 @@
           console.error('NavigationBar: isMenuOpen state not available');
           return null;
         }
+
+        const handleAdminAccess = () => {
+          const pass = prompt("Admin-Passwort:");
+          // Ofuscación simple: 1415130
+          if (pass === atob('MTQxNTEzMA==')) {
+            setCurrentScreen('admin');
+            setIsMenuOpen(false);
+          } else if (pass !== null) {
+            alert("Falsches Passwort");
+          }
+        };
         
         return React.createElement('nav', { 
           className: 'bg-black text-white shadow-lg relative',
@@ -5765,10 +5795,7 @@
                   }`
                 }, 'Ruhmeshalle'),
                 React.createElement('button', {
-                  onClick: () => {
-                    setCurrentScreen('admin');
-                    setIsMenuOpen(false);
-                  },
+                  onClick: handleAdminAccess,
                   className: `px-4 py-2 rounded-lg font-bold transition-all duration-300 ${
                     currentScreen === 'admin' 
                       ? 'bg-yellow-400 text-black' 
@@ -5781,7 +5808,7 @@
             // Menú móvil desplegable
             React.createElement('div', {
               className: `md:hidden absolute top-full left-0 right-0 bg-black transition-all duration-300 ease-in-out overflow-hidden z-50 ${
-                isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
               }`
             },
               React.createElement('div', { className: 'py-4 space-y-2 border-t border-gray-700' },
@@ -5844,10 +5871,7 @@
                   }`
                 }, '🏅 Ruhmeshalle'),
                 React.createElement('button', {
-                  onClick: () => {
-                    setCurrentScreen('admin');
-                    setIsMenuOpen(false);
-                  },
+                  onClick: handleAdminAccess,
                   className: `w-full text-left px-4 py-3 rounded-lg font-bold transition-all duration-300 ${
                     currentScreen === 'admin' 
                       ? 'bg-yellow-400 text-black' 
@@ -5885,7 +5909,7 @@
           // Botón principal
           React.createElement('button', {
             onClick: () => setShowHelpMenu(!showHelpMenu),
-            className: 'w-14 h-14 bg-yellow-400 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold hover:bg-yellow-500 transition-all duration-300 transform hover:scale-110'
+            className: 'w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-2xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 border-2 border-gray-200'
           }, '?'),
           
           // Gesto/Botón para acoplar (dock)
@@ -5900,7 +5924,7 @@
           
           // Menú de opciones (desplegable arriba del botón)
           showHelpMenu && React.createElement('div', {
-            className: 'absolute bottom-16 right-0 bg-white rounded-xl shadow-2xl p-2 w-48 border-2 border-yellow-400 animate-slideUp'
+            className: 'absolute bottom-16 right-0 bg-white rounded-xl shadow-2xl p-2 w-48 border-2 border-gray-200 animate-slideUp'
           },
             React.createElement('button', {
               onClick: () => {
