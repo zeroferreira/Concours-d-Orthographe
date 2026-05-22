@@ -3,685 +3,685 @@ window.SPELLING_DATA = {
   "levelAWords": [
     {
       "word": "Apfel",
-      "phonetic": "",
+      "phonetic": "[ˈapfəl]",
       "definition": "Manzana",
       "example": "Ich esse einen Apfel."
     },
     {
       "word": "Wurst",
-      "phonetic": "",
+      "phonetic": "[vʊʁst]",
       "definition": "Salchicha",
       "example": "Das Mädchen isst eine Wurst."
     },
     {
       "word": "Bier",
-      "phonetic": "",
+      "phonetic": "[biːɐ̯]",
       "definition": "Cerveza",
       "example": "Ich trinke ein Bier."
     },
     {
       "word": "Schokolade",
-      "phonetic": "",
+      "phonetic": "[ʃokoˈlaːdə]",
       "definition": "Chocolate",
-      "example": "Der Junge isst die Schokoladetablete."
+      "example": "Der Junge isst eine Tafel Schokolade."
     },
     {
       "word": "Stadt",
-      "phonetic": "",
+      "phonetic": "[ʃtat]",
       "definition": "Ciudad",
       "example": "Die Mädchen besucht eine neue Stadt."
     },
     {
       "word": "Geschichte",
-      "phonetic": "",
+      "phonetic": "[ɡəˈʃɪçtə]",
       "definition": "Historia",
       "example": "Eine wahre Geschichte"
     },
     {
       "word": "Lösung",
-      "phonetic": "",
+      "phonetic": "[ˈløːzʊŋ]",
       "definition": "Solución",
       "example": "Es gibt eine alternative Lösung."
     },
     {
       "word": "Flasche",
-      "phonetic": "",
+      "phonetic": "[ˈflaʃə]",
       "definition": "Botella",
       "example": "Ich kaufe eine Flasche."
     },
     {
       "word": "Prüfung",
-      "phonetic": "",
+      "phonetic": "[ˈpʁyːfʊŋ]",
       "definition": "Examen",
       "example": "Die Studenten machen eine Prüfung."
     },
     {
       "word": "Hauptstadt",
-      "phonetic": "",
+      "phonetic": "[ˈhaʊ̯ptˌʃtat]",
       "definition": "Capital",
-      "example": "London ist die Hauptstadt der Verreinigten Königreiches."
+      "example": "London ist die Hauptstadt des Vereinigten Königreichs."
     },
     {
       "word": "Wörterbuch",
-      "phonetic": "",
+      "phonetic": "[ˈvœʁtɐˌbuːx]",
       "definition": "Diccionario",
       "example": "Ich suche neue Wörter im Wörterbuch."
     },
     {
       "word": "Bleistift",
-      "phonetic": "",
+      "phonetic": "[ˈblaɪ̯ˌʃtɪft]",
       "definition": "Lápiz",
       "example": "Ich schreibe mit meinem neuen Bleistift."
     },
     {
       "word": "Kugelschreiber",
-      "phonetic": "",
+      "phonetic": "[ˈkuːɡl̩ˌʃʁaɪ̯bɐ]",
       "definition": "Lapicero",
       "example": "Ich möchte dir diesen Kugelschreiber schenken."
     },
     {
       "word": "Österreich",
-      "phonetic": "",
+      "phonetic": "[ˈøːstəʁaɪ̯ç]",
       "definition": "Austria",
-      "example": "Österreich ist ein Land in Mitteleuropa"
+      "example": "Österreich ist ein Land in Mitteleuropa."
     },
     {
-      "word": "Süβigkeiten",
-      "phonetic": "",
+      "word": "Süßigkeiten",
+      "phonetic": "[ˈzyːsɪçkaɪ̯tən]",
       "definition": "Dulces",
-      "example": "Die Süssigkeiten schmeckten sehr gut."
+      "example": "Die Süßigkeiten schmeckten sehr gut."
     },
     {
       "word": "Hausaufgabe",
-      "phonetic": "",
+      "phonetic": "[ˈhaʊ̯saʊ̯fˌɡaːbə]",
       "definition": "Tarea",
       "example": "Die Studenten machen die Hausaufgabe."
     },
     {
-      "word": "Straβe",
-      "phonetic": "",
+      "word": "Straße",
+      "phonetic": "[ˈʃtʁaːsə]",
       "definition": "Calle",
-      "example": "Diese Straβe ist sehr lang."
+      "example": "Diese Straße ist sehr lang."
     },
     {
       "word": "Schneemann",
-      "phonetic": "",
+      "phonetic": "[ˈʃneːˌman]",
       "definition": "Muñeco de nieve",
       "example": "Die Kinder wollen einen Schneemann im Winter bauen."
     },
     {
       "word": "Lieblingssprache",
-      "phonetic": "",
+      "phonetic": "[ˈliːblɪŋsˌʃpʁaːxə]",
       "definition": "Idioma Favorito",
       "example": "Was ist deine Lieblingssprache?"
     },
     {
       "word": "Wohnung",
-      "phonetic": "",
+      "phonetic": "[ˈvoːnʊŋ]",
       "definition": "Departamento",
       "example": "Die Frau wohnt in einer schönen Wohnung."
     },
     {
-      "word": "Willkommen",
-      "phonetic": "",
+      "word": "willkommen",
+      "phonetic": "[vɪlˈkɔmən]",
       "definition": "Bienvenido",
       "example": "Fragen sind jederzeit willkommen."
     },
     {
       "word": "Freitag",
-      "phonetic": "",
+      "phonetic": "[ˈfʁaɪ̯taːk]",
       "definition": "Viernes",
       "example": "Ich arbeite normalerweise von Montag bis Freitag."
     },
     {
       "word": "Dienstag",
-      "phonetic": "",
+      "phonetic": "[ˈdiːnstaːk]",
       "definition": "Martes",
       "example": "Jeden Dienstag Ich spiele Tennis."
     },
     {
       "word": "Geschäft",
-      "phonetic": "",
+      "phonetic": "[ɡəˈʃɛft]",
       "definition": "Negocio",
       "example": "Das Geschäft hat den ganzen Tag geöffnet."
     },
     {
       "word": "Radiergummi",
-      "phonetic": "",
+      "phonetic": "[ʁaˈdiːɐ̯ˌɡʊmi]",
       "definition": "Goma para borrar",
       "example": "Alle Kinder in der Klasse brauchen einen Radiergummi."
     },
     {
       "word": "Ausländer",
-      "phonetic": "",
+      "phonetic": "[ˈaʊ̯sˌlɛndɐ]",
       "definition": "Persona extranjera",
       "example": "Diese Menschen sind Ausländer."
     },
     {
       "word": "Parkplatz",
-      "phonetic": "",
-      "definition": "Estacionamineto",
+      "phonetic": "[ˈpaʁkˌplats]",
+      "definition": "Estacionamiento",
       "example": "Es gibt keinen Parkplatz im Hotel."
     },
     {
       "word": "Frühstück",
-      "phonetic": "",
+      "phonetic": "[ˈfʁyːˌʃtʏk]",
       "definition": "Desayuno",
       "example": "Was möchtest du zum Frühstück?"
     },
     {
       "word": "Abitur",
-      "phonetic": "",
-      "definition": "Titulo/ diploma",
+      "phonetic": "[abiˈtuːɐ̯]",
+      "definition": "Título / diploma",
       "example": "Das Abitur machen/bestanden."
     },
     {
       "word": "Mathematik",
-      "phonetic": "",
+      "phonetic": "[matemaˈtiːk]",
       "definition": "matemáticas",
       "example": "Mathematik war ich nie meine Stärke."
     },
     {
       "word": "Söhne",
-      "phonetic": "",
+      "phonetic": "[ˈzøːnə]",
       "definition": "hijos",
       "example": "Er hat sieben Söhne"
     },
     {
       "word": "Schwesterchen",
-      "phonetic": "",
+      "phonetic": "[ˈʃvɛstɐçən]",
       "definition": "hermanita",
       "example": "Ich gönne es meinem Schwesterchen."
     },
     {
       "word": "Verkäufer",
-      "phonetic": "",
+      "phonetic": "[fɛɐ̯ˈkɔɪ̯fɐ]",
       "definition": "vendedor(a)",
       "example": "Vom Verkäufer beherrschter Markt."
     },
     {
       "word": "Schwimmbad",
-      "phonetic": "",
+      "phonetic": "[ˈʃvɪmˌbaːt]",
       "definition": "alberca",
       "example": "Das Hotel verfügt über ein hauseigenes Schwimmbad."
     },
     {
       "word": "Ingenieur",
-      "phonetic": "",
+      "phonetic": "[ɪnʒeˈni̯øːɐ̯]",
       "definition": "ingeniero",
       "example": "Ingenieur für Straßenbau."
     },
     {
       "word": "Mechaniker",
-      "phonetic": "",
+      "phonetic": "[meˈçaːnɪkɐ]",
       "definition": "mecánico",
       "example": "Der Mechaniker weiß es nicht."
     },
     {
       "word": "Krankenschwester",
-      "phonetic": "",
+      "phonetic": "[ˈkʁaŋkn̩ˌʃvɛstɐ]",
       "definition": "enfermera",
       "example": "Die Krankenschwester kümmerte sich um die Erneuerung der Verbände."
     },
     {
       "word": "Schildkröte",
-      "phonetic": "",
+      "phonetic": "[ˈʃɪltˌkʁøːtə]",
       "definition": "tortuga",
       "example": "Die Schildkröte ist langsam."
     },
     {
       "word": "Schwein",
-      "phonetic": "",
+      "phonetic": "[ʃvaɪ̯n]",
       "definition": "cerdo",
       "example": "Wahrscheinlich war es nicht das Schwein."
     },
     {
       "word": "Mund",
-      "phonetic": "",
+      "phonetic": "[mʊnt]",
       "definition": "boca",
       "example": "Von Mund zu Mund beatmen."
     },
     {
       "word": "Knie",
-      "phonetic": "",
+      "phonetic": "[kniː]",
       "definition": "rodilla",
       "example": "Auf die Knie fallen."
     },
     {
       "word": "Mikrowelle",
-      "phonetic": "",
+      "phonetic": "[ˈmiːkʁoˌvɛlə]",
       "definition": "microondas",
       "example": "Die Mikrowelle brennt."
     },
     {
       "word": "Kaution",
-      "phonetic": "",
+      "phonetic": "[kaʊ̯ˈtsi̯oːn]",
       "definition": "fianza/ garantía",
       "example": "Erhebung einer Kaution für Schlüssel."
     },
     {
       "word": "Aufzug",
-      "phonetic": "",
+      "phonetic": "[ˈaʊ̯fˌtsuːk]",
       "definition": "elevador",
       "example": "Der Aufzug funktioniert nicht"
     },
     {
       "word": "Verkehrsmittel",
-      "phonetic": "",
+      "phonetic": "[fɛɐ̯ˈkeːɐ̯sˌmɪtl̩]",
       "definition": "transporte público",
       "example": "Die öffentlichen Verkehrsmittel."
     },
     {
       "word": "Beziehung",
-      "phonetic": "",
+      "phonetic": "[bəˈtsiːʊŋ]",
       "definition": "relación",
       "example": "Eine Beziehung eingehen."
     },
     {
       "word": "erzählen",
-      "phonetic": "",
+      "phonetic": "[ɛɐ̯ˈtsɛːlən]",
       "definition": "contar/narrar",
       "example": "über sich selbst erzählen"
     },
     {
-      "word": "schnupfen",
-      "phonetic": "",
+      "word": "Schnupfen",
+      "phonetic": "[ˈʃnʊpfən]",
       "definition": "estar congestionado",
       "example": "Er hat Schnupfen."
     },
     {
       "word": "aufwachsen",
-      "phonetic": "",
+      "phonetic": "[ˈaʊ̯fˌvaksən]",
       "definition": "crecer/ criarse",
       "example": "Du wirst aufwachsen."
     },
     {
       "word": "weinen",
-      "phonetic": "",
+      "phonetic": "[ˈvaɪ̯nən]",
       "definition": "llorar",
       "example": "Krokodilstränen weinen!"
     },
     {
       "word": "schlafen",
-      "phonetic": "",
+      "phonetic": "[ˈʃlaːfən]",
       "definition": "dormir",
       "example": "Du musst bei offenem Fenster schlafen."
     },
     {
       "word": "frühstücken",
-      "phonetic": "",
+      "phonetic": "[ˈfʁyːˌʃtʏkən]",
       "definition": "desayunar",
       "example": "Frühstücken wie ein Kaiser, Mittagessen wie ein Edelmann, Abendessen wie ein Bettelmann."
     },
     {
       "word": "vergessen",
-      "phonetic": "",
+      "phonetic": "[fɛɐ̯ˈɡɛsən]",
       "definition": "olvidar",
       "example": "Das werde ich mein Lebtag nicht vergessen."
     },
     {
       "word": "schmecken",
-      "phonetic": "",
+      "phonetic": "[ˈʃmɛkən]",
       "definition": "tener sabor",
       "example": "penetrant schmecken"
     },
     {
       "word": "gehen",
-      "phonetic": "",
+      "phonetic": "[ˈɡeːən]",
       "definition": "ir",
       "example": "Essen gehen!"
     },
     {
       "word": "zeigen",
-      "phonetic": "",
+      "phonetic": "[ˈtsaɪ̯ɡən]",
       "definition": "mostrar/ enseñar",
       "example": "Verständigungsbereitschaft zeigen"
     },
     {
       "word": "arbeiten",
-      "phonetic": "",
+      "phonetic": "[ˈaʁbaɪ̯tən]",
       "definition": "trabajar",
       "example": "Meine Freundin und ich müssen zusammen arbeiten."
     },
     {
       "word": "aufstehen",
-      "phonetic": "",
-      "definition": "Levantarse/ ponerse de pie",
-      "example": "Morgens  stehe ich  um 7 Uhr auf."
+      "phonetic": "[ˈaʊ̯fˌʃteːən]",
+      "definition": "Levantarse / ponerse de pie",
+      "example": "Morgens stehe ich um 7 Uhr auf."
     },
     {
       "word": "aufräumen",
-      "phonetic": "",
-      "definition": "odenar",
-      "example": "Das Kind  räumt sein Zimmer auf."
+      "phonetic": "[ˈaʊ̯fˌʁɔɪ̯mən]",
+      "definition": "ordenar",
+      "example": "Das Kind räumt sein Zimmer auf."
     },
     {
       "word": "besuchen",
-      "phonetic": "",
+      "phonetic": "[bəˈzuːxən]",
       "definition": "visitar",
       "example": "Er besucht seine Eltern."
     },
     {
       "word": "küssen",
-      "phonetic": "",
+      "phonetic": "[ˈkʏsən]",
       "definition": "besar",
       "example": "Ich küsse meinen Hund."
     },
     {
       "word": "fühlen",
-      "phonetic": "",
+      "phonetic": "[ˈfyːlən]",
       "definition": "sentir/tocar",
       "example": "Was fühlst du?"
     },
     {
       "word": "freuen",
-      "phonetic": "",
+      "phonetic": "[ˈfʁɔɪ̯ən]",
       "definition": "alegrarse / emocionado",
       "example": "Das freut uns sehr."
     },
     {
       "word": "verkaufen",
-      "phonetic": "",
-      "definition": "vender/ despachar",
-      "example": "In einem Kaufthaus verkauft viele Dinge"
+      "phonetic": "[fɛɐ̯ˈkaʊ̯fən]",
+      "definition": "vender / despachar",
+      "example": "Ein Kaufhaus verkauft viele Dinge."
     },
     {
-      "word": "begrüβen",
-      "phonetic": "",
-      "definition": "saludar/ acojer",
+      "word": "begrüßen",
+      "phonetic": "[bəˈɡʁyːsən]",
+      "definition": "saludar / acoger",
       "example": "Sie begrüßten mich."
     },
     {
       "word": "bekommen",
-      "phonetic": "",
+      "phonetic": "[bəˈkɔmən]",
       "definition": "recibir/ odernar",
       "example": "Hast du die Karten bekommen?"
     },
     {
       "word": "duschen",
-      "phonetic": "",
+      "phonetic": "[ˈduːʃən]",
       "definition": "bañarse",
-      "example": "Jeden Tag dusche ich mich"
+      "example": "Jeden Tag dusche ich mich."
     },
     {
       "word": "hängen",
-      "phonetic": "",
+      "phonetic": "[ˈhɛŋən]",
       "definition": "fijar/ colgarse",
       "example": "Er hängte das Bild an die Wand."
     },
     {
       "word": "helfen",
-      "phonetic": "",
+      "phonetic": "[ˈhɛlfən]",
       "definition": "ayudar",
       "example": "Bitte hilf mir!"
     },
     {
       "word": "singen",
-      "phonetic": "",
+      "phonetic": "[ˈzɪŋən]",
       "definition": "cantar",
       "example": "Ich singe gern."
     },
     {
       "word": "lügen",
-      "phonetic": "",
+      "phonetic": "[ˈlyːɡən]",
       "definition": "mentir",
       "example": "Warum lügst du?"
     },
     {
       "word": "beschweren",
-      "phonetic": "",
+      "phonetic": "[bəˈʃveːʁən]",
       "definition": "quejarse",
       "example": "Ich beschwere mich nicht oft."
     },
     {
       "word": "einziehen",
-      "phonetic": "",
+      "phonetic": "[ˈaɪ̯nˌtsiːən]",
       "definition": "mudarse",
-      "example": "Ich ziehe nach  Österreich ein."
+      "example": "Ich ziehe nach Österreich ein."
     },
     {
       "word": "entschuldigen",
-      "phonetic": "",
-      "definition": "disculpar/ personar",
-      "example": "Entschuldigen Sie  bitte!"
+      "phonetic": "[ɛntˈʃʊldɪɡən]",
+      "definition": "disculpar / perdonar",
+      "example": "Entschuldigen Sie bitte!"
     },
     {
       "word": "stattfinden",
-      "phonetic": "",
+      "phonetic": "[ˈʃtatˌfɪndən]",
       "definition": "llevarse a cabo / tener un lugar",
       "example": "Jeden Montag findet der Markt statt."
     },
     {
       "word": "allein",
-      "phonetic": "",
+      "phonetic": "[aˈlaɪ̯n]",
       "definition": "solo",
       "example": "Lebst du allein?"
     },
     {
       "word": "verheiratet",
-      "phonetic": "",
+      "phonetic": "[fɛɐ̯ˈhaɪ̯ʁaːtət]",
       "definition": "casado",
       "example": "Ich bin verheiratet."
     },
     {
       "word": "schwanger",
-      "phonetic": "",
+      "phonetic": "[ˈʃvaŋɐ]",
       "definition": "embarazada",
       "example": "Sie ist schwanger."
     },
     {
       "word": "vorsichtig",
-      "phonetic": "",
+      "phonetic": "[ˈfoːɐ̯ˌzɪçtɪç]",
       "definition": "prudente/ cuidadoso",
       "example": "Fahren  Sie vorsichtig!"
     },
     {
       "word": "weltweit",
-      "phonetic": "",
+      "phonetic": "[ˈvɛltˌvaɪ̯t]",
       "definition": "global/ mundial",
       "example": "Er ist  weltweit  berühmt."
     },
     {
       "word": "schwarz",
-      "phonetic": "",
+      "phonetic": "[ʃvaʁts]",
       "definition": "negro",
       "example": "Meine Lieblingsfarbe ist schwarz."
     },
     {
       "word": "langsam",
-      "phonetic": "",
+      "phonetic": "[ˈlaŋˌzaːm]",
       "definition": "lento",
       "example": "Die Schnecke  ist langsam"
     },
     {
       "word": "breit",
-      "phonetic": "",
+      "phonetic": "[bʁaɪ̯t]",
       "definition": "ancho/ amplio",
       "example": "Wie breit ist es?"
     },
     {
-      "word": "drauβen",
-      "phonetic": "",
+      "word": "draußen",
+      "phonetic": "[ˈdʁaʊ̯sən]",
       "definition": "afuera",
-      "example": "Ich muss noch den Hund drauβen lassen."
+      "example": "Ich muss noch den Hund draußen lassen."
     },
     {
       "word": "circa",
-      "phonetic": "",
+      "phonetic": "[ˈtsɪʁka]",
       "definition": "aproximado",
-      "example": "Die Reise dauert circa drei Studen."
+      "example": "Die Reise dauert circa drei Stunden."
     },
     {
       "word": "wütend",
-      "phonetic": "",
+      "phonetic": "[ˈvyːtənt]",
       "definition": "enojado",
-      "example": "Bist du wünted?"
+      "example": "Bist du wütend?"
     },
     {
       "word": "krank",
-      "phonetic": "",
+      "phonetic": "[kʁaŋk]",
       "definition": "enfermo",
       "example": "Mein Sohn ist krank."
     },
     {
-      "word": "heiβen",
-      "phonetic": "",
+      "word": "heißen",
+      "phonetic": "[ˈhaɪ̯sən]",
       "definition": "llamarse",
-      "example": "Meine Tante heiβt Kaja Zimmer."
+      "example": "Meine Tante heißt Kaja Zimmer."
     },
     {
       "word": "traurig",
-      "phonetic": "",
+      "phonetic": "[ˈtʁaʊ̯ʁɪç]",
       "definition": "triste",
       "example": "Er war traurig."
     },
     {
       "word": "langweilig",
-      "phonetic": "",
+      "phonetic": "[ˈlaŋˌvaɪ̯lɪç]",
       "definition": "aburrido",
       "example": "Der Film war reichlich langweilig."
     },
     {
       "word": "Westdeutschland",
-      "phonetic": "",
-      "definition": "oeste de alemania",
+      "phonetic": "[ˈvɛstˌdɔɪ̯tʃlant]",
+      "definition": "oeste de Alemania",
       "example": "Westdeutschland ist sehr kalt."
     },
     {
       "word": "einige",
-      "phonetic": "",
+      "phonetic": "[ˈaɪ̯nɪɡə]",
       "definition": "algunos",
       "example": "Unsere Vorstellung bietet einige besondere Bonbons."
     },
     {
       "word": "gefährlich",
-      "phonetic": "",
+      "phonetic": "[ɡəˈfɛːɐ̯lɪç]",
       "definition": "peligroso",
       "example": "Das ist ja direkt gefährlich, was du machst?"
     },
     {
       "word": "glücklich",
-      "phonetic": "",
+      "phonetic": "[ˈɡlʏklɪç]",
       "definition": "feliz/ suerte",
       "example": "Ich bin glücklich."
     },
     {
       "word": "hässlich",
-      "phonetic": "",
+      "phonetic": "[ˈhɛslɪç]",
       "definition": "feo",
       "example": "Meine Tasche ist hässlich."
     },
     {
       "word": "pünktlich",
-      "phonetic": "",
+      "phonetic": "[ˈpʏŋktlɪç]",
       "definition": "puntualmente",
       "example": "Dass du mir pünktlich nach Hause kommst!"
     },
     {
       "word": "plötzlich",
-      "phonetic": "",
+      "phonetic": "[ˈplœtslɪç]",
       "definition": "repentinamente",
       "example": "Gestern bin ich plötzlich gefallen."
     },
     {
       "word": "unbedingt",
-      "phonetic": "",
+      "phonetic": "[ˈʊnbəˌdɪŋt]",
       "definition": "indispensable",
       "example": "Ist das unbedingt nötig?"
     },
     {
       "word": "unterwegs",
-      "phonetic": "",
+      "phonetic": "[ʊntɐˈveːks]",
       "definition": "en camino",
       "example": "Wir sind schon unterwegs."
     },
     {
       "word": "schlecht",
-      "phonetic": "",
+      "phonetic": "[ʃlɛçt]",
       "definition": "malo",
       "example": "Das ist keine schlechte Idee."
     },
     {
       "word": "kurz",
-      "phonetic": "",
+      "phonetic": "[kʊʁts]",
       "definition": "corto",
       "example": "Es ist kurz nach zwölf."
     },
     {
       "word": "scharf",
-      "phonetic": "",
+      "phonetic": "[ʃaʁf]",
       "definition": "picante",
       "example": "Die Soße ist höllisch scharf."
     },
     {
       "word": "lecker",
-      "phonetic": "",
+      "phonetic": "[ˈlɛkɐ]",
       "definition": "delicioso",
       "example": "Meine Pizza ist lecker!"
     },
     {
       "word": "stinken",
-      "phonetic": "",
+      "phonetic": "[ˈʃtɪŋkən]",
       "definition": "apestar/ oler mal",
       "example": "Es stinkt fürchterlich."
     },
     {
       "word": "gebraten",
-      "phonetic": "",
+      "phonetic": "[ɡəˈbʁaːtən]",
       "definition": "asar/freir",
       "example": "Er hat die Würste gebraten."
     },
     {
       "word": "sauer",
-      "phonetic": "",
+      "phonetic": "[ˈzaʊ̯ɐ]",
       "definition": "agrio/acido",
       "example": "Die Zitronen sind sauer."
     },
     {
       "word": "roh",
-      "phonetic": "",
+      "phonetic": "[ʁoː]",
       "definition": "crudo",
       "example": "Mein Fleisch ist roh."
     },
     {
       "word": "geduldig",
-      "phonetic": "",
+      "phonetic": "[ɡəˈdʊldɪç]",
       "definition": "paciencia",
       "example": "Ich bin eine geduldige Person."
     },
     {
       "word": "hilfsbereit",
-      "phonetic": "",
+      "phonetic": "[ˈhɪlfsbəˌʁaɪ̯t]",
       "definition": "servicial",
       "example": "Er ist stets hilfsbereit."
     },
     {
       "word": "bequem",
-      "phonetic": "",
+      "phonetic": "[bəˈkveːm]",
       "definition": "comodo",
       "example": "Machen Sie sich's bequem!"
     },
     {
       "word": "chinesisch",
-      "phonetic": "",
+      "phonetic": "[çiˈneːzɪʃ]",
       "definition": "chino",
       "example": "Sogar Chinesisch spricht sie."
     },
     {
       "word": "mexikanisch",
-      "phonetic": "",
+      "phonetic": "[mɛksiˈkaːnɪʃ]",
       "definition": "mexicano",
-      "example": "Ich liebe diejenigen, die Mexikaner sind."
+      "example": "Ich liebe mexikanisches Essen."
     },
     {
       "word": "schwer",
-      "phonetic": "",
+      "phonetic": "[ʃveːɐ̯]",
       "definition": "pesado/ dificil",
       "example": "Schwer erhältlich!"
     },
     {
       "word": "leicht",
-      "phonetic": "",
+      "phonetic": "[laɪ̯ç]",
       "definition": "ligero",
       "example": "Leicht bekömmlich!"
     }
