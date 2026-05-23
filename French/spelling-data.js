@@ -2,628 +2,860 @@ window.SPELLING_DATA = {
   "language": "fr-FR",
   "levelAWords": [
     {
-      "word": "adolescence",
-      "definition": "Adolescencia.",
-      "example": "L'adolescence, c'est une époque difficile. ",
-      "phonetic": "/a.dɔ.lɛ.sɑ̃s/"
-    },
-    {
       "word": "curieux",
+      "phonetic": "",
       "definition": "curioso",
-      "example": "C'est un chien curieux.",
-      "phonetic": "/ky.rjø/"
+      "example": "C'est un chien curieux."
     },
     {
       "word": "enfance",
-      "definition": "Tiempo en el que transcurre la infancia ",
-      "example": "Mon enfance était plus belle.",
-      "phonetic": "/ɑ̃.fɑ̃s/"
+      "phonetic": "",
+      "definition": "Tiempo en el que transcurre la infancia",
+      "example": "Ma infance était plus belle."
     },
     {
       "word": "gare",
-      "definition": "Estación de transporte ",
-      "example": "Je vais à la gare pour prendre le train.",
-      "phonetic": "/ɡaʁ/"
+      "phonetic": "",
+      "definition": "Estación de transporte",
+      "example": "Je vais à la gare pour prendre le train."
     },
     {
-      "word": "pyramide",
-      "definition": "Piramide ",
-      "example": "Les égyptiens enterraient leurs pharaons dans des pyramides.",
-      "phonetic": "/pi.ʁa.mid/"
-    },
-    {
-      "word": "communauté",
-      "definition": "comunidad",
-      "example": "Nous faisons partie de la communauté française de ce pays.",
-      "phonetic": "/kɔ.my.no.te/"
-    },
-    {
-      "word": "courageuse",
-      "definition": "Valiente",
-      "example": "Elle est courageuse, elle se lève tous les jours à 6h.",
-      "phonetic": "/ku.ʁa.ʒøz/"
-    },
-    {
-      "word": "gouvernement",
-      "definition": "gobierno",
-      "example": "Nous détestons le gouvernement actuel.",
-      "phonetic": "/ɡu.vɛʁ.nə.mɑ̃/"
+      "word": "étique",
+      "phonetic": "",
+      "definition": "Etica o valor humano",
+      "example": "L'éthique étudie les fondements de la morale."
     },
     {
       "word": "malheur",
+      "phonetic": "",
       "definition": "Desgracia",
-      "example": "Si tu es dans le malheur, tu peux compter sur tes amis.",
-      "phonetic": "/ma.lœʁ/"
+      "example": "Si tu es dans le malheur, tu peux compter sur tes amis."
     },
     {
-      "word": "sorcière",
-      "definition": "Bruja, hechicera",
-      "example": "La sorcière porte un chapeau noir",
-      "phonetic": "/sɔʁ.sjɛʁ/"
-    },
-    {
-      "word": "indépendant",
-      "definition": "Independiente",
-      "example": "Le Mexique  est devenue indépendant en 1810",
-      "phonetic": "/ɛ̃.de.pɑ̃.dɑ̃/"
-    },
-    {
-      "word": "drôle",
-      "definition": "gracioso",
-      "example": "mon ami, est très drôle",
-      "phonetic": "/dʁol/"
+      "word": "bizarre",
+      "phonetic": "",
+      "definition": "Bizarro",
+      "example": "Avec son poil bleu, ce chat est vraiment bizarre."
     },
     {
       "word": "valeur",
+      "phonetic": "",
       "definition": "Valor",
-      "example": "La valeur de l'or augmente en ce moment.",
-      "phonetic": "/va.lœʁ/"
+      "example": "La valeur de l'or augmente en ce moment."
     },
     {
-      "word": "pharmacie",
-      "definition": "Farmacia",
-      "example": "je travaille dans une pharmacie",
-      "phonetic": "/faʁ.ma.si/"
-    },
-    {
-      "word": "étranger",
-      "definition": "Extranjero, foranéo",
-      "example": "Il y a un étudiant étranger dans ma classe.",
-      "phonetic": "/e.tʁɑ̃.ʒe/"
+      "word": "peindre",
+      "phonetic": "",
+      "definition": "pintar",
+      "example": "Elle peint le portrait de sa mère"
     },
     {
       "word": "secteur",
+      "phonetic": "",
       "definition": "Sector",
-      "example": "Luc travaille dans le secteur du commerce international.",
-      "phonetic": "/sɛk.tœʁ/"
+      "example": "Luc travaille dans le secteur du commerce international."
     },
     {
       "word": "stage",
+      "phonetic": "",
       "definition": "prácticas, curso, entrenamiento",
-      "example": "Tous les étudiants devront effectuer un stage chez un professionnel à la fin de l'année.",
-      "phonetic": "/staʒ/"
+      "example": "Tous les étudiants devront effectuer un stage chez un professionnel en fin d'année."
     },
     {
-      "word": "naissance",
-      "definition": "nacimiento",
-      "example": "La naissance d'un enfant est une grande joie.",
-      "phonetic": "/nɛ.sɑ̃s/"
+      "word": "rumeur",
+      "phonetic": "",
+      "definition": "rumor",
+      "example": "La rumeur désigne ce candidat comme le futur président."
     },
     {
       "word": "espoir",
+      "phonetic": "",
       "definition": "esperanza",
-      "example": "Ce prisonnier a toujours gardé l'espoir  en sa libération.",
-      "phonetic": "/ɛs.pwaʁ/"
+      "example": "Ce prisonnier a toujours gardé espoir en sa libération."
     },
     {
-      "word": "finir",
-      "definition": "acabar, terminar, finalizar",
-      "example": "Elle va finir son dévoir aujourd'hui",
-      "phonetic": "/fi.niʁ/"
-    },
-    {
-      "word": "travail",
-      "definition": "Trabajo",
-      "example": "Le travail de mon père est très dur",
-      "phonetic": "/tʁa.vaj/"
+      "word": "travaux",
+      "phonetic": "",
+      "definition": "obras, trabajos, tareas",
+      "example": "Les travaux de ce chercheur ont modifié le quotidien de beaucoup de monde."
     },
     {
       "word": "biscuit",
+      "phonetic": "",
       "definition": "galleta",
-      "example": "On peut accompagner le café avec de petits biscuits au citron.",
-      "phonetic": "/bis.kɥi/"
+      "example": "On peut accompagner le café de petits biscuits au citron."
     },
     {
-      "word": "beaucoup",
-      "definition": "mucho, demasiado, basto.",
-      "example": "Je t'aime beaucoup",
-      "phonetic": "/bo.ku/"
-    },
-    {
-      "word": "chercher",
-      "definition": "buscar",
-      "example": "Tu es en train de chercher ton chien?",
-      "phonetic": "/ʃɛʁ.ʃe/"
-    },
-    {
-      "word": "bibliothèque",
-      "definition": "biblioteca",
-      "example": "Où se trouve la bibliothèque ?",
-      "phonetic": "/bi.bli.jɔ.tɛk/"
-    },
-    {
-      "word": "bienvenue",
-      "definition": "Bienvenido",
-      "example": "Bienvenue chez moi",
-      "phonetic": "/bjɛ̃.və.ny/"
+      "word": "filleul",
+      "phonetic": "",
+      "definition": "ahijado",
+      "example": "Il est mon filleul."
     },
     {
       "word": "oiseaux",
+      "phonetic": "",
       "definition": "pájaros",
-      "example": "Les cinq oiseaux sont beaux.",
-      "phonetic": "/wa.zo/"
+      "example": "Les oiseaux sont beaux."
     },
     {
-      "word": "boire",
-      "definition": "beber",
-      "example": "Qu'est-ce que vous voulez boire ?",
-      "phonetic": "/bwaʁ/"
+      "word": "boisson",
+      "phonetic": "",
+      "definition": "Bebida",
+      "example": "¿Que est-ce  que vous voulez comment boisson?"
     },
     {
-      "word": "délicieux",
-      "definition": "Delicioso",
-      "example": "L'hôtel propose un délicieux petit déjeuner ",
-      "phonetic": "/de.li.sjø/"
-    },
-    {
-      "word": "chemisier",
-      "definition": "blusa",
-      "example": "Elle portait un chemisier rouge.",
-      "phonetic": "/ʃə.mi.zje/"
-    },
-    {
-      "word": "ingénieur",
-      "definition": "ingeniero",
-      "example": "Il est ingénieur",
-      "phonetic": "/ɛ̃.ʒe.njœʁ/"
-    },
-    {
-      "word": "chaussures",
-      "definition": "zapatos",
-      "example": "Mes nouvelles chaussures sont confortables.",
-      "phonetic": "/ʃo.syʁ/"
+      "word": "abîmé",
+      "phonetic": "",
+      "definition": "abismo",
+      "example": "Cet abîme est est profond."
     },
     {
       "word": "réussir",
+      "phonetic": "",
       "definition": "Lograr",
-      "example": "Je te souhaite de réussir.",
-      "phonetic": "/ʁe.y.siʁ/"
+      "example": "Je te souhaite de réussir."
     },
     {
       "word": "bijoux",
+      "phonetic": "",
       "definition": "Joyas",
-      "example": "Ma femme aime les bijoux ",
-      "phonetic": "/bi.ʒu/"
+      "example": "Ma femme aime les bijoux"
     },
     {
       "word": "voyager",
-      "definition": "viajar",
-      "example": "Voyager à travers le monde, c'est un plaisir.",
-      "phonetic": "/vwa.ja.ʒe/"
-    },
-    {
-      "word": "lunettes",
-      "definition": "Lentes ",
-      "example": "Elle est blonde et elle porte des lunettes.",
-      "phonetic": "/ly.nɛt/"
-    },
-    {
-      "word": "moutarde",
-      "definition": "mostaza",
-      "example": "J'aime le hamburger avec de la moutarde.",
-      "phonetic": "/mu.taʁd/"
-    },
-    {
-      "word": "imperméable",
-      "definition": "impermeable",
-      "example": "N'oubliez pas l'imperméable pour la pluie.",
-      "phonetic": "/ɛ̃.pɛʁ.me.abl/"
-    },
-    {
-      "word": "crocodile",
-      "definition": "cocodrilo",
-      "example": "Le crocodile est grand et vert.",
-      "phonetic": "/kʁɔ.kɔ.dil/"
-    },
-    {
-      "word": "mignonne",
-      "definition": "femenino: linda, bella, bonita",
-      "example": "La petite fille était vraiment mignonne avec son sourire éclatant.",
-      "phonetic": "/mi.ɲɔn/"
-    },
-    {
-      "word": "chevalier",
-      "definition": "caballero",
-      "example": "Le chevalier courageux brandit son épée pour protéger le royaume.",
-      "phonetic": "/ʃə.va.lje/"
-    },
-    {
-      "word": "événement",
-      "definition": "evento",
-      "example": "L'événement du français est aujourd'hui",
-      "phonetic": "/e.vɛn.mɑ̃/"
-    },
-    {
-      "word": "printemps",
-      "definition": "primavera",
-      "example": "Les fleurs commencent à éclore, signe que le printemps est arrivé.",
-      "phonetic": "/pʁɛ̃.tɑ̃/"
-    },
-    {
-      "word": "grenouille",
-      "definition": "rana",
-      "example": "La grenouille sauta joyeusement dans l'étang.",
-      "phonetic": "/ɡʁə.nuj/"
+      "phonetic": "",
+      "definition": "Viajes",
+      "example": "Voyager pour le monde, c'est une plasier."
     },
     {
       "word": "yeux",
+      "phonetic": "",
       "definition": "ojos",
-      "example": "Ses yeux brillaient d'excitation quand elle ouvrit son cadeau d'anniversaire.",
-      "phonetic": "/jø/"
+      "example": "Ses yeux brillaient d'excitation quand elle ouvrit son cadeau d'anniversaire."
+    },
+    {
+      "word": "oeuf",
+      "phonetic": "",
+      "definition": "huevo",
+      "example": "J'ai cassé un œuf dans le bol pour préparer une omelette."
+    },
+    {
+      "word": "soeur",
+      "phonetic": "",
+      "definition": "hermana",
+      "example": "Ma sœur et moi sommes très proches malgré nos différences."
     },
     {
       "word": "poisson",
+      "phonetic": "",
       "definition": "pez, pescado",
-      "example": "Nous avons dégusté un délicieux poisson grillé au dîner.",
-      "phonetic": "/pwa.sɔ̃/"
+      "example": "Nous avons dégusté un délicieux poisson grillé au dîner."
     },
     {
-      "word": "descendre",
-      "definition": "decender, bajar",
-      "example": "Nous avons dû descendre plusieurs étages pour rejoindre la sortie.",
-      "phonetic": "/de.sɑ̃dʁ/"
+      "word": "poison",
+      "phonetic": "",
+      "definition": "veneno",
+      "example": "Attention à ne pas consommer de plante contenant du poison."
     },
     {
       "word": "famille",
+      "phonetic": "",
       "definition": "familia",
-      "example": "Les réunions de famille sont toujours joyeuses et animées.",
-      "phonetic": "/fa.mij/"
+      "example": "Les réunions de famille sont toujours joyeuses et animées."
     },
     {
       "word": "beau",
+      "phonetic": "",
       "definition": "bonito, bello, hermoso",
-      "example": "C'était une journée ensoleillée avec un beau ciel bleu.",
-      "phonetic": "/bo/"
+      "example": "C'était une journée ensoleillée avec un beau ciel bleu."
     },
     {
       "word": "belle",
-      "definition": "guapa, bella, hermosa",
-      "example": "La princesse est belle.",
-      "phonetic": "/bɛl/"
+      "phonetic": "",
+      "definition": "guapa, bella",
+      "example": "La princesse était d'une beauté à couper le souffle."
     },
     {
       "word": "frère",
+      "phonetic": "",
       "definition": "hermano",
-      "example": "Mon frère cadet est très doué en mathématiques.",
-      "phonetic": "/fʁɛʁ/"
+      "example": "Mon frère cadet est très doué en mathématiques."
     },
     {
       "word": "cousin",
+      "phonetic": "",
       "definition": "primo, prima",
-      "example": "Mon cousin vient souvent nous rendre visite pendant les vacances.",
-      "phonetic": "/ku.zɛ̃/"
+      "example": "Mes cousins viennent souvent nous rendre visite pendant les vacances."
     },
     {
       "word": "tante",
+      "phonetic": "",
       "definition": "tía",
-      "example": "Ma tante prépare toujours les meilleurs gâteaux.",
-      "phonetic": "/tɑ̃t/"
+      "example": "Ma tante prépare toujours les meilleurs gâteaux."
     },
     {
       "word": "oncle",
+      "phonetic": "",
       "definition": "tío",
-      "example": "Mon oncle est un grand voyageur qui a visité de nombreux pays.",
-      "phonetic": "/ɔ̃kl/"
+      "example": "Mon oncle est un grand voyageur qui a visité de nombreux pays."
     },
     {
       "word": "parents",
+      "phonetic": "",
       "definition": "padres",
-      "example": "Mes parents sont fiers de mes réalisations académiques.",
-      "phonetic": "/pa.ʁɑ̃/"
-    },
-    {
-      "word": "architecte",
-      "definition": "arquitecto, arquitecta",
-      "example": "L'architecte a conçu un bâtiment moderne et écologique.",
-      "phonetic": "/aʁ.ʃi.tɛkt/"
-    },
-    {
-      "word": "généreux",
-      "definition": "generoso",
-      "example": "Il est connu pour être un homme généreux qui aide toujours les autres.",
-      "phonetic": "/ʒe.ne.ʁø/"
-    },
-    {
-      "word": "murmurer",
-      "definition": "murmurar",
-      "example": "Les feuilles des arbres murmuraient doucement dans le vent.",
-      "phonetic": "/myʁ.my.ʁe/"
-    },
-    {
-      "word": "individualisme",
-      "definition": "individualismo",
-      "example": "Notre société valorise souvent l'individualisme au détriment du bien commun.",
-      "phonetic": "/ɛ̃.di.vi.dy.a.lism/"
+      "example": "Mes parents sont fiers de mes réalisations académiques."
     },
     {
       "word": "noble",
+      "phonetic": "",
       "definition": "noble",
-      "example": "Le roi était un homme noble qui se souciait du bien-être de son peuple.",
-      "phonetic": "/nɔbl/"
+      "example": "Le roi était un homme noble qui se souciait du bien-être de son peuple."
     },
     {
       "word": "bateau",
+      "phonetic": "",
       "definition": "Bote",
-      "example": "Nous avons fait une promenade en bateau sur le lac au coucher du soleil.",
-      "phonetic": "/ba.to/"
+      "example": "Nous avons fait une promenade en bateau sur le lac au coucher du soleil."
     },
     {
       "word": "projet",
+      "phonetic": "",
       "definition": "Proyecto",
-      "example": "Nous avons présenté notre projet lors de la réunion d'équipe.",
-      "phonetic": "/pʁɔ.ʒɛ/"
+      "example": "Nous avons présenté notre projet lors de la réunion d'équipe."
     },
     {
-      "word": "mannequin",
-      "definition": "Modelo",
-      "example": "Elle rêvait de devenir mannequin depuis son plus jeune âge.",
-      "phonetic": "/man.kɛ̃/"
+      "word": "raleine",
+      "phonetic": "",
+      "definition": "Ballena",
+      "example": "Nous avons eu la chance d'apercevoir une baleine lors de notre excursion en mer."
+    },
+    {
+      "word": "peint",
+      "phonetic": "",
+      "definition": "Pintado",
+      "example": "Mon ami a peint un magnifique paysage de montagne."
     },
     {
       "word": "oignon",
+      "phonetic": "",
       "definition": "Cebolla",
-      "example": "J'ai coupé un oignon pour préparer une soupe savoureuse.",
-      "phonetic": "/ɔ.ɲɔ̃/"
+      "example": "J'ai coupé un oignon pour préparer une soupe savoureuse."
     },
     {
-      "word": "psychologue",
-      "definition": "Psicólogo",
-      "example": "Mon ami consulte un psychologue pour surmonter ses angoisses.",
-      "phonetic": "/psi.kɔ.lɔɡ/"
-    },
-    {
-      "word": "papillon",
-      "definition": "Mariposa",
-      "example": "Les papillons voltigeaient autour des fleurs dans le jardin.",
-      "phonetic": "/pa.pi.jɔ̃/"
-    },
-    {
-      "word": "saucisson",
-      "definition": "Salchicha",
-      "example": "Nous avons acheté du saucisson artisanal pour l'apéritif.",
-      "phonetic": "/so.si.sɔ̃/"
-    },
-    {
-      "word": "chaussettes",
-      "definition": "Medias",
-      "example": "Elle a mis ses chaussettes chaudes avant de sortir dans la neige.",
-      "phonetic": "/ʃo.sɛt/"
-    },
-    {
-      "word": "musique",
-      "definition": "música",
-      "example": "J'adore écouter de la musique",
-      "phonetic": "/my.zik/"
-    },
-    {
-      "word": "orthographe",
-      "definition": "Ortografía",
-      "example": "L'orthographe correcte est importante pour une communication claire.",
-      "phonetic": "/ɔʁ.tɔ.ɡʁaf/"
-    },
-    {
-      "word": "baguette",
-      "definition": "Baguette",
-      "example": "J'ai acheté une baguette fraîche à la boulangerie ce matin.",
-      "phonetic": "/ba.ɡɛt/"
-    },
-    {
-      "word": "passeport",
-      "definition": "Pasaporte",
-      "example": "Assurez-vous d'avoir votre passeport valide avant de partir en voyage.",
-      "phonetic": "/pas.pɔʁ/"
-    },
-    {
-      "word": "voleur",
-      "definition": "ladrón",
-      "example": "Le voleur a été arrêté par la police après avoir essayé de voler un bijou.",
-      "phonetic": "/vɔ.lœʁ/"
-    },
-    {
-      "word": "incroyable",
-      "definition": "increíble",
-      "example": "C'était une performance incroyable qui a émerveillé le public.",
-      "phonetic": "/ɛ̃.kʁwa.jabl/"
+      "word": "voleuse",
+      "phonetic": "",
+      "definition": "Ladrón",
+      "example": "La voleuse a été arrêtée par la police après avoir tenté de voler un bijou."
     },
     {
       "word": "ville",
+      "phonetic": "",
       "definition": "Ciudad",
-      "example": "J'adore me promener dans les rues de la ville.",
-      "phonetic": "/vil/"
-    },
-    {
-      "word": "meilleur",
-      "definition": "Mejor",
-      "example": "Il est toujours déterminé à faire de son mieux et à être le meilleur.",
-      "phonetic": "/mɛ.jœʁ/"
-    },
-    {
-      "word": "orange",
-      "definition": "naranja",
-      "example": "mon fruit préféré est l'orange",
-      "phonetic": "/ɔ.ʁɑ̃ʒ/"
+      "example": "J'adore me promener dans les rues animées de la ville."
     },
     {
       "word": "jaune",
+      "phonetic": "",
       "definition": "amarillo",
-      "example": "Les bananes sont jaunes.",
-      "phonetic": "/ʒon/"
-    },
-    {
-      "word": "intelligent",
-      "definition": "inteligente",
-      "example": "Mon ami est très intelligent",
-      "phonetic": "/ɛ̃.te.li.ʒɑ̃/"
+      "example": "Les bananes sont jaunes."
     },
     {
       "word": "cours",
+      "phonetic": "",
       "definition": "clase",
-      "example": "Le cours de français est très difficile",
-      "phonetic": "/kuʁ/"
+      "example": "Le cours de français est très difficile"
     },
     {
-      "word": "méchant",
-      "definition": "malvado",
-      "example": "le prof du français est méchant",
-      "phonetic": "/me.ʃɑ̃/"
+      "word": "antique",
+      "phonetic": "",
+      "definition": "antiguo",
+      "example": "Le livre du professeur est très antique."
     },
     {
-      "word": "dentiste",
-      "definition": "dentista",
-      "example": "mon dentiste est sympa",
-      "phonetic": "/dɑ̃.tist/"
-    },
-    {
-      "word": "roi",
-      "definition": "rey",
-      "example": "Le roi de l'Angleterre est vieux.",
-      "phonetic": "/ʁwa/"
-    },
-    {
-      "word": "vieux",
-      "definition": "viejo",
-      "example": "J'ai un vieux portable.",
-      "phonetic": "/vjø/"
-    },
-    {
-      "word": "liberté",
-      "definition": "libertad",
-      "example": "la liberté est un droit humain",
-      "phonetic": "/li.bɛʁ.te/"
+      "word": "veuve",
+      "phonetic": "",
+      "definition": "viuda",
+      "example": "Ma voisine est devenue veuve après l'accident"
     },
     {
       "word": "appétit",
+      "phonetic": "",
       "definition": "apetito, hambre",
-      "example": "Il a bon appétit, c'est bon signe.",
-      "phonetic": "/a.pe.ti/"
-    },
-    {
-      "word": "vélo",
-      "definition": "bicicleta",
-      "example": "Je vais acheter un vélo",
-      "phonetic": "/ve.lo/"
+      "example": "Il a bon appétit, c'est bon signe."
     },
     {
       "word": "cadeau",
+      "phonetic": "",
       "definition": "regalo",
-      "example": "J'ai acheté un cadeau pour ma soeur ",
-      "phonetic": "/ka.do/"
+      "example": "J'ai acheté un cadeau pour ma soeur"
     },
     {
-      "word": "calendrier",
-      "definition": "calendario",
-      "example": "Dans le calendrier vous voyez les jours de l’année",
-      "phonetic": "/ka.lɑ̃.dʁije/"
-    },
-    {
-      "word": "cheval",
-      "definition": "caballo",
-      "example": "Mon ami a un cheval",
-      "phonetic": "/ʃə.val/"
-    },
-    {
-      "word": "champignons",
-      "definition": "champiñones",
-      "example": "Les schtroumpfs vivent dans des petits champignons",
-      "phonetic": "/ʃɑ̃.pi.ɲɔ̃/"
-    },
-    {
-      "word": "boulangerie",
-      "definition": "panadería",
-      "example": "Quand je veux acheter du pain, je vais à la boulangerie",
-      "phonetic": "/bu.lɑ̃.ʒə.ʁi/"
-    },
-    {
-      "word": "coiffeur",
-      "definition": "peluquero",
-      "example": "Je me fais couper les cheveux chez le coiffeur.",
-      "phonetic": "/kwa.fœʁ/"
+      "word": "cerceau",
+      "phonetic": "",
+      "definition": "aro",
+      "example": "Micheal, saute dans le cerceau."
     },
     {
       "word": "dauphin",
+      "phonetic": "",
       "definition": "delfín",
-      "example": "Les dauphins accompagnent souvent les voiliers.",
-      "phonetic": "/do.fɛ̃/"
-    },
-    {
-      "word": "embouteillage",
-      "definition": "embotellamiento",
-      "example": "À cause de l'accident il y a un embouteillage qui empêche la circulation normale sur la route.",
-      "phonetic": "/ɑ̃.bu.tɛ.jaʒ/"
-    },
-    {
-      "word": "canapé",
-      "definition": "sofá",
-      "example": "Le garçon est assis dans le canapé vert",
-      "phonetic": "/ka.na.pe/"
-    },
-    {
-      "word": "mammifère",
-      "definition": "mamífero",
-      "example": "L'homme est un mammifère bipède.",
-      "phonetic": "/ma.mi.fɛʁ/"
+      "example": "Les dauphins accompagnent souvent les voiliers."
     },
     {
       "word": "monnaie",
+      "phonetic": "",
       "definition": "moneda",
-      "example": "Pardon, je n'ai pas de monnaie, je n'ai qu'un billet de 20 euros.",
-      "phonetic": "/mɔ.nɛ/"
+      "example": "Pardon, je n'ai pas de monnaie, je n'ai qu'un billet de 20 euros."
+    },
+    {
+      "word": "poignet",
+      "phonetic": "",
+      "definition": "muñeca",
+      "example": "Elle est tombée et s'est foulé le poignet."
+    }
+  ],
+  "levelBWords": [
+    {
+      "word": "pyramide",
+      "phonetic": "",
+      "definition": "Piramide",
+      "example": "Les égyptiens enterraient leurs pharaons dans des pyramides."
+    },
+    {
+      "word": "sorcière",
+      "phonetic": "",
+      "definition": "Bruja, hechicera",
+      "example": "La sorcière porte un chapeau noir"
+    },
+    {
+      "word": "étranger",
+      "phonetic": "",
+      "definition": "Extranjero, foranéo",
+      "example": "Il y a trois étudiants étrangers dans ma classe."
+    },
+    {
+      "word": "naissance",
+      "phonetic": "",
+      "definition": "nacimiento",
+      "example": "La naissance d'un enfant est une grande joie."
+    },
+    {
+      "word": "soutenir",
+      "phonetic": "",
+      "definition": "sostener, sujetar, mantener",
+      "example": "Il faut des tuteurs pour soutenir mes pieds de tomates."
+    },
+    {
+      "word": "beaucoup",
+      "phonetic": "",
+      "definition": "mucho, demasiado, basto.",
+      "example": "Je t'aime beaucoup"
+    },
+    {
+      "word": "gaspiller",
+      "phonetic": "",
+      "definition": "desperdiciar",
+      "example": "Gaspillier la nourriture c'est une mauvaise action"
+    },
+    {
+      "word": "bienvenue",
+      "phonetic": "",
+      "definition": "Bienvenido",
+      "example": "Bienvenue chez moi"
+    },
+    {
+      "word": "délicieux",
+      "phonetic": "",
+      "definition": "Delicioso",
+      "example": "L'hôtel propose un délicieux petit déjeuner"
+    },
+    {
+      "word": "chemisier",
+      "phonetic": "",
+      "definition": "blusa",
+      "example": "Elle portait un chemisier rouge."
+    },
+    {
+      "word": "lunettes",
+      "phonetic": "",
+      "definition": "Lentes",
+      "example": "Elle est blonde est elle porte des lunettes"
+    },
+    {
+      "word": "moutarde",
+      "phonetic": "",
+      "definition": "mostaza",
+      "example": "J'aime l'hamburguer avec moutarde"
+    },
+    {
+      "word": "crocodile",
+      "phonetic": "",
+      "definition": "cocodrilo",
+      "example": "Le cocodrile est grand et vert."
+    },
+    {
+      "word": "mignonne",
+      "phonetic": "",
+      "definition": "lindo, bello,bonito",
+      "example": "La petite fille était vraiment mignonne avec son sourire éclatant."
+    },
+    {
+      "word": "chevalier",
+      "phonetic": "",
+      "definition": "caballero",
+      "example": "Le chevalier courageux brandit son épée pour protéger le royaume."
+    },
+    {
+      "word": "printemps",
+      "phonetic": "",
+      "definition": "primavera",
+      "example": "Les fleurs commencent à éclore, signe que le printemps est arrivé."
+    },
+    {
+      "word": "gingembre",
+      "phonetic": "",
+      "definition": "genjibre",
+      "example": "J'ai ajouté un peu de gingembre râpé à la soupe pour lui donner du piquant."
+    },
+    {
+      "word": "descendre",
+      "phonetic": "",
+      "definition": "decender, bajar",
+      "example": "Nous avons dû descendre plusieurs étages pour rejoindre la sortie."
+    },
+    {
+      "word": "généreux",
+      "phonetic": "",
+      "definition": "generoso",
+      "example": "Il est connu pour être un homme généreux qui aide toujours les autres."
+    },
+    {
+      "word": "murmurer",
+      "phonetic": "",
+      "definition": "murmurar",
+      "example": "Les feuilles des arbres murmuraient doucement dans le vent."
+    },
+    {
+      "word": "ardemment",
+      "phonetic": "",
+      "definition": "ardientemente",
+      "example": "Il désirait ardemment décrocher ce poste depuis des années."
+    },
+    {
+      "word": "mannequin",
+      "phonetic": "",
+      "definition": "Modelo",
+      "example": "Elle rêvait de devenir mannequin depuis son plus jeune âge."
+    },
+    {
+      "word": "papillon",
+      "phonetic": "",
+      "definition": "Mariposa",
+      "example": "Les papillons voltigeaient autour des fleurs dans le jardin."
+    },
+    {
+      "word": "saucisson",
+      "phonetic": "",
+      "definition": "Embutido",
+      "example": "Nous avons acheté du saucisson artisanal pour l'apéritif."
+    },
+    {
+      "word": "orchestre",
+      "phonetic": "",
+      "definition": "Orquesta",
+      "example": "L'orchestre a donné un concert magistral dans la salle de concert."
+    },
+    {
+      "word": "baguette",
+      "phonetic": "",
+      "definition": "Baguette",
+      "example": "J'ai acheté une baguette fraîche à la boulangerie ce matin."
+    },
+    {
+      "word": "passeport",
+      "phonetic": "",
+      "definition": "Pasaporte",
+      "example": "Assurez-vous d'avoir votre passeport valide avant de partir en voyage."
+    },
+    {
+      "word": "meilleur",
+      "phonetic": "",
+      "definition": "Mejor",
+      "example": "Il est toujours déterminé à faire de son mieux et à être le meilleur."
+    },
+    {
+      "word": "concombre",
+      "phonetic": "",
+      "definition": "Pepino",
+      "example": "J'ai utilisé des tranches de concombre frais dans ma salade."
+    },
+    {
+      "word": "duchesse",
+      "phonetic": "",
+      "definition": "duquesa",
+      "example": "la duchesse dirige le palais"
+    },
+    {
+      "word": "calamité",
+      "phonetic": "",
+      "definition": "Calamidad",
+      "example": "Ce n’est pas la première fois que ce type de calamité se produit."
+    },
+    {
+      "word": "sceptique",
+      "phonetic": "",
+      "definition": "Escéptico",
+      "example": "J'étais sceptique, mais je suppose que la thérapie fonctionne."
+    },
+    {
+      "word": "artichaut",
+      "phonetic": "",
+      "definition": "alcachofa, es un alimento",
+      "example": "Commander la pizza aux artichauts"
+    },
+    {
+      "word": "aubergine",
+      "phonetic": "",
+      "definition": "berenjena, es un vegetal",
+      "example": "Je vais manger une aubergine"
+    },
+    {
+      "word": "bricolage",
+      "phonetic": "",
+      "definition": "bricolaje",
+      "example": "Le temps passe de ma mère est le bricolage"
+    },
+    {
+      "word": "cavalier",
+      "phonetic": "",
+      "definition": "jinete",
+      "example": "Mon ami est un cavalier"
+    },
+    {
+      "word": "coiffeur",
+      "phonetic": "",
+      "definition": "peluquero",
+      "example": "Je me couper le cheveux avec le coiffeur"
+    },
+    {
+      "word": "fauteuil",
+      "phonetic": "",
+      "definition": "sillón",
+      "example": "Le garçon est assis dans le fauteuil vert"
+    },
+    {
+      "word": "mammifère",
+      "phonetic": "",
+      "definition": "mamífero",
+      "example": "L'homme est un mammifère bipède."
+    },
+    {
+      "word": "oreiller",
+      "phonetic": "",
+      "definition": "almohada",
+      "example": "Jean préfère les oreillers aux traversins."
     },
     {
       "word": "parapluie",
+      "phonetic": "",
       "definition": "paraguas",
-      "example": "N'oublie pas ton parapluie, il va pleuvoir !",
-      "phonetic": "/pa.ʁa.plɥi/"
+      "example": "N'oublie pas ton parapluie, il va pleuvoir !"
     },
     {
-      "word": "pâtisserie",
-      "definition": "pastelería ",
-      "example": "Je suis allée à la pâtisserie",
-      "phonetic": "/pa.ti.sə.ʁi/"
-    },
-    {
-      "word": "silhouette",
-      "definition": "silueta",
-      "example": "J'ai vu une silhouette à l'extérieur de la maison",
-      "phonetic": "/si.lwɛt/"
+      "word": "squelette",
+      "phonetic": "",
+      "definition": "Esqueleto",
+      "example": "Il y a un squelette en plastique dans le salon"
     },
     {
       "word": "tabouret",
+      "phonetic": "",
       "definition": "Banco/silla",
-      "example": "Le tabouret de la cuisine est marron",
-      "phonetic": "/ta.bu.ʁɛ/"
+      "example": "Le tabouret de la cuisine est marron"
     },
     {
-      "word": "téléphone",
-      "definition": "teléfono",
-      "example": "je vais changer mon numéro de téléphone",
-      "phonetic": "/te.le.fɔn/"
+      "word": "ustensile",
+      "phonetic": "",
+      "definition": "utensilio",
+      "example": "Je me suis acheté un ustensile de cuisine"
     },
     {
       "word": "vaisselle",
+      "phonetic": "",
       "definition": "Platos",
-      "example": "Elle lave la vaisselle.",
-      "phonetic": "/vɛ.sɛl/"
+      "example": "Elle lave la vaiselle"
+    },
+    {
+      "word": "victoire",
+      "phonetic": "",
+      "definition": "victoria",
+      "example": "Ils on remporté la victorie dans le tournoi"
+    }
+  ],
+  "levelCWords": [
+    {
+      "word": "adolescence",
+      "phonetic": "",
+      "definition": "Adolescencia.",
+      "example": "L'adolescence, c'est une époque difficile."
+    },
+    {
+      "word": "communauté",
+      "phonetic": "",
+      "definition": "comunidad",
+      "example": "Nous faisons partie de la communauté française de ce pays."
+    },
+    {
+      "word": "courageuse",
+      "phonetic": "",
+      "definition": "Valiente",
+      "example": "Il est courageux, il se lève tous les jours à 6h."
+    },
+    {
+      "word": "engagement",
+      "phonetic": "",
+      "definition": "compromiso",
+      "example": "Nous sommes surpris de son engagement politique."
+    },
+    {
+      "word": "caritative",
+      "phonetic": "",
+      "definition": "Caritativo",
+      "example": "Il est caritative est sympathique"
+    },
+    {
+      "word": "indépendant",
+      "phonetic": "",
+      "definition": "Independiente",
+      "example": "Mexique  est devenue indépendante en 1810."
+    },
+    {
+      "word": "pharmaceutique",
+      "phonetic": "",
+      "definition": "Farmaceutico",
+      "example": "C'est un centre pharmaceutique"
+    },
+    {
+      "word": "authenticité",
+      "phonetic": "",
+      "definition": "Autenticidad",
+      "example": "Le journaliste vérifie l'authenticité de l'information."
+    },
+    {
+      "word": "réseau social",
+      "phonetic": "",
+      "definition": "razon social",
+      "example": "Le nombre de Dunbar indique qu'un réseau social est limité à 150 relations."
+    },
+    {
+      "word": "bibliothèque",
+      "phonetic": "",
+      "definition": "biblioteca",
+      "example": "Oú se trouve la bibliothéque?"
+    },
+    {
+      "word": "couturière",
+      "phonetic": "",
+      "definition": "costurera",
+      "example": "Elle est couturiére"
+    },
+    {
+      "word": "chaussures",
+      "phonetic": "",
+      "definition": "zapatos",
+      "example": "Mes nouvelles chaussures sont confortables."
+    },
+    {
+      "word": "imperméable",
+      "phonetic": "",
+      "definition": "impermeable",
+      "example": "Ne oubliez pas le impermeable pour la pluie."
+    },
+    {
+      "word": "mademoiselle",
+      "phonetic": "",
+      "definition": "señorita",
+      "example": "Ma mademoiselle. ¿Comment ca va?"
+    },
+    {
+      "word": "arrondissement",
+      "phonetic": "",
+      "definition": "distrito",
+      "example": "J'habite dans le 5ème arrondissement de Paris, près de la Seine."
+    },
+    {
+      "word": "grenouille",
+      "phonetic": "",
+      "definition": "rana",
+      "example": "La grenouille sauta joyeusement dans l'étang."
+    },
+    {
+      "word": "retrouvailles",
+      "phonetic": "",
+      "definition": "reencuentro",
+      "example": "Les retrouvailles avec mes amis d'enfance étaient émouvantes."
+    },
+    {
+      "word": "architecte",
+      "phonetic": "",
+      "definition": "arquitecto, arquitecta",
+      "example": "L'architecte a conçu un bâtiment moderne et écologique."
+    },
+    {
+      "word": "mademoiselle",
+      "phonetic": "",
+      "definition": "señorita",
+      "example": "Bonjour, mademoiselle, puis-je vous aider ?"
+    },
+    {
+      "word": "individualisme",
+      "phonetic": "",
+      "definition": "individualismo",
+      "example": "Notre société valorise souvent l'individualisme au détriment du bien commun."
+    },
+    {
+      "word": "psychologue",
+      "phonetic": "",
+      "definition": "Psicólogo",
+      "example": "Mon ami consulte un psychologue pour surmonter ses angoisses."
+    },
+    {
+      "word": "chaussettes",
+      "phonetic": "",
+      "definition": "Medias",
+      "example": "Elle a mis ses chaussettes chaudes avant de sortir dans la neige."
+    },
+    {
+      "word": "orthographe",
+      "phonetic": "",
+      "definition": "Ortografía",
+      "example": "L'orthographe correcte est importante pour une communication claire."
+    },
+    {
+      "word": "incroyable",
+      "phonetic": "",
+      "definition": "Asombroso",
+      "example": "C'était une performance incroyable qui a émerveillé le public."
+    },
+    {
+      "word": "intelligent",
+      "phonetic": "",
+      "definition": "inteligente",
+      "example": "Mon ami est très intelligent"
+    },
+    {
+      "word": "réciproque",
+      "phonetic": "",
+      "definition": "recíproco",
+      "example": "Mon ami me traite mal donc c'est réciproque"
+    },
+    {
+      "word": "concertiste",
+      "phonetic": "",
+      "definition": "concertista",
+      "example": "le concertiste fera une musique incroyable"
+    },
+    {
+      "word": "architecte",
+      "phonetic": "",
+      "definition": "arquitecto",
+      "example": "Mon père est architecte"
+    },
+    {
+      "word": "bicyclette",
+      "phonetic": "",
+      "definition": "bicicleta, transporte",
+      "example": "Je vais acheter une bicyclette"
+    },
+    {
+      "word": "calendrier",
+      "phonetic": "",
+      "definition": "calendario",
+      "example": "Dans le calendrier vous voyez les jours de l’année"
+    },
+    {
+      "word": "champignon",
+      "phonetic": "",
+      "definition": "champiñón",
+      "example": "Les schtroumpfs vivent dans des petits champignons"
+    },
+    {
+      "word": "charcuterie",
+      "phonetic": "",
+      "definition": "carnicería",
+      "example": "Quand je veux acheter de la viande, je vais a la charcuterie"
+    },
+    {
+      "word": "chirurgien",
+      "phonetic": "",
+      "definition": "cirujano",
+      "example": "Mon pere est chirugien"
+    },
+    {
+      "word": "commissariat",
+      "phonetic": "",
+      "definition": "estación de policía",
+      "example": "La police est au comissariat"
+    },
+    {
+      "word": "embouteillage",
+      "phonetic": "",
+      "definition": "embotellamiento",
+      "example": "À cause de l'accident il y a un embouteillage qui empêche la circulation normale sur la route."
+    },
+    {
+      "word": "hirondelle",
+      "phonetic": "",
+      "definition": "golondrina",
+      "example": "Une hirondelle a fait son nid juste sous notre toit."
+    },
+    {
+      "word": "lampadaire",
+      "phonetic": "",
+      "definition": "farola",
+      "example": "Le banc était éclairé par un lampadaire."
+    },
+    {
+      "word": "Marguerite",
+      "phonetic": "",
+      "definition": "Margarita",
+      "example": "J'ai invité Marguerite et Robert à manger le dimanche."
+    },
+    {
+      "word": "pâtisserie",
+      "phonetic": "",
+      "definition": "pastelería",
+      "example": "Je suis allée à la pâtisserie"
+    },
+    {
+      "word": "rhinocéros",
+      "phonetic": "",
+      "definition": "rinoceronte",
+      "example": "Les rhinocéros sont mes animaux préférés"
+    },
+    {
+      "word": "silhouette",
+      "phonetic": "",
+      "definition": "silueta",
+      "example": "J'ai vu une silhouette à l'extérieur de la maison"
+    },
+    {
+      "word": "somnambule",
+      "phonetic": "",
+      "definition": "Sonámbulo",
+      "example": "Mon père est somnambule"
+    },
+    {
+      "word": "téléphérique",
+      "phonetic": "",
+      "definition": "teleférico",
+      "example": "J’aime voyager dans le téléphérique"
+    },
+    {
+      "word": "thermomètre",
+      "phonetic": "",
+      "definition": "termómetro",
+      "example": "J’ai perdu le thermomètre du docteur"
     }
   ]
 };

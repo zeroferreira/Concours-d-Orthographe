@@ -3694,7 +3694,9 @@
         }
       };
 
-      const levelBWords = [
+      const levelBWords = (window.SPELLING_DATA && Array.isArray(window.SPELLING_DATA.levelBWords) && window.SPELLING_DATA.levelBWords.length)
+        ? window.SPELLING_DATA.levelBWords
+        : [
             { word: 'absolutely', phonetic: '/ˈæbsəluːtli/' },
             { word: 'accurate', phonetic: '/ˈækjərət/' },
             { word: 'actually', phonetic: '/ˈæktʃuəli/' },
@@ -4049,7 +4051,9 @@
             { word: 'zoo', phonetic: '/zuː/' }
       ];
 
-      const levelCWords = [
+      const levelCWords = (window.SPELLING_DATA && Array.isArray(window.SPELLING_DATA.levelCWords) && window.SPELLING_DATA.levelCWords.length)
+        ? window.SPELLING_DATA.levelCWords
+        : [
             { word: 'astonished', phonetic: '/əˈstɒnɪʃt/' },
             { word: 'accessory', phonetic: '/əkˈsesəri/' },
             { word: 'accommodation', phonetic: '/əˌkɒməˈdeɪʃən/' },
@@ -4394,13 +4398,13 @@
         'B': {
           name: 'Level B',
           sublevels: ['B1', 'B1+', 'PET'],
-          words: [],
+          words: levelBWords,
           color: '#FFA500'
         },
         'C': {
           name: 'Level C',
           sublevels: ['B2', 'C1', 'C2', 'FC', 'CAE'],
-          words: [],
+          words: levelCWords,
           color: '#FF8C00'
         }
       };
