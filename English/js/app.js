@@ -111,9 +111,9 @@
     const [showExample, setShowExample] = useState(false);
     const [currentExample, setCurrentExample] = useState('');
     const [currentDefinition, setCurrentDefinition] = useState('');
-    // Theme and Visual Settings State
+    // Theme and Visual Settings State (persisted in localStorage)
     const [themeConfig, setThemeConfig] = useState({
-      mode: 'night',
+      mode: localStorage.getItem('bee_en_theme') || 'night',
       effectSpeed: 1,
       bgOpacity: 1,
       beeOpacity: 1,
@@ -5409,6 +5409,22 @@
         }
       };
 
+      const speak = (text) => {
+        if (window.responsiveVoice && typeof window.responsiveVoice.speak === 'function') {
+          responsiveVoice.speak(text, "US English Female");
+        } else if ('speechSynthesis' in window) {
+          speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'en-US';
+          if (selectedVoice) {
+            utterance.voice = selectedVoice;
+          }
+          speechSynthesis.speak(utterance);
+        } else {
+          console.warn('Speech synthesis not available.');
+        }
+      };
+
       const selectRandomWord = () => {
         if (!selectedLevel || !levels[selectedLevel].words.length) return;
         
@@ -6178,14 +6194,7 @@
                       React.createElement('div', { className: 'space-y-2 flex flex-col items-center' },
                         React.createElement('button', {
                           onClick: () => {
-                            if ('speechSynthesis' in window) {
-                              const utterance = new SpeechSynthesisUtterance(currentWord.word);
-                              utterance.lang = 'en-US';
-                              if (selectedVoice) {
-                                utterance.voice = selectedVoice;
-                              }
-                              speechSynthesis.speak(utterance);
-                            }
+                            speak(currentWord.word);
                           },
                           className: 'w-full bg-amber-600 text-white py-2 px-2 rounded-lg hover:bg-amber-700 transition-all duration-300 shadow-md flex items-center justify-center gap-1 text-sm font-bold'
                         }, 
@@ -6378,14 +6387,9 @@
                 React.createElement('div', { className: 'flex items-center gap-2' },
                   React.createElement('button', {
                     onClick: () => {
-                      if ('speechSynthesis' in window && currentExample) {
+                      if (currentExample) {
                         const cleanText = currentExample.replace(/\*\*(.*?)\*\*/g, '$1').replace(/<[^>]*>/g, '');
-                        const utterance = new SpeechSynthesisUtterance(cleanText);
-                        utterance.lang = 'en-US';
-                        if (selectedVoice) {
-                          utterance.voice = selectedVoice;
-                        }
-                        speechSynthesis.speak(utterance);
+                        speak(cleanText);
                       }
                     },
                     className: 'bg-amber-600 text-white p-2 rounded-full hover:bg-amber-700 transition-all duration-300 shadow-lg',
@@ -6419,23 +6423,11 @@
                 React.createElement('div', { className: 'flex items-center gap-2' },
                   React.createElement('button', {
                     onClick: () => {
-                      if ('speechSynthesis' in window && currentWord && currentDefinition) {
-                        const wordUtterance = new SpeechSynthesisUtterance(currentWord.word);
-                        wordUtterance.lang = 'en-US';
-                        if (selectedVoice) {
-                          wordUtterance.voice = selectedVoice;
-                        }
-                        wordUtterance.onend = () => {
-                          setTimeout(() => {
-                            const definitionUtterance = new SpeechSynthesisUtterance(currentDefinition);
-                            definitionUtterance.lang = 'en-US';
-                            if (selectedVoice) {
-                              definitionUtterance.voice = selectedVoice;
-                            }
-                            speechSynthesis.speak(definitionUtterance);
-                          }, 500);
-                        };
-                        speechSynthesis.speak(wordUtterance);
+                      if (currentWord && currentDefinition) {
+                        speak(currentWord.word);
+                        setTimeout(() => {
+                          speak(currentDefinition);
+                        }, 1200);
                       }
                     },
                     className: 'bg-amber-600 text-white p-2 rounded-full hover:bg-amber-700 transition-all duration-300 shadow-lg',
@@ -7684,10 +7676,11 @@
       }, [currentScreen, gameMode, windowWidth, themeConfig.mode]);
 
       const toggleTheme = () => {
-        setThemeConfig(prev => ({
-          ...prev,
-          mode: prev.mode === 'night' ? 'day' : 'night'
-        }));
+        setThemeConfig(prev => {
+          const newMode = prev.mode === 'night' ? 'day' : 'night';
+          localStorage.setItem('bee_en_theme', newMode);
+          return { ...prev, mode: newMode };
+        });
       };
 
       const ThemeToggleButton = () => {
