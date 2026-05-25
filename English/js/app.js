@@ -5884,7 +5884,7 @@
           
           React.createElement(TransformWrapper, { id: 'bee', config: layoutConfig, isEditMode, onConfigChange: setLayoutConfig },
             React.createElement('img', {
-              src: '../img/Abeja.png',
+              src: 'img/Abeja.png',
               alt: 'Bee',
               className: 'animate-bee-float',
               style: {
@@ -5913,7 +5913,7 @@
                 }, 
                   'BEE',
                   React.createElement('img', {
-                    src: '../img/Abeja.png',
+                    src: 'img/Abeja.png',
                     alt: 'Bee',
                     className: 'w-24 h-24 sm:w-32 sm:h-32 lg:hidden object-contain animate-bee-wiggle',
                     style: {
@@ -7764,7 +7764,7 @@
                 }
               },
                 React.createElement('img', {
-                  src: '../img/Abeja.png',
+                  src: 'img/Abeja.png',
                   alt: 'Logo Bee',
                   className: 'w-8 h-8 object-contain filter drop-shadow-[0_2px_8px_rgba(253,224,71,0.45)]'
                 })

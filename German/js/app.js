@@ -5315,7 +5315,7 @@
             level: "Level A",
             winningWord: "beautiful",
             trophy: "🥇",
-            photo: "img/1A.webp"
+            photo: "../English/img/1A.webp"
           },
           {
             year: 2024,
@@ -5324,7 +5324,7 @@
             level: "Level B",
             winningWord: "magnificent",
             trophy: "🥇",
-            photo: "img/2B.jpg"
+            photo: "../English/img/2B.jpg"
           },
           {
             year: 2024,
@@ -5333,7 +5333,7 @@
             level: "Level C",
             winningWord: "exhilarating",
             trophy: "🥇",
-            photo: "img/3C.webp"
+            photo: "../English/img/3C.webp"
           },
           {
             year: 2023,

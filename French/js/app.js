@@ -5375,7 +5375,7 @@
           // 3D Abeille Foreground Layer (with TransformWrapper!)
           React.createElement(TransformWrapper, { id: 'bee', config: layoutConfig, isEditMode, onConfigChange: setLayoutConfig },
             React.createElement('img', {
-              src: '../img/Abeja.png',
+              src: '../English/img/Abeja.png',
               alt: 'Bee',
               className: 'animate-bee-float',
               style: {
@@ -5404,7 +5404,7 @@
                   }, 
                     'BEE',
                     React.createElement('img', {
-                      src: '../img/Abeja.png',
+                      src: '../English/img/Abeja.png',
                       alt: 'Bee',
                       className: 'w-24 h-24 sm:w-32 sm:h-32 lg:hidden object-contain animate-bee-wiggle',
                       style: {
@@ -6462,7 +6462,7 @@
             level: "Level A",
             winningWord: "beautiful",
             trophy: "🥇",
-            photo: "img/1A.webp"
+            photo: "../English/img/1A.webp"
           },
           {
             year: 2024,
@@ -6471,7 +6471,7 @@
             level: "Level B",
             winningWord: "magnificent",
             trophy: "🥇",
-            photo: "img/2B.jpg"
+            photo: "../English/img/2B.jpg"
           },
           {
             year: 2024,
@@ -6480,7 +6480,7 @@
             level: "Level C",
             winningWord: "exhilarating",
             trophy: "🥇",
-            photo: "img/3C.webp"
+            photo: "../English/img/3C.webp"
           },
           {
             year: 2023,
