@@ -2796,7 +2796,7 @@
           const isActive = extraCheck 
             ? (currentScreen === screenName && extraCheck()) 
             : currentScreen === screenName;
-          return `nav-item-btn-glass ${glowClass} px-3 py-2 font-bold text-[13px] lg:text-sm relative ${
+          return `nav-item-btn-glass ${glowClass} px-4 py-2 font-bold text-[15px] lg:text-[17px] relative ${
             isActive 
               ? 'active-nav-btn text-white' 
               : 'text-gray-300'
