@@ -5305,7 +5305,7 @@
             key: 'contest',
             title: 'CONCOURS',
             desc: 'Participez à de vrais concours et testez vos compétences.',
-            emoji: '🏆',
+            img: 'IMG/trofeo.png',
             glowClass: 'card-contest-glow',
             onClick: () => {
               setGameMode('contest');
@@ -5316,7 +5316,7 @@
             key: 'training',
             title: 'ENTRAÎNEMENT',
             desc: 'Pratiquez et améliorez-vous avec des exercices intelligents.',
-            emoji: '💪',
+            img: 'IMG/brazo.png',
             glowClass: 'card-training-glow',
             onClick: () => {
               setGameMode('training');
@@ -5327,7 +5327,7 @@
             key: 'instructions',
             title: 'INSTRUCTIONS',
             desc: 'Apprenez à participer et découvrez les règles du concours.',
-            emoji: '📖',
+            img: 'IMG/libro.png',
             glowClass: 'card-instructions-glow',
             onClick: () => {
               setCurrentScreen('instructions');
@@ -5337,7 +5337,7 @@
             key: 'winners',
             title: 'GAGNANTS',
             desc: 'Découvrez les leaders et les anciens champions.',
-            emoji: '🏅',
+            img: 'IMG/medalla.png',
             glowClass: 'card-winners-glow',
             onClick: () => {
               setCurrentScreen('winners');
@@ -5479,7 +5479,11 @@
                       },
                         React.createElement('div', { className: 'flex items-center gap-4 text-left' },
                           React.createElement('div', { className: 'badge-hex' },
-                            React.createElement('span', { className: 'text-2xl' }, card.emoji)
+                            React.createElement('img', {
+                              src: card.img,
+                              alt: card.title,
+                              className: 'badge-hex-img'
+                            })
                           ),
                           React.createElement('div', { className: 'flex flex-col' },
                             React.createElement('span', { className: 'card-title-txt' }, card.title),

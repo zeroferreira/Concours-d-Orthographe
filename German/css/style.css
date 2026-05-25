@@ -480,29 +480,43 @@
   background: rgba(12, 9, 30, 0.45);
 }
 
-/* Hexagonal Badge for Left Icon */
+/* Hexagonal Badge for Left Icon - Transparent Wrapper Container */
 .badge-hex {
-  width: 64px;
-  height: 64px;
-  background: rgba(255,255,255,0.01);
-  border: 1px solid rgba(255,255,255,0.08);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  width: 76px;
+  height: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-theme);
-  font-size: 2rem;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  position: relative;
 }
 
+/* No background, no border, no transform on outer container to prevent mismatch */
 .rounded-glass-card:hover .badge-hex {
-  background: var(--color-theme);
-  border-color: var(--color-theme);
-  color: #000000;
-  transform: scale(1.06) rotate(15deg);
-  filter: drop-shadow(0 0 8px var(--color-theme));
+  background: none;
+  border-color: transparent;
+}
+
+/* Physical image icon styling inside the hexagon - Balanced scale */
+.badge-hex-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 154px !important; /* Active colored hexagon will be 58px wide, beautifully proportioned */
+  height: 103px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Micro-animation: rotate, scale, and add vibrant neon theme-colored glow directly wrapping the PNG shape */
+.rounded-glass-card:hover .badge-hex-img {
+  transform: translate(-50%, -50%) scale(1.15) rotate(12deg);
+  filter: drop-shadow(0 0 14px var(--color-theme)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
 }
 
 /* Circle Arrow Button (Right) */

@@ -613,7 +613,7 @@
             key: 'contest',
             title: 'Wettbewerb',
             desc: 'Buchstabiere gegen die Zeit. 3 Versuche.',
-            emoji: '🏆',
+            img: 'IMG/trofeo.png',
             glowClass: 'card-contest-glow',
             onClick: () => {
               setGameMode('contest');
@@ -624,7 +624,7 @@
             key: 'training',
             title: 'Training',
             desc: 'Lerne ohne Druck. Mit Aussprachehilfe.',
-            emoji: '💪',
+            img: 'IMG/brazo.png',
             glowClass: 'card-training-glow',
             onClick: () => {
               setGameMode('training');
@@ -635,7 +635,7 @@
             key: 'instructions',
             title: 'Anleitung',
             desc: 'Spielregeln und detaillierte Infos.',
-            emoji: '📖',
+            img: 'IMG/libro.png',
             glowClass: 'card-instructions-glow',
             onClick: () => {
               setCurrentScreen('instructions');
@@ -645,7 +645,7 @@
             key: 'winners',
             title: 'Ruhmeshalle',
             desc: 'Unsere bisherigen Champions.',
-            emoji: '🥇',
+            img: 'IMG/medalla.png',
             glowClass: 'card-winners-glow',
             onClick: () => {
               setCurrentScreen('winners');
@@ -721,7 +721,11 @@
                       // Badge and info text
                       React.createElement('div', { className: 'flex items-center gap-4 text-left' },
                         React.createElement('div', { className: 'badge-hex' },
-                          React.createElement('span', { className: 'text-2xl' }, card.emoji)
+                          React.createElement('img', {
+                            src: card.img,
+                            alt: card.title,
+                            className: 'badge-hex-img'
+                          })
                         ),
                         React.createElement('div', { className: 'flex flex-col' },
                           React.createElement('span', { className: 'card-title-txt' }, card.title),
