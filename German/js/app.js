@@ -211,9 +211,9 @@
     
     // UI Layout Configuration Coordinates
     const [layoutConfig, setLayoutConfig] = useState({
-      hero: { x: -193, y: -135, scale: 1.32 },
-      cards: { x: 27, y: -75, scale: 1.1 },
-      bee: { x: 528, y: 525, scale: 0.6 }
+      hero: { x: 0, y: 0, scale: 1 },
+      cards: { x: 0, y: 0, scale: 1 },
+      bee: { x: 0, y: 0, scale: 1 }
     });
 
     const [isAdminLogged, setIsAdminLogged] = useState(false);
@@ -509,8 +509,8 @@
             React.createElement(TransformWrapper, { id: 'hero', config: layoutConfig, className: 'flex-1 w-full flex justify-center lg:justify-start', isEditMode, onConfigChange: handleConfigChange },
               React.createElement('div', { className: 'w-full max-w-md sm:max-w-xl lg:max-w-none mx-auto lg:mx-0 flex flex-col items-center justify-center text-center lg:items-start lg:text-left px-4 sm:px-8 lg:pl-12 xl:pl-20' },
                 React.createElement('span', { className: 'text-xs sm:text-base lg:text-sm font-extrabold tracking-widest text-slate-400 uppercase mb-3 block' }, 'WILLKOMMEN ZUM OFFIZIELLEN'),
-                React.createElement('h1', { className: 'main-title font-black text-white leading-none tracking-tight text-7xl sm:text-8xl lg:text-[6.5rem] w-full text-center lg:text-left' }, 'BUCHSTABIER'),
-                React.createElement('h1', { className: 'main-title font-black text-yellow-400 leading-none tracking-tight mb-2 text-8xl sm:text-9xl lg:text-[9rem] flex items-center justify-center lg:justify-start gap-4 w-full' }, 
+                React.createElement('h1', { className: 'main-title font-black text-white leading-none tracking-tight text-5xl sm:text-6xl lg:text-[4rem] w-full text-center lg:text-left' }, 'BUCHSTABIER'),
+                React.createElement('h1', { className: 'main-title font-black text-yellow-400 leading-none tracking-tight mb-2 text-6xl sm:text-7xl lg:text-[5.5rem] flex items-center justify-center lg:justify-start gap-4 w-full' }, 
                   'WETTBEWERB',
                   React.createElement('img', {
                     src: '../English/img/Abeja.png',
