@@ -1454,6 +1454,69 @@
     };
 
     const NavigationBar = () => {
+      const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+      useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
+
+      const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, color: '#FFE259', opacity: 0 });
+
+      const isDay = themeConfig.mode === 'day';
+      const navItems = [
+        { id: 'home', color: isDay ? '#D97706' : '#FFD54F' },
+        { id: 'contest', color: isDay ? '#7C3AED' : '#BA68C8' },
+        { id: 'training', color: isDay ? '#0284C7' : '#29B6F6' },
+        { id: 'instructions', color: isDay ? '#059669' : '#26A69A' },
+        { id: 'winners', color: isDay ? '#D97706' : '#FFD54F' }
+      ];
+
+      const getActiveItemId = () => {
+        if (currentScreen === 'home') return 'home';
+        if (currentScreen === 'menu' && gameMode === 'contest') return 'contest';
+        if ((currentScreen === 'menu' || currentScreen === 'wordList') && gameMode === 'training') return 'training';
+        if (currentScreen === 'instructions') return 'instructions';
+        if (currentScreen === 'winners') return 'winners';
+        return null;
+      };
+
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          const container = document.getElementById('desktop-nav-menu');
+          if (!container) return;
+          const activeEl = container.querySelector('.active-nav-btn');
+          if (activeEl) {
+            const left = activeEl.offsetLeft;
+            const width = activeEl.offsetWidth;
+            const activeId = getActiveItemId();
+            const activeItem = navItems.find(item => item.id === activeId);
+            const color = activeItem ? activeItem.color : '#FFE259';
+            
+            setIndicatorStyle({
+              left: left + (width * 0.15),
+              width: width * 0.7,
+              color: color,
+              opacity: 1
+            });
+          } else {
+            setIndicatorStyle(prev => ({ ...prev, opacity: 0 }));
+          }
+        }, 50);
+        return () => clearTimeout(timer);
+      }, [currentScreen, gameMode, windowWidth, themeConfig.mode]);
+
+      const getNavLinkClass = (screenName, extraCheck = null, glowClass = '') => {
+        const isActive = extraCheck 
+          ? (currentScreen === screenName && extraCheck()) 
+          : currentScreen === screenName;
+        return `nav-item-btn-glass ${glowClass} px-5 py-2.5 font-bold text-[15px] lg:text-base relative ${
+          isActive 
+            ? 'active-nav-btn text-white' 
+            : 'text-gray-300'
+        }`;
+      };
+
       const handleAdminAccess = () => {
         const pass = prompt("Admin-Passwort:");
         if (pass === atob('MTQxNTEzMA==')) {
@@ -1501,39 +1564,72 @@
           ),
 
           // Menu navigation Links
-          React.createElement('div', { className: 'hidden md:flex items-center gap-4 text-xs font-bold text-gray-300 uppercase tracking-widest' },
+          React.createElement('div', { 
+            id: 'desktop-nav-menu',
+            className: 'hidden md:flex items-center gap-2 sm:gap-4 relative py-2 text-xs font-bold uppercase tracking-widest' 
+          },
             React.createElement('button', {
               onClick: () => { setGameMode(null); setCurrentScreen('home'); },
-              className: `nav-item-btn-glass px-4 py-2 ${currentScreen === 'home' ? 'active-nav-btn' : ''}`
+              className: getNavLinkClass('home', null, 'card-winners-glow')
             }, 'Start'),
             React.createElement('button', {
               onClick: () => { setGameMode('contest'); setCurrentScreen('menu'); },
-              className: `nav-item-btn-glass px-4 py-2 ${currentScreen === 'menu' && gameMode === 'contest' ? 'active-nav-btn' : ''}`
+              className: getNavLinkClass('menu', () => gameMode === 'contest', 'card-contest-glow')
             }, 'Wettbewerb'),
             React.createElement('button', {
               onClick: () => { setGameMode('training'); setCurrentScreen('menu'); },
-              className: `nav-item-btn-glass px-4 py-2 ${currentScreen === 'menu' && gameMode === 'training' ? 'active-nav-btn' : ''}`
+              className: getNavLinkClass('menu', () => gameMode === 'training', 'card-training-glow')
             }, 'Training'),
             React.createElement('button', {
               onClick: () => setCurrentScreen('instructions'),
-              className: `nav-item-btn-glass px-4 py-2 ${currentScreen === 'instructions' ? 'active-nav-btn' : ''}`
+              className: getNavLinkClass('instructions', null, 'card-instructions-glow')
             }, 'Anleitung'),
             React.createElement('button', {
               onClick: () => setCurrentScreen('winners'),
-              className: `nav-item-btn-glass px-4 py-2 ${currentScreen === 'winners' ? 'active-nav-btn' : ''}`
+              className: getNavLinkClass('winners', null, 'card-winners-glow')
             }, 'Winners'),
             
             // Day/Night switch
             React.createElement('button', {
               onClick: toggleThemeMode,
-              className: 'nav-item-btn-glass p-2 text-base transition-transform duration-300 transform hover:rotate-12 hover:scale-115'
+              className: 'nav-item-btn-glass p-2 text-base transition-all flex items-center justify-center flex-shrink-0',
+              style: { width: '38px', height: '38px' }
             }, themeConfig.mode === 'night' ? '🌙' : '☀️'),
             
             // Other language link
             React.createElement('a', {
               href: 'https://spellingbee-portal.vercel.app/',
               className: 'nav-item-btn-glass px-4 py-2 text-yellow-400 hover:text-black hover:bg-yellow-400 transition-all duration-300 rounded-lg flex items-center gap-1 font-bold text-[11px] tracking-widest uppercase border border-dashed border-yellow-400/30'
-            }, '🌐 Andere Sprache?')
+            }, '🌐 Andere Sprache?'),
+
+            // Dynamic Sliding Indicator
+            React.createElement('div', {
+              className: 'absolute transition-all duration-300 ease-out pointer-events-none',
+              style: {
+                left: `${indicatorStyle.left}px`,
+                width: `${indicatorStyle.width}px`,
+                height: '2.5px',
+                bottom: '4px',
+                backgroundColor: indicatorStyle.color,
+                boxShadow: `0 0 10px ${indicatorStyle.color}, 0 0 18px ${indicatorStyle.color}80`,
+                borderRadius: '99px',
+                opacity: indicatorStyle.opacity,
+                transform: `scaleX(${indicatorStyle.opacity})`,
+                transitionProperty: 'left, width, background-color, box-shadow, opacity, transform'
+              }
+            },
+              // Dot centered below the line
+              React.createElement('div', {
+                className: 'absolute left-1/2 -translate-x-1/2 rounded-full transition-all duration-300 ease-out',
+                style: {
+                  width: '6px',
+                  height: '6px',
+                  bottom: '-10px',
+                  backgroundColor: indicatorStyle.color,
+                  boxShadow: `0 0 8px ${indicatorStyle.color}, 0 0 14px ${indicatorStyle.color}80`,
+                }
+              })
+            )
           ),
 
           // Right Actions
@@ -1664,7 +1760,7 @@
 
     // Global background variables builder
     const globalBgStyle = {
-      '--bg-image': themeConfig.mode === 'day' ? "url('../IMG/dia.png')" : "url('../IMG/noche.png')",
+      '--bg-image': themeConfig.mode === 'day' ? "url('../IMG/Tag.png')" : "url('../IMG/Nacht.png')",
       '--bg-opacity': themeConfig.bgOpacity,
       '--effect-speed': themeConfig.effectSpeed,
       '--bee-opacity': themeConfig.beeOpacity,
