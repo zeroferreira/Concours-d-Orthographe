@@ -5432,10 +5432,10 @@
                 React.createElement('div', { className: 'w-full max-w-md sm:max-w-xl lg:max-w-none mx-auto lg:mx-0 flex flex-col items-center justify-center text-center lg:items-start lg:text-left px-4 sm:px-8 lg:pl-12 xl:pl-20' },
                   React.createElement('span', { className: 'text-xs sm:text-base lg:text-sm font-extrabold tracking-widest text-slate-400 uppercase mb-3 block' }, "BIENVENUE SUR L'APPLICATION OFFICIELLE"),
                   React.createElement('h1', { 
-                    className: 'main-title font-black text-white leading-none tracking-tight text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[4rem] w-full text-center lg:text-left uppercase'
+                    className: 'main-title font-black text-white leading-none tracking-tight text-3xl sm:text-4xl lg:text-[2.6rem] xl:text-[3.2rem] w-full text-center lg:text-left uppercase'
                   }, "CONCOURS D'"),
                   React.createElement('h1', { 
-                    className: 'main-title font-black text-yellow-400 leading-none tracking-tight mb-2 text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-[5rem] flex items-center justify-center lg:justify-start gap-4 w-full uppercase'
+                    className: 'main-title font-black text-yellow-400 leading-none tracking-tight mb-2 text-3xl sm:text-4xl lg:text-[2.8rem] xl:text-[3.4rem] flex items-center justify-center lg:justify-start gap-4 w-full uppercase'
                   }, 
                     'ORTHOGRAPHE',
                     React.createElement('img', {
@@ -6549,7 +6549,7 @@
           const isActive = extraCheck 
             ? (currentScreen === screenName && extraCheck()) 
             : currentScreen === screenName;
-          return `nav-item-btn-glass ${glowClass} px-5 py-2.5 font-bold text-[15px] lg:text-base relative ${
+          return `nav-item-btn-glass ${glowClass} px-3 py-2 font-bold text-[13px] lg:text-sm relative ${
             isActive 
               ? 'active-nav-btn text-white' 
               : 'text-gray-300'
@@ -6612,133 +6612,129 @@
         };
         
         return React.createElement('nav', { 
-          className: 'floating-nav-capsule text-white relative',
+          className: 'floating-nav-capsule relative px-6 py-3',
           style: { zIndex: 1000 }
         },
-          React.createElement('div', { className: 'max-w-6xl mx-auto px-4 sm:px-8' },
-            React.createElement('div', { className: 'flex justify-between items-center py-4' },
-              React.createElement('div', { className: 'flex items-center gap-3 cursor-pointer', onClick: () => { setGameMode(null); setCurrentScreen('home'); } },
-                React.createElement('div', { className: 'relative w-9 h-9 flex items-center justify-center' },
-                  React.createElement('div', {
-                    className: 'absolute inset-0 bg-black border border-yellow-400 border-opacity-70 flex items-center justify-center',
-                    style: {
-                      clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                      WebkitClipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
-                    }
-                  },
-                    React.createElement('img', {
-                      src: 'IMG/Abeja.png',
-                      alt: 'Logo Bee',
-                      className: 'w-8 h-8 object-contain filter drop-shadow-[0_2px_8px_rgba(253,224,71,0.45)]'
-                    })
-                  )
-                ),
-                React.createElement('span', { className: 'font-black text-sm sm:text-base tracking-wider text-white uppercase' },
-                  "CONCOURS D'",
-                  React.createElement('span', { className: 'text-yellow-400' }, 'ORTHOGRAPHE')
-                )
-              ),
-              
-              React.createElement('div', { className: 'flex items-center gap-2' },
-                React.createElement('button', {
-                  onClick: () => setIsMenuOpen(!isMenuOpen),
-                  className: 'md:hidden text-white hover:text-yellow-400 transition-colors duration-300 p-2'
-                },
-                  React.createElement('div', { className: 'w-6 h-6 flex flex-col justify-center items-center' },
-                    React.createElement('span', {
-                      className: `block w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`
-                    }),
-                    React.createElement('span', {
-                      className: `block w-6 h-0.5 bg-current transition-all duration-300 mt-1 ${isMenuOpen ? 'opacity-0' : ''}`
-                    }),
-                    React.createElement('span', {
-                      className: `block w-6 h-0.5 bg-current transition-all duration-300 mt-1 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`
-                    })
-                  )
-                )
-              ),
-              
-              React.createElement('div', { 
-                id: 'desktop-nav-menu',
-                className: 'hidden md:flex items-center gap-2 sm:gap-4 relative py-2' 
-              },
-                React.createElement('button', {
-                  onClick: () => {
-                    setGameMode(null);
-                    setCurrentScreen('home');
-                    setIsMenuOpen(false);
-                  },
-                  className: getNavLinkClass('home', null, 'card-winners-glow')
-                }, 'Accueil'),
-                React.createElement('button', {
-                  onClick: () => {
-                    setGameMode('contest');
-                    setCurrentScreen('menu');
-                    setIsMenuOpen(false);
-                  },
-                  className: getNavLinkClass('menu', () => gameMode === 'contest', 'card-contest-glow')
-                }, 'Concours'),
-                React.createElement('button', {
-                  onClick: () => {
-                    setGameMode('training');
-                    setCurrentScreen('menu');
-                    setIsMenuOpen(false);
-                  },
-                  className: getNavLinkClass('menu', () => gameMode === 'training', 'card-training-glow')
-                }, 'Entraînement'),
-                React.createElement('button', {
-                  onClick: () => {
-                    setCurrentScreen('instructions');
-                    setIsMenuOpen(false);
-                  },
-                  className: getNavLinkClass('instructions', null, 'card-instructions-glow')
-                }, 'Instructions'),
-                React.createElement('button', {
-                  onClick: () => {
-                    setCurrentScreen('winners');
-                    setIsMenuOpen(false);
-                  },
-                  className: getNavLinkClass('winners', null, 'card-winners-glow')
-                }, 'Gagnants'),
-                ThemeToggleButton(),
-                ChangeLanguageButton(),
-                EditModeToggleButton(),
-
-                // Dynamic Sliding Indicator
+          React.createElement('div', { className: 'w-full flex justify-between items-center' },
+            React.createElement('div', { className: 'flex items-center gap-3 cursor-pointer', onClick: () => { setGameMode(null); setCurrentScreen('home'); } },
+              React.createElement('div', { className: 'relative w-9 h-9 flex items-center justify-center' },
                 React.createElement('div', {
-                  className: 'absolute transition-all duration-300 ease-out pointer-events-none',
+                  className: 'absolute inset-0 bg-black border border-yellow-400 border-opacity-70 flex items-center justify-center',
                   style: {
-                    left: `${indicatorStyle.left}px`,
-                    width: `${indicatorStyle.width}px`,
-                    height: '2.5px',
-                    bottom: '4px',
-                    backgroundColor: indicatorStyle.color,
-                    boxShadow: `0 0 10px ${indicatorStyle.color}, 0 0 18px ${indicatorStyle.color}80`,
-                    borderRadius: '99px',
-                    opacity: indicatorStyle.opacity,
-                    transform: `scaleX(${indicatorStyle.opacity})`,
-                    transitionProperty: 'left, width, background-color, box-shadow, opacity, transform'
+                    clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
+                    WebkitClipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)'
                   }
                 },
-                  // Dot centered below the line
-                  React.createElement('div', {
-                    className: 'absolute left-1/2 -translate-x-1/2 rounded-full transition-all duration-300 ease-out',
-                    style: {
-                      width: '6px',
-                      height: '6px',
-                      bottom: '-10px',
-                      backgroundColor: indicatorStyle.color,
-                      boxShadow: `0 0 8px ${indicatorStyle.color}, 0 0 14px ${indicatorStyle.color}80`,
-                    }
+                  React.createElement('img', {
+                    src: 'IMG/Abeja.png',
+                    alt: 'Logo Bee',
+                    className: 'w-8 h-8 object-contain filter drop-shadow-[0_2px_8px_rgba(253,224,71,0.45)]'
                   })
                 )
               ),
-              React.createElement('div', { className: 'hidden md:block' },
-                React.createElement('button', {
-                  onClick: handleAdminAccess,
-                  className: 'btn-admin-glass flex items-center gap-1 font-bold'
-                }, '⚙️ Admin')
+              React.createElement('div', { className: 'flex flex-col leading-[1.1] text-left animate-fade-in' },
+                React.createElement('span', { className: 'font-black text-[9px] tracking-wider text-slate-300 uppercase' }, "CONCOURS"),
+                React.createElement('span', { className: 'font-black text-[12px] tracking-widest text-yellow-400 uppercase -mt-0.5' }, "D'ORTHOGRAPHE")
               )
+            ),
+            
+            React.createElement('button', {
+              onClick: () => setIsMenuOpen(!isMenuOpen),
+              className: 'md:hidden text-white hover:text-yellow-400 transition-colors duration-300 p-2'
+            },
+              React.createElement('div', { className: 'w-6 h-6 flex flex-col justify-center items-center' },
+                React.createElement('span', {
+                  className: `block w-6 h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`
+                }),
+                React.createElement('span', {
+                  className: `block w-6 h-0.5 bg-current transition-all duration-300 mt-1 ${isMenuOpen ? 'opacity-0' : ''}`
+                }),
+                React.createElement('span', {
+                  className: `block w-6 h-0.5 bg-current transition-all duration-300 mt-1 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`
+                })
+              )
+            ),
+            
+            React.createElement('div', { 
+              id: 'desktop-nav-menu',
+              className: 'hidden md:flex items-center gap-2 sm:gap-4 relative py-2' 
+            },
+              React.createElement('button', {
+                onClick: () => {
+                  setGameMode(null);
+                  setCurrentScreen('home');
+                  setIsMenuOpen(false);
+                },
+                className: getNavLinkClass('home', null, 'card-winners-glow')
+              }, 'Accueil'),
+              React.createElement('button', {
+                onClick: () => {
+                  setGameMode('contest');
+                  setCurrentScreen('menu');
+                  setIsMenuOpen(false);
+                },
+                className: getNavLinkClass('menu', () => gameMode === 'contest', 'card-contest-glow')
+              }, 'Concours'),
+              React.createElement('button', {
+                onClick: () => {
+                  setGameMode('training');
+                  setCurrentScreen('menu');
+                  setIsMenuOpen(false);
+                },
+                className: getNavLinkClass('menu', () => gameMode === 'training', 'card-training-glow')
+              }, 'Entraînement'),
+              React.createElement('button', {
+                onClick: () => {
+                  setCurrentScreen('instructions');
+                  setIsMenuOpen(false);
+                },
+                className: getNavLinkClass('instructions', null, 'card-instructions-glow')
+              }, 'Instructions'),
+              React.createElement('button', {
+                onClick: () => {
+                  setCurrentScreen('winners');
+                  setIsMenuOpen(false);
+                },
+                className: getNavLinkClass('winners', null, 'card-winners-glow')
+              }, 'Gagnants'),
+              ThemeToggleButton(),
+              ChangeLanguageButton(),
+              EditModeToggleButton(),
+
+              // Dynamic Sliding Indicator
+              React.createElement('div', {
+                className: 'absolute transition-all duration-300 ease-out pointer-events-none',
+                style: {
+                  left: `${indicatorStyle.left}px`,
+                  width: `${indicatorStyle.width}px`,
+                  height: '2.5px',
+                  bottom: '4px',
+                  backgroundColor: indicatorStyle.color,
+                  boxShadow: `0 0 10px ${indicatorStyle.color}, 0 0 18px ${indicatorStyle.color}80`,
+                  borderRadius: '99px',
+                  opacity: indicatorStyle.opacity,
+                  transform: `scaleX(${indicatorStyle.opacity})`,
+                  transitionProperty: 'left, width, background-color, box-shadow, opacity, transform'
+                }
+              },
+                // Dot centered below the line
+                React.createElement('div', {
+                  className: 'absolute left-1/2 -translate-x-1/2 rounded-full transition-all duration-300 ease-out',
+                  style: {
+                    width: '6px',
+                    height: '6px',
+                    bottom: '-10px',
+                    backgroundColor: indicatorStyle.color,
+                    boxShadow: `0 0 8px ${indicatorStyle.color}, 0 0 14px ${indicatorStyle.color}80`,
+                  }
+                })
+              )
+            ),
+            React.createElement('div', { className: 'hidden md:block' },
+              React.createElement('button', {
+                onClick: handleAdminAccess,
+                className: 'btn-admin-glass flex items-center gap-1 font-bold'
+              }, '⚙️ Admin')
             )
           ),
           
