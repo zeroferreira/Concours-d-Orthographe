@@ -7018,7 +7018,7 @@
       console.log('Rendering SpellingBeeGame, currentScreen:', currentScreen);
       
       const globalBgStyle = {
-        '--bg-image': themeConfig.mode === 'day' ? "url('../IMG/dia.png')" : "url('../IMG/noche.png')",
+        '--bg-image': themeConfig.mode === 'day' ? "url('IMG/dia.png')" : "url('IMG/noche.png')",
         '--bg-opacity': themeConfig.bgOpacity,
         '--effect-speed': themeConfig.effectSpeed,
         '--bee-opacity': themeConfig.beeOpacity,

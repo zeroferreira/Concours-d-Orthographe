@@ -7255,7 +7255,7 @@
       
       // Global background style
       const globalBgStyle = {
-        '--bg-image': themeConfig.mode === 'day' ? "url('../../img/D\u00eda.png')" : "url('../../img/Universo.png')",
+        '--bg-image': themeConfig.mode === 'day' ? "url('img/dia.png')" : "url('img/noche.png')",
         '--bg-opacity': themeConfig.bgOpacity,
         '--effect-speed': themeConfig.effectSpeed,
         '--bee-opacity': themeConfig.beeOpacity,

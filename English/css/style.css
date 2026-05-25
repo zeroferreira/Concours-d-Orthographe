@@ -224,7 +224,7 @@
 }
 
 :root {
-  --bg-image: url('../../img/Universo.png');
+  --bg-image: url('../img/noche.png');
   --bg-opacity: 1;
   --effect-speed: 1;
   --bee-opacity: 1;
@@ -403,7 +403,7 @@
   height: 100%;
   z-index: 1005;
   pointer-events: none;
-  background-image: url('../../img/Abeja.png');
+  background-image: url('../img/Abeja.png');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
