@@ -495,6 +495,8 @@
   font-size: 2rem;
   transition: all 0.3s ease;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .rounded-glass-card:hover .badge-hex {
@@ -507,8 +509,12 @@
 
 /* Physical image icon styling inside the hexagon */
 .badge-hex-img {
-  width: 68px;
-  height: 68px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 120px;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -516,7 +522,7 @@
 
 /* Micro-animation: extra pop on card hover */
 .rounded-glass-card:hover .badge-hex-img {
-  transform: scale(1.1);
+  transform: translate(-50%, -50%) scale(1.1);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
 }
 
