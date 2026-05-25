@@ -1506,7 +1506,7 @@
             
             // Other language link
             React.createElement('a', {
-              href: 'index_multi.html',
+              href: 'https://spellingbee-portal.vercel.app/',
               className: 'nav-item-btn-glass px-4 py-2 text-yellow-400 hover:text-black hover:bg-yellow-400 transition-all duration-300 rounded-lg flex items-center gap-1 font-bold text-[11px] tracking-widest uppercase border border-dashed border-yellow-400/30'
             }, '🌐 Andere Sprache?')
           ),
@@ -1555,7 +1555,7 @@
             className: 'w-full py-2.5 text-center hover:bg-yellow-400 hover:text-black rounded-lg transition-colors'
           }, 'Winners'),
           React.createElement('a', {
-            href: 'index_multi.html',
+            href: 'https://spellingbee-portal.vercel.app/',
             className: 'w-full py-2.5 text-center hover:bg-yellow-400 hover:text-black rounded-lg transition-colors block border border-dashed border-yellow-400/30 mt-1 text-yellow-400'
           }, 'Andere Sprache? 🌐'),
           React.createElement('button', {
