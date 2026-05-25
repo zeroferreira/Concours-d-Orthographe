@@ -636,7 +636,7 @@
         
         React.createElement(TransformWrapper, { id: 'bee', config: layoutConfig, isEditMode, onConfigChange: setLayoutConfig },
           React.createElement('img', {
-            src: '../English/img/Abeja.png',
+            src: 'IMG/Abeja.png',
             alt: 'Bee',
             className: 'animate-bee-float',
             style: {
@@ -661,7 +661,7 @@
                 React.createElement('h1', { className: 'main-title font-black text-yellow-400 leading-none tracking-tight mb-2 text-5xl sm:text-6xl lg:text-[4.5rem] xl:text-[5rem] flex items-center justify-center lg:justify-start gap-4 w-full' }, 
                   'WETTBEWERB',
                   React.createElement('img', {
-                    src: '../English/img/Abeja.png',
+                    src: 'IMG/Abeja.png',
                     alt: 'Bee',
                     className: 'w-16 h-16 sm:w-24 sm:h-24 lg:hidden object-contain animate-bee-wiggle',
                     style: {
@@ -1463,7 +1463,7 @@
                 }
               },
                 React.createElement('img', {
-                  src: '../English/img/Abeja.png',
+                  src: 'IMG/Abeja.png',
                   alt: 'Logo Bee',
                   className: 'w-8 h-8 object-contain filter drop-shadow-[0_2px_8px_rgba(253,224,71,0.45)]'
                 })
@@ -1506,7 +1506,7 @@
             
             // Other language link
             React.createElement('a', {
-              href: '../index%20MULTI.html',
+              href: 'index_multi.html',
               className: 'nav-item-btn-glass px-4 py-2 text-yellow-400 hover:text-black hover:bg-yellow-400 transition-all duration-300 rounded-lg flex items-center gap-1 font-bold text-[11px] tracking-widest uppercase border border-dashed border-yellow-400/30'
             }, '🌐 Andere Sprache?')
           ),
@@ -1555,7 +1555,7 @@
             className: 'w-full py-2.5 text-center hover:bg-yellow-400 hover:text-black rounded-lg transition-colors'
           }, 'Winners'),
           React.createElement('a', {
-            href: '../index%20MULTI.html',
+            href: 'index_multi.html',
             className: 'w-full py-2.5 text-center hover:bg-yellow-400 hover:text-black rounded-lg transition-colors block border border-dashed border-yellow-400/30 mt-1 text-yellow-400'
           }, 'Andere Sprache? 🌐'),
           React.createElement('button', {

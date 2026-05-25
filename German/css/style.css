@@ -404,7 +404,7 @@
   height: 100%;
   z-index: 1005;
   pointer-events: none;
-  background-image: url('../../English/img/Abeja.png');
+  background-image: url('../IMG/Abeja.png');
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;

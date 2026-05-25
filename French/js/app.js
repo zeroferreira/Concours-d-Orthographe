@@ -5391,7 +5391,7 @@
           // 3D Abeille Foreground Layer (with TransformWrapper!)
           React.createElement(TransformWrapper, { id: 'bee', config: layoutConfig, isEditMode, onConfigChange: setLayoutConfig },
             React.createElement('img', {
-              src: '../English/img/Abeja.png',
+              src: 'IMG/Abeja.png',
               alt: 'Bee',
               className: 'animate-bee-float',
               style: {
@@ -5420,7 +5420,7 @@
                   }, 
                     'BEE',
                     React.createElement('img', {
-                      src: '../English/img/Abeja.png',
+                      src: 'IMG/Abeja.png',
                       alt: 'Bee',
                       className: 'w-24 h-24 sm:w-32 sm:h-32 lg:hidden object-contain animate-bee-wiggle',
                       style: {
@@ -6807,7 +6807,7 @@
 
         const ChangeLanguageButton = () => {
           return React.createElement('a', {
-            href: '../index%20MULTI.html',
+            href: 'index_multi.html',
             className: 'bg-white bg-opacity-10 backdrop-blur-md rounded-full border border-yellow-400 border-opacity-40 hover:bg-yellow-400 hover:text-black transition-all ml-2 flex items-center justify-center text-yellow-400 hover:border-yellow-400 flex-shrink-0 font-bold text-[11px] px-3 uppercase tracking-wider',
             title: 'Changer de langue',
             style: { height: '38px', lineHeight: '38px' }
@@ -7001,7 +7001,7 @@
                 }`
               }, '⚙️ Admin'),
               React.createElement('a', {
-                href: '../index%20MULTI.html',
+                href: 'index_multi.html',
                 className: 'w-full text-left px-4 py-3 rounded-lg font-bold transition-all duration-300 text-yellow-400 hover:bg-gray-800 hover:text-yellow-300 block border border-dashed border-yellow-400/30 mt-2'
               }, '🌐 Autre langue ?'),
               React.createElement('div', { className: 'flex flex-col gap-2 px-4 py-2 border-t border-gray-800 mt-2' },

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spelling Bee 🐝 - Portal Multilingüe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    :root {
+      --color-en: 250, 204, 21; /* Yellow */
+      --color-fr: 59, 130, 246; /* Blue */
+      --color-de: 239, 68, 68;   /* Red */
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at center, #0f0a1e 0%, #05030a 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Starry Sky Animations */
+    .star-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: pulse var(--speed, 4s) ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.8); opacity: 0.8; }
+    }
+
+    /* Shooting Comets */
+    .comet {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+      transform: rotate(-45deg);
+      opacity: 0;
+      pointer-events: none;
+      animation: shoot 12s linear infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translate(0, 0) rotate(-45deg) scale(0);
+        opacity: 0;
+      }
+      1% {
+        opacity: 1;
+        transform: translate(-10px, 10px) rotate(-45deg) scale(1);
+      }
+      8% {
+        transform: translate(-200px, 200px) rotate(-45deg) scale(1);
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-200px, 200px) rotate(-45deg) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Floating Fireflies */
+    .firefly {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(253, 224, 71, 0.6);
+      border-radius: 50%;
+      filter: blur(1px);
+      box-shadow: 0 0 10px rgba(253, 224, 71, 0.8), 0 0 20px rgba(253, 224, 71, 0.4);
+      animation: floatUp var(--speed, 8s) ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(var(--dx, 50px)) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Premium Glassmorphic Card Styling */
+    .glass-card {
+      background: rgba(15, 12, 30, 0.45);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(800px circle at var(--x, 0px) var(--y, 0px), rgba(255,255,255,0.06), transparent 40%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Card Glows and Borders */
+    .card-en {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+    }
+    .card-en:hover {
+      border-color: rgba(var(--color-en), 0.4);
+      box-shadow: 0 15px 45px rgba(var(--color-en), 0.15), 0 0 20px rgba(var(--color-en), 0.08), inset 0 1px 1px rgba(255,255,255,0.15);
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .card-fr {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+    }
+    .card-fr:hover {
+      border-color: rgba(var(--color-fr), 0.4);
+      box-shadow: 0 15px 45px rgba(var(--color-fr), 0.15), 0 0 20px rgba(var(--color-fr), 0.08), inset 0 1px 1px rgba(255,255,255,0.15);
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .card-de {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+    }
+    .card-de:hover {
+      border-color: rgba(var(--color-de), 0.4);
+      box-shadow: 0 15px 45px rgba(var(--color-de), 0.15), 0 0 20px rgba(var(--color-de), 0.08), inset 0 1px 1px rgba(255,255,255,0.15);
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    /* Floating bee logo */
+    .bee-logo {
+      animation: beeFloat 3.5s ease-in-out infinite;
+      filter: drop-shadow(0 10px 15px rgba(250, 204, 21, 0.3));
+    }
+
+    @keyframes beeFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(3deg); }
+    }
+
+    /* Interactive button styles */
+    .btn-portal {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-portal::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-portal:hover::after {
+      transform: translateX(100%);
+    }
+
+    /* Shimmer effect for titles */
+    .title-shimmer {
+      background: linear-gradient(to right, #ffffff 20%, #ffd700 40%, #ffd700 60%, #ffffff 80%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      to { background-position: 200% center; }
+    }
+  </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between overflow-x-hidden text-white py-12 px-4 sm:px-6 lg:px-8">
+
+  <!-- Background Emitters -->
+  <div class="star-bg" id="star-bg"></div>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-6xl mx-auto flex-grow flex flex-col justify-center items-center z-10">
+    
+    <!-- Logo & Title Section -->
+    <div class="text-center mb-16 flex flex-col items-center">
+      <div class="relative w-28 h-28 mb-6 flex items-center justify-center bg-black/40 border border-yellow-400/40 rounded-full p-2 backdrop-blur-md shadow-[0_0_30px_rgba(250,204,21,0.2)]">
+        <img src="IMG/Abeja.png" alt="Logo Spelling Bee" class="w-20 h-20 object-contain bee-logo">
+      </div>
+      
+      <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-4 Space-Grotesk">
+        SPELLING <span class="text-yellow-400 title-shimmer">BEE</span>
+      </h1>
+      <p class="text-gray-400 max-w-lg text-lg font-light leading-relaxed">
+        Elige tu idioma y pon a prueba tus habilidades de deletreo con reconocimiento de voz de última generación.
+      </p>
+    </div>
+
+    <!-- Language Selector Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl px-4">
+      
+      <!-- English Card -->
+      <a href="https://spellingbeeenglish.vercel.app/" class="glass-card card-en rounded-3xl p-8 flex flex-col justify-between min-h-[380px] group cursor-pointer">
+        <div>
+          <!-- Card Header -->
+          <div class="flex justify-between items-start mb-6">
+            <span class="text-5xl filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">🇬🇧</span>
+            <span class="bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">English</span>
+          </div>
+          
+          <!-- Card Title & Desc -->
+          <h2 class="text-2xl font-bold mb-4 group-hover:text-yellow-400 transition-colors Space-Grotesk">English Spelling Bee</h2>
+          <p class="text-gray-400 text-sm leading-relaxed font-light">
+            Practice spelling in English. Native voice synthesis, full dynamic phonetic transcriptions, three training/contest levels, and a beautiful customizable stellar interface.
+          </p>
+        </div>
+        
+        <!-- Action Button inside Card -->
+        <div class="mt-8 flex items-center justify-between text-yellow-400 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+          <span>COMENZAR AHORA</span>
+          <span class="text-xl">➔</span>
+        </div>
+      </a>
+
+      <!-- French Card -->
+      <a href="https://concours-d-orthographe.vercel.app/" class="glass-card card-fr rounded-3xl p-8 flex flex-col justify-between min-h-[380px] group cursor-pointer">
+        <div>
+          <!-- Card Header -->
+          <div class="flex justify-between items-start mb-6">
+            <span class="text-5xl filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">🇫🇷</span>
+            <span class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Français</span>
+          </div>
+          
+          <!-- Card Title & Desc -->
+          <h2 class="text-2xl font-bold mb-4 group-hover:text-blue-400 transition-colors Space-Grotesk">Jeu d'Orthographe</h2>
+          <p class="text-gray-400 text-sm leading-relaxed font-light">
+            Entraînez-vous à l'orthographe en français. Comprend des exemples écrits, des définitions complètes, un support de reconnaissance vocale avancé et des rapports administratifs.
+          </p>
+        </div>
+        
+        <!-- Action Button inside Card -->
+        <div class="mt-8 flex items-center justify-between text-blue-400 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+          <span>COMMENCER LE JEU</span>
+          <span class="text-xl">➔</span>
+        </div>
+      </a>
+
+      <!-- German Card -->
+      <a href="https://rechtschreibwettbewerb.vercel.app/" class="glass-card card-de rounded-3xl p-8 flex flex-col justify-between min-h-[380px] group cursor-pointer">
+        <div>
+          <!-- Card Header -->
+          <div class="flex justify-between items-start mb-6">
+            <span class="text-5xl filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">🇩🇪</span>
+            <span class="bg-red-500/10 text-red-400 border border-red-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Deutsch</span>
+          </div>
+          
+          <!-- Card Title & Desc -->
+          <h2 class="text-2xl font-bold mb-4 group-hover:text-red-400 transition-colors Space-Grotesk">Rechtschreibspiel</h2>
+          <p class="text-gray-400 text-sm leading-relaxed font-light">
+            Verbessern Sie Ihre deutsche Rechtschreibung spielerisch. Unterstützung für die Spracheingabe, dynamische Vokabellisten der Stufen A, B und C, und Admin-Kontrollpanel.
+          </p>
+        </div>
+        
+        <!-- Action Button inside Card -->
+        <div class="mt-8 flex items-center justify-between text-red-400 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+          <span>SPIEL STARTEN</span>
+          <span class="text-xl">➔</span>
+        </div>
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full text-center py-6 text-xs text-gray-600 font-light tracking-widest z-10 mt-12">
+    &copy; 2026 SPELLING BEE PLATFORM. TODOS LOS DERECHOS RESERVADOS.
+  </footer>
+
+  <script>
+    // Generate Stars Dynamically
+    const starBg = document.getElementById('star-bg');
+    const starCount = 60;
+    
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 80}%`;
+      const size = Math.random() * 2 + 1;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.setProperty('--speed', `${Math.random() * 4 + 3}s`);
+      starBg.appendChild(star);
+    }
+
+    // Generate Fireflies
+    const fireflyCount = 15;
+    for (let i = 0; i < fireflyCount; i++) {
+      const fly = document.createElement('div');
+      fly.className = 'firefly';
+      fly.style.left = `${Math.random() * 100}%`;
+      fly.style.setProperty('--speed', `${Math.random() * 8 + 8}s`);
+      fly.style.setProperty('--dx', `${Math.random() * 100 - 50}px`);
+      fly.style.animationDelay = `${Math.random() * 10}s`;
+      starBg.appendChild(fly);
+    }
+
+    // Generate Shooting Stars (Comets)
+    const cometCount = 3;
+    for (let i = 0; i < cometCount; i++) {
+      const comet = document.createElement('div');
+      comet.className = 'comet';
+      comet.style.left = `${Math.random() * 50 + 50}%`;
+      comet.style.top = `${Math.random() * 30}%`;
+      comet.style.setProperty('--delay', `${Math.random() * 15}s`);
+      starBg.appendChild(comet);
+    }
+
+    // Card Glassmorphic Spotlight Effect
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      });
+    });
+  </script>
+</body>
+</html>
