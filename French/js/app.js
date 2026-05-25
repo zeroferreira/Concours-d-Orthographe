@@ -5297,7 +5297,7 @@
           }
           return {
             hero: { x: -193, y: -135, scale: 1.32 },
-            cards: { x: 27, y: -95, scale: 1.1 },
+            cards: { x: 0, y: -115, scale: 1.1 },
             bee: { x: 528, y: 525, scale: 0.6 }
           };
         });
@@ -5452,7 +5452,11 @@
                   ),
                   React.createElement('p', { 
                     className: 'hero-text-sub text-lg sm:text-xl md:text-2xl font-black tracking-widest text-blue-400 uppercase mb-6 text-center lg:text-left w-full mx-auto lg:mx-0' 
-                  }, "S'ENTRAÎNER. PRATIQUER. CONCOURIR. GAGNER."),
+                  }, 
+                    "S'ENTRAÎNER. PRATIQUER. CONCOURIR.",
+                    React.createElement('br'),
+                    "GAGNER."
+                  ),
                   React.createElement('button', {
                     onClick: () => {
                       setGameMode('contest');
