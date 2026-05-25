@@ -1169,220 +1169,6 @@
       };
       
       // Mapeo mejorado de letras con variaciones de pronunciación en inglés
-      const enhancedLetterMap = {
-        // Letras básicas
-        'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f', 'g': 'g', 'h': 'h',
-        'i': 'i', 'j': 'j', 'k': 'k', 'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'p': 'p',
-        'q': 'q', 'r': 'r', 's': 's', 't': 't', 'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x',
-        'y': 'y', 'z': 'z',
-        
-        // Pronunciaciones comunes en inglés con mayor precisión
-        'ay': 'a', 'aye': 'a', 'eh': 'a', 'hey': 'a',
-        'bee': 'b', 'be': 'b', 'bea': 'b', 'bey': 'b',
-        'see': 'c', 'sea': 'c', 'cee': 'c', 'si': 'c',
-        'dee': 'd', 'de': 'd', 'day': 'd',
-        'ee': 'e', 'e': 'e', 'hey': 'e',
-        'eff': 'f', 'ef': 'f', 'ph': 'f', 'fee': 'f',
-        'gee': 'g', 'ge': 'g', 'jee': 'g', 'ghee': 'g',
-        'aitch': 'h', 'ache': 'h', 'haitch': 'h', 'h': 'h', 'hey': 'h',
-        'eye': 'i', 'aye': 'i', 'ai': 'i', 'high': 'i',
-        'jay': 'j', 'jaye': 'j', 'je': 'j', 'jey': 'j',
-        'kay': 'k', 'kaye': 'k', 'ke': 'k', 'key': 'k',
-        'el': 'l', 'ell': 'l', 'le': 'l', 'elle': 'l',
-        'em': 'm', 'me': 'm', 'mm': 'm',
-        'en': 'n', 'ne': 'n', 'nn': 'n',
-        'ou': 'o', 'oh': 'o', 'owe': 'o', 'o': 'o', 'eau': 'o', 'oo': 'o',
-        'pee': 'p', 'pe': 'p', 'pi': 'p', 'pea': 'p',
-        'cue': 'q', 'queue': 'q', 'que': 'q', 'kyu': 'q', 'cu': 'q',
-        'are': 'r', 'ar': 'r', 're': 'r', 'arr': 'r',
-        'ess': 's', 'es': 's', 'se': 's', 'ss': 's',
-        'tea': 't', 'tee': 't', 'te': 't', 'ti': 't', 'tay': 't',
-        'you': 'u', 'yu': 'u', 'ue': 'u', 'ooh': 'u',
-        'vee': 'v', 've': 'v', 'vi': 'v', 'vay': 'v',
-        'double you': 'w', 'doubleyou': 'w', 'double u': 'w', 'w': 'w', 'dub': 'w',
-        'ex': 'x', 'eks': 'x', 'x': 'x', 'ecks': 'x',
-        'why': 'y', 'wye': 'y', 'wi': 'y', 'way': 'y',
-        'zee': 'z', 'zed': 'z', 'ze': 'z', 'zay': 'z',
-        
-        // Alfabeto fonético NATO con variaciones
-        'alpha': 'a', 'alfa': 'a', 'alpa': 'a',
-        'bravo': 'b', 'brawo': 'b', 'brabo': 'b',
-        'charlie': 'c', 'charley': 'c', 'charly': 'c',
-        'delta': 'd', 'dalta': 'd',
-        'echo': 'e', 'eco': 'e', 'ecko': 'e',
-        'foxtrot': 'f', 'fox trot': 'f', 'foxtrat': 'f',
-        'golf': 'g', 'gulf': 'g', 'galf': 'g',
-        'hotel': 'h', 'hotle': 'h',
-        'india': 'i', 'indya': 'i',
-        'juliet': 'j', 'juliett': 'j', 'juliat': 'j',
-        'kilo': 'k', 'kelo': 'k',
-        'lima': 'l', 'lema': 'l', 'leema': 'l',
-        'mike': 'm', 'mic': 'm', 'myk': 'm',
-        'november': 'n', 'novamber': 'n',
-        'oscar': 'o', 'oskar': 'o',
-        'papa': 'p', 'pappa': 'p',
-        'quebec': 'q', 'kebec': 'q', 'quebek': 'q',
-        'romeo': 'r', 'romio': 'r',
-        'sierra': 's', 'sera': 's',
-        'tango': 't', 'tongo': 't',
-        'uniform': 'u', 'uneform': 'u',
-        'victor': 'v', 'viktor': 'v', 'victer': 'v',
-        'whiskey': 'w', 'whisky': 'w', 'wisky': 'w',
-        'xray': 'x', 'x-ray': 'x', 'x ray': 'x', 'exray': 'x',
-        'yankee': 'y', 'yankey': 'y', 'yanky': 'y',
-        'zulu': 'z', 'zulo': 'z',
-        
-        // Comandos especiales con variaciones
-        'delete': 'DELETE', 'backspace': 'DELETE', 'back': 'DELETE', 'remove': 'DELETE', 'erase': 'DELETE',
-        'clear': 'CLEAR', 'reset': 'CLEAR', 'clean': 'CLEAR', 'start over': 'CLEAR', 'new': 'CLEAR'
-      };
-
-      // Función mejorada para encontrar coincidencias en inglés
-      const findEnglishBestMatch = (word, threshold = 0.8) => {
-        const exactMatch = enhancedLetterMap[word];
-        if (exactMatch) return { letter: exactMatch, confidence: 1.0 };
-        
-        let bestMatch = null;
-        let bestScore = 0;
-        
-        // Priorizar coincidencias fonéticas
-        const phoneticPairs = {
-          'b': ['bee', 'be', 'bea', 'bravo'],
-          'd': ['dee', 'de', 'delta'],
-          'c': ['see', 'sea', 'cee', 'charlie'],
-          'p': ['pee', 'pe', 'papa'],
-          't': ['tea', 'tee', 'tango'],
-          'g': ['gee', 'ge', 'golf'],
-          'v': ['vee', 've', 'victor'],
-          'j': ['jay', 'jaye', 'juliet'],
-          'k': ['kay', 'kaye', 'kilo'],
-          'q': ['cue', 'queue', 'quebec'],
-          'r': ['are', 'ar', 'romeo'],
-          's': ['ess', 'es', 'sierra'],
-          'u': ['you', 'yu', 'uniform'],
-          'w': ['double you', 'doubleyou', 'whiskey'],
-          'x': ['ex', 'eks', 'xray'],
-          'y': ['why', 'wye', 'yankee'],
-          'z': ['zee', 'zed', 'zulu']
-        };
-        
-        // Buscar en pares fonéticos primero
-        for (const [letter, variations] of Object.entries(phoneticPairs)) {
-          for (const variation of variations) {
-            const distance = levenshteinDistance(word, variation);
-            const similarity = 1 - (distance / Math.max(word.length, variation.length));
-            
-            if (similarity >= threshold && similarity > bestScore) {
-              bestMatch = letter;
-              bestScore = similarity;
-            }
-          }
-        }
-        
-        // Si no se encuentra en fonéticos, buscar en todo el mapeo
-        if (!bestMatch) {
-          for (const [key, value] of Object.entries(enhancedLetterMap)) {
-            if (key.length > 1) {
-              const distance = levenshteinDistance(word, key);
-              const similarity = 1 - (distance / Math.max(word.length, key.length));
-              
-              if (similarity >= threshold && similarity > bestScore) {
-                bestMatch = value;
-                bestScore = similarity;
-              }
-            }
-          }
-        }
-        
-        return bestMatch ? { letter: bestMatch, confidence: bestScore } : null;
-      };
-
-      // Nueva función para detectar secuencias repetidas
-      const detectRepeatedSequences = (words) => {
-        const sequences = [];
-        
-        // Mapeo de pronunciaciones comunes para letras
-        const letterSounds = {
-          'ou': 'o', 'oh': 'o', 'owe': 'o', 'eau': 'o',
-          'ay': 'a', 'aye': 'a', 'eh': 'a',
-          'bee': 'b', 'be': 'b', 'bea': 'b',
-          'see': 'c', 'sea': 'c', 'cee': 'c', 'si': 'c',
-          'dee': 'd', 'de': 'd', 'day': 'd',
-          'ee': 'e', 'hey': 'e',
-          'eff': 'f', 'ef': 'f', 'fee': 'f',
-          'gee': 'g', 'ge': 'g', 'jee': 'g',
-          'aitch': 'h', 'ache': 'h', 'haitch': 'h',
-          'eye': 'i', 'aye': 'i', 'ai': 'i', 'high': 'i',
-          'jay': 'j', 'jaye': 'j', 'je': 'j',
-          'kay': 'k', 'kaye': 'k', 'ke': 'k', 'key': 'k',
-          'el': 'l', 'ell': 'l', 'le': 'l', 'elle': 'l',
-          'em': 'm', 'me': 'm', 'mm': 'm',
-          'en': 'n', 'ne': 'n', 'nn': 'n',
-          'pee': 'p', 'pe': 'p', 'pi': 'p', 'pea': 'p',
-          'cue': 'q', 'queue': 'q', 'que': 'q', 'kyu': 'q',
-          'are': 'r', 'ar': 'r', 're': 'r', 'arr': 'r',
-          'ess': 's', 'es': 's', 'se': 's', 'ss': 's',
-          'tea': 't', 'tee': 't', 'te': 't', 'ti': 't',
-          'you': 'u', 'yu': 'u', 'ue': 'u', 'ooh': 'u',
-          'vee': 'v', 've': 'v', 'vi': 'v',
-          'double': 'w', 'doubleyou': 'w', 'dub': 'w',
-          'ex': 'x', 'eks': 'x', 'ecks': 'x',
-          'why': 'y', 'wye': 'y', 'wi': 'y', 'way': 'y',
-          'zee': 'z', 'zed': 'z', 'ze': 'z', 'zay': 'z'
-        };
-        
-        // Buscar patrones de repetición
-        for (let i = 0; i < words.length - 1; i++) {
-          const currentWord = words[i].trim().toLowerCase();
-          const nextWord = words[i + 1].trim().toLowerCase();
-          
-          if (!currentWord || !nextWord) continue;
-          
-          // Detectar repetición exacta
-          if (currentWord === nextWord) {
-            const letter = letterSounds[currentWord] || enhancedLetterMap[currentWord];
-            if (letter && letter.length === 1) {
-              sequences.push(letter, letter);
-              console.log('🔄 Repetición exacta detectada:', currentWord, currentWord, '->', letter + letter);
-              i++; // Saltar la siguiente palabra ya procesada
-              continue;
-            }
-          }
-          
-          // Detectar repetición aproximada (para casos como 'ou' 'oh')
-          const currentLetter = letterSounds[currentWord] || enhancedLetterMap[currentWord];
-          const nextLetter = letterSounds[nextWord] || enhancedLetterMap[nextWord];
-          
-          if (currentLetter && nextLetter && currentLetter === nextLetter && currentLetter.length === 1) {
-            sequences.push(currentLetter, currentLetter);
-            console.log('🔄 Repetición aproximada detectada:', currentWord, nextWord, '->', currentLetter + currentLetter);
-            i++; // Saltar la siguiente palabra ya procesada
-            continue;
-          }
-          
-          // Detectar variaciones fonéticas de la misma letra
-          const phoneticVariations = {
-            'o': ['ou', 'oh', 'owe', 'eau', 'oscar'],
-            'a': ['ay', 'aye', 'eh', 'hey', 'alpha'],
-            'e': ['ee', 'hey', 'echo'],
-            'i': ['eye', 'aye', 'ai', 'high', 'india'],
-            'u': ['you', 'yu', 'ue', 'ooh', 'uniform']
-          };
-          
-          for (const [letter, variations] of Object.entries(phoneticVariations)) {
-            if (variations.includes(currentWord) && variations.includes(nextWord)) {
-              sequences.push(letter, letter);
-              console.log('🔄 Variación fonética repetida detectada:', currentWord, nextWord, '->', letter + letter);
-              i++; // Saltar la siguiente palabra ya procesada
-              break;
-            }
-          }
-        }
-        
-        return sequences;
-      };
-
-      // Función para detectar si el input parece deletreo
       const normalizeForCompare = (text) => {
       return (text || '')
         .toLowerCase()
@@ -1435,6 +1221,8 @@
       'delete': 'DELETE', 'backspace': 'DELETE', 'clear': 'CLEAR', 'reset': 'CLEAR',
       'groß': 'CAPITAL', 'gross': 'CAPITAL', 'capital': 'CAPITAL'
     };
+
+    const enhancedLetterMap = enhancedGermanLetterMap;
 
     // Función para detectar si el input contiene palabras completas en alemán
     const containsCompleteWords = (transcript) => {
@@ -2261,14 +2049,14 @@
                                     React.createElement('div', { className: 'grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4' },
                                       // Current (Izquierda)
                                       spokenText && React.createElement('div', { className: 'text-center' },
-                                        React.createElement('div', { className: 'text-xs font-medium text-gray-600 mb-1' }, 'Actuel'),
+                                        React.createElement('div', { className: 'text-xs font-medium text-gray-600 mb-1' }, 'Aktuell'),
                                         React.createElement('div', { className: 'current-spelling' },
                                           React.createElement('strong', { className: 'text-blue-600 text-sm font-mono' }, spokenText)
                                         )
                                       ),
                                       // Target (Centro)
                                       currentWord && React.createElement('div', { className: 'text-center' },
-                                        React.createElement('div', { className: 'text-xs font-medium text-gray-600 mb-1' }, 'Cible'),
+                                        React.createElement('div', { className: 'text-xs font-medium text-gray-600 mb-1' }, 'Ziel'),
                                         React.createElement('div', { className: 'target-word' },
                                           React.createElement('strong', { className: 'text-gray-800 text-sm font-mono' }, currentWord.word)
                                         )
@@ -2824,7 +2612,7 @@
         const words = levels[selectedLevel]?.words || [];
         
         const sortedWords = React.useMemo(() => {
-          return [...words].sort((a, b) => a.word.localeCompare(b.word, 'fr', { sensitivity: 'base' }));
+          return [...words].sort((a, b) => a.word.localeCompare(b.word, 'de', { sensitivity: 'base' }));
         }, [words]);
         
         const filteredWords = sortedWords.filter(item => 
@@ -3280,7 +3068,7 @@
       console.log('Rendering SpellingBeeGame, currentScreen:', currentScreen);
       
       const globalBgStyle = {
-        '--bg-image': themeConfig.mode === 'day' ? "url('../IMG/Jour.png')" : "url('../IMG/nuit.png')",
+        '--bg-image': themeConfig.mode === 'day' ? "url('../IMG/Tag.png')" : "url('../IMG/Nacht.png')",
         '--bg-opacity': themeConfig.bgOpacity,
         '--effect-speed': themeConfig.effectSpeed,
         '--bee-opacity': themeConfig.beeOpacity,

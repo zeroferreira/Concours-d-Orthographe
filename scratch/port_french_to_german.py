@@ -68,7 +68,7 @@ if closing_brace_idx == -1:
 code = code[:start_idx] + german_fallback_code + code[closing_brace_idx + 2:]
 
 # Now replace the French speech spelling functions with our upgraded German speech spelling functions
-french_is_likely_spelling_start = code.find("const isLikelySpelling =")
+french_is_likely_spelling_start = code.find("const enhancedLetterMap =")
 french_process_spoken_input_end = code.find("const checkSpelling =", french_is_likely_spelling_start)
 
 if french_is_likely_spelling_start == -1 or french_process_spoken_input_end == -1:
@@ -127,6 +127,8 @@ german_speech_helpers = """const normalizeForCompare = (text) => {
       'delete': 'DELETE', 'backspace': 'DELETE', 'clear': 'CLEAR', 'reset': 'CLEAR',
       'groß': 'CAPITAL', 'gross': 'CAPITAL', 'capital': 'CAPITAL'
     };
+
+    const enhancedLetterMap = enhancedGermanLetterMap;
 
     // Función para detectar si el input contiene palabras completas en alemán
     const containsCompleteWords = (transcript) => {
@@ -483,6 +485,17 @@ replacements = [
     
     # Case sensitive button translations
     ("Écouter", "Anhören"),
+    
+    # Background image path corrections
+    ("url('../IMG/Jour.png')", "url('../IMG/Tag.png')"),
+    ("url('../IMG/nuit.png')", "url('../IMG/Nacht.png')"),
+    
+    # French visual spelling headings to German
+    ("'Actuel'", "'Aktuell'"),
+    ("'Cible'", "'Ziel'"),
+    
+    # French sort locale to German
+    ("localeCompare(b.word, 'fr'", "localeCompare(b.word, 'de'"),
 ]
 
 # Apply UI text translations
