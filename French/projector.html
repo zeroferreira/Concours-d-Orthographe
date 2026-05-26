@@ -100,6 +100,19 @@
       text-transform: uppercase;
     }
 
+    .target-word {
+      font-size: 4.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #a5f3fc 0%, #60a5fa 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      filter: drop-shadow(0 0 25px rgba(96, 165, 250, 0.35));
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
     .slots-container {
       display: flex;
       flex-wrap: wrap;
@@ -260,6 +273,7 @@
   <main>
     <div id="game-content" style="display: none; width: 100%; text-align: center;">
       <div class="subtitle">Mot à Épeler</div>
+      <div class="target-word" id="target-word-display"></div>
       <div class="slots-container" id="slots-wrapper"></div>
       <div style="display: flex; justify-content: center;" id="alert-wrapper"></div>
     </div>
@@ -283,6 +297,7 @@
     const slotsWrapper = document.getElementById('slots-wrapper');
     const alertWrapper = document.getElementById('alert-wrapper');
     const micIndicator = document.getElementById('mic-indicator');
+    const targetWordDisplay = document.getElementById('target-word-display');
 
     // Create broadcast channel
     const bc = new BroadcastChannel('spelling_bee_sync');
@@ -298,6 +313,9 @@
 
       waitingScreen.style.display = 'none';
       gameContent.style.display = 'block';
+
+      // Update Target Word
+      targetWordDisplay.textContent = state.currentWord.word.toUpperCase();
 
       // Update Header
       headerTitle.textContent = `${state.levelName} - Concours`;
