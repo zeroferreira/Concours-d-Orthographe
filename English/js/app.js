@@ -126,6 +126,7 @@
     const [isEditMode, setIsEditMode] = useState(false);
 
     // Agregar este nuevo estado
+    const [showProjectorMode, setShowProjectorMode] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [availableVoices, setAvailableVoices] = useState([]);
     const [selectedVoice, setSelectedVoice] = useState(null);
@@ -6254,10 +6255,16 @@
                   })
                 )
               ),
-              React.createElement('button', {
-                onClick: resetGame,
-                className: 'bg-gradient-to-r from-orange-500 to-amber-600 text-white p-2.5 rounded-full hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.25)]'
-              }, React.createElement(RotateCcw, { className: 'w-4 h-4 sm:w-5 h-5' }))
+              React.createElement('div', { className: 'flex items-center gap-2' },
+                gameMode === 'contest' && React.createElement('button', {
+                  onClick: () => setShowProjectorMode(true),
+                  className: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-3 py-2 sm:py-2.5 rounded-full hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.25)] flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider hover:scale-105 transform'
+                }, '📺 Projector View'),
+                React.createElement('button', {
+                  onClick: resetGame,
+                  className: 'bg-gradient-to-r from-orange-500 to-amber-600 text-white p-2.5 rounded-full hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.25)]'
+                }, React.createElement(RotateCcw, { className: 'w-4 h-4 sm:w-5 h-5' }))
+              )
             ),
             
             // Diseño de 2 columnas - altura optimizada y responsiva
@@ -6564,6 +6571,86 @@
                   onClick: () => setShowDefinition(false),
                   className: 'bg-white bg-opacity-10 border border-white border-opacity-10 text-white py-2.5 px-6 rounded-xl font-bold hover:bg-opacity-20 transition-all duration-300 uppercase text-xs tracking-wider'
                 }, 'Close')
+              )
+            )
+          ),
+          
+          showProjectorMode && React.createElement('div', { 
+            className: 'fixed inset-0 bg-[#070412]/98 backdrop-blur-2xl z-50 flex flex-col justify-between p-8 sm:p-16 animate-fadeIn text-white' 
+          },
+            // 1. Cabecera (Nivel, Vidas y Temporizador gigante)
+            React.createElement('div', { className: 'flex justify-between items-center w-full bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl backdrop-blur-md animate-fadeIn' },
+              React.createElement('div', { className: 'text-left' },
+                React.createElement('h2', { className: 'text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-amber-300 uppercase tracking-widest' }, 
+                  `${levels[selectedLevel]?.name} - CONTEST`
+                ),
+                React.createElement('p', { className: 'text-xs sm:text-sm font-semibold text-slate-300 mt-1' },
+                  `Words used: ${usedWords.length} / ${levels[selectedLevel]?.words.length}`
+                )
+              ),
+              // Botón flotante para cerrar y volver al control
+              React.createElement('button', {
+                onClick: () => setShowProjectorMode(false),
+                className: 'bg-red-500 hover:bg-red-600 text-white rounded-full p-3 sm:p-4 transition-all duration-300 transform hover:scale-105 border border-white/10 shadow-lg text-lg font-bold'
+              }, '✕')
+            ),
+
+            // 2. Centro: Tarjetas de "Ahorcado" masivas
+            React.createElement('div', { className: 'flex flex-col items-center justify-center flex-1 my-8 text-center' },
+              currentWord ? React.createElement('div', { className: 'space-y-8 w-full' },
+                React.createElement('h3', { className: 'text-xs sm:text-sm font-extrabold uppercase tracking-widest text-slate-400 block' }, 'WORD TO SPELL :'),
+                React.createElement('div', { className: 'flex flex-wrap justify-center gap-3 sm:gap-4 max-w-6xl mx-auto' },
+                  (() => {
+                    const target = currentWord.word.toLowerCase();
+                    const spoken = spokenText.toLowerCase().trim();
+                    const slots = [];
+
+                    for (let i = 0; i < target.length; i++) {
+                      const targetLetter = target[i];
+                      const spokenLetter = spoken[i] || '';
+
+                      let slotClass = 'w-12 h-16 sm:w-20 sm:h-28 rounded-2xl border flex items-center justify-center text-3xl sm:text-5xl font-black transition-all duration-500 shadow-2xl ';
+                      
+                      if (spokenLetter) {
+                        if (spokenLetter === targetLetter) {
+                          // Letra correcta: Fondo de cristal esmeralda y brillo
+                          slotClass += 'bg-emerald-500/15 border-emerald-400 text-emerald-300 shadow-[0_0_30px_rgba(52,211,153,0.35)]';
+                        } else {
+                          // Letra incorrecta: Fondo de cristal rubí
+                          slotClass += 'bg-rose-500/15 border-rose-400 text-rose-300 animate-bounce shadow-[0_0_30px_rgba(244,63,94,0.35)]';
+                        }
+                      } else {
+                        // Espacio vacío (Línea o tarjeta vacía con borde difuminado)
+                        slotClass += 'bg-white/5 border-white/10 text-white/20 border-b-4 border-b-yellow-400/40';
+                      }
+
+                      slots.push(
+                        React.createElement('div', { 
+                          key: i, 
+                          className: slotClass 
+                        }, spokenLetter.toUpperCase() || '_')
+                      );
+                    }
+                    return slots;
+                  })()
+                ),
+                isCorrect !== null && React.createElement('div', {
+                  className: `px-6 py-3 rounded-2xl text-xl sm:text-3xl font-extrabold uppercase tracking-widest border max-w-md mx-auto shadow-2xl ${
+                    isCorrect 
+                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.4)] animate-pulse' 
+                      : 'bg-rose-500/10 text-rose-400 border-rose-500/30 shadow-[0_0_40px_rgba(244,63,94,0.4)] animate-bounce'
+                  }`
+                }, isCorrect ? '✅ CORRECT !' : '❌ TRY AGAIN !')
+              ) : React.createElement('div', { className: 'text-xl sm:text-3xl text-slate-400 font-bold' },
+                'Waiting for a word...'
+              )
+            ),
+
+            // 3. Pie de página: Indicador sutil de micrófono activo
+            React.createElement('div', { className: 'flex justify-center items-center gap-3 w-full' },
+              isListening && React.createElement('div', { className: 'flex items-center gap-3 bg-rose-500/10 border border-rose-500/30 px-6 py-3 rounded-2xl animate-pulse text-rose-400 font-bold text-sm sm:text-base shadow-lg' },
+                React.createElement('span', { className: 'w-3 h-3 rounded-full bg-rose-500 shadow-[0_0_10px_#f43f5e]' }),
+                'MICROPHONE ACTIVE - LISTENING...'
               )
             )
           )
