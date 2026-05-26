@@ -5742,7 +5742,7 @@
           return {
             hero: { x: -362, y: -236, scale: 1.48 },
             cards: { x: 257, y: -169, scale: 1.42 },
-            bee: { x: 507, y: 420, scale: 0.55 },
+            bee: { x: 507, y: 380, scale: 0.55 },
             designedWidth: 1920
           };
         });
