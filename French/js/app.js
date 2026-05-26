@@ -510,7 +510,7 @@
             
             React.createElement('button', {
               onClick: () => setIsMenuOpen(!isMenuOpen),
-              className: 'md:hidden text-white hover:text-yellow-400 transition-colors duration-300 p-2'
+              className: 'lg:hidden text-white hover:text-yellow-400 transition-colors duration-300 p-2'
             },
               React.createElement('div', { className: 'w-6 h-6 flex flex-col justify-center items-center' },
                 React.createElement('span', {
@@ -527,7 +527,7 @@
             
             React.createElement('div', { 
               id: 'desktop-nav-menu',
-              className: 'hidden md:flex items-center gap-4 lg:gap-6 relative py-2' 
+              className: 'hidden lg:flex items-center gap-4 lg:gap-6 relative py-2' 
             },
               React.createElement('button', {
                 onClick: () => {
@@ -611,7 +611,7 @@
           
           // Mobile dropdown
           React.createElement('div', {
-            className: `md:hidden absolute top-full left-0 right-0 mt-2 bg-slate-950 bg-opacity-95 backdrop-blur-lg border border-white border-opacity-10 rounded-2xl transition-all duration-300 ease-in-out overflow-hidden z-50 ${
+            className: `lg:hidden absolute top-full left-0 right-0 mt-2 bg-slate-950 bg-opacity-95 backdrop-blur-lg border border-white border-opacity-10 rounded-2xl transition-all duration-300 ease-in-out overflow-hidden z-50 ${
               isMenuOpen ? 'max-h-[500px] opacity-100 p-4' : 'max-h-0 opacity-0 pointer-events-none'
             }`
           },
@@ -673,9 +673,40 @@
                     ? 'bg-yellow-400 text-black' 
                     : 'text-white hover:bg-white hover:bg-opacity-10 hover:text-yellow-400'
                 }`
-              }, '🏅 Gagnants')
+              }, '🏅 Gagnants'),
+              React.createElement('a', {
+                href: 'https://spellingbee-portal.vercel.app/',
+                className: 'w-full text-left px-4 py-3 rounded-xl font-bold transition-all duration-300 text-yellow-400 hover:bg-white hover:bg-opacity-10 hover:text-yellow-300 block border border-dashed border-yellow-400/30 mt-2'
+              }, '🌐 Autre langue ?'),
+              React.createElement('div', { className: 'py-2 flex gap-4 justify-center items-center border-t border-white border-opacity-10 mt-2 pt-4' },
+                React.createElement(ThemeToggleButton),
+                isAdminLogged && React.createElement(AdminSettingsButton)
+              ),
+              isAdminLogged && React.createElement('div', { className: 'py-2 flex flex-col gap-2 justify-center items-center' },
+                React.createElement('button', {
+                  onClick: () => {
+                    setIsEditMode(!isEditMode);
+                    setCurrentScreen('home');
+                    setIsMenuOpen(false);
+                  },
+                  className: 'px-4 py-2 bg-yellow-400 text-black font-bold rounded-full w-full'
+                }, isEditMode ? "Fin Édition" : '✏️ Éditer Layout')
+              ),
+              React.createElement('button', {
+                onClick: handleAdminAccess,
+                className: 'w-full text-left px-4 py-3 rounded-xl font-bold transition-all duration-300 text-white hover:bg-white hover:bg-opacity-10 hover:text-yellow-400 flex items-center gap-2 border-t border-white border-opacity-10 mt-2 pt-4'
+              }, 
+                React.createElement('span', { className: 'text-[1rem]' }, '⚙️'),
+                React.createElement('span', null, 'Admin')
+              )
             )
-          )
+          ),
+          
+          // Overlay to close mobile menu
+          isMenuOpen && React.createElement('div', {
+            className: 'fixed inset-0 bg-black bg-opacity-30 z-30 lg:hidden',
+            onClick: () => setIsMenuOpen(false)
+          })
         );
     };
 
@@ -5711,7 +5742,7 @@
           return {
             hero: { x: -362, y: -236, scale: 1.48 },
             cards: { x: 257, y: -169, scale: 1.42 },
-            bee: { x: 507, y: 483, scale: 0.55 },
+            bee: { x: 507, y: 420, scale: 0.55 },
             designedWidth: 1920
           };
         });
@@ -6914,7 +6945,7 @@
           // Botón principal
           React.createElement('button', {
             onClick: () => setShowHelpMenu(!showHelpMenu),
-            className: 'w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-2xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 border-2 border-gray-200'
+            className: 'help-circle-glass text-2xl font-bold transition-all duration-300 transform hover:scale-110'
           }, '?'),
           
           // Gesto/Botón para acoplar (dock)

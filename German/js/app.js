@@ -510,7 +510,7 @@
             
             React.createElement('button', {
               onClick: () => setIsMenüOpen(!isMenüOpen),
-              className: 'md:hidden text-white hover:text-yellow-400 transition-colors duration-300 p-2'
+              className: 'lg:hidden text-white hover:text-yellow-400 transition-colors duration-300 p-2'
             },
               React.createElement('div', { className: 'w-6 h-6 flex flex-col justify-center items-center' },
                 React.createElement('span', {
@@ -527,7 +527,7 @@
             
             React.createElement('div', { 
               id: 'desktop-nav-menu',
-              className: 'hidden md:flex items-center gap-4 lg:gap-6 relative py-2' 
+              className: 'hidden lg:flex items-center gap-4 lg:gap-6 relative py-2' 
             },
               React.createElement('button', {
                 onClick: () => {
@@ -611,7 +611,7 @@
           ),
           
           React.createElement('div', {
-            className: `md:hidden absolute top-full left-0 right-0 bg-black transition-all duration-300 ease-in-out overflow-hidden z-50 ${
+            className: `lg:hidden absolute top-full left-0 right-0 bg-black transition-all duration-300 ease-in-out overflow-hidden z-50 ${
               isMenüOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
             }`
           },
@@ -696,7 +696,7 @@
           ),
           
           isMenüOpen && React.createElement('div', {
-            className: 'fixed inset-0 bg-black bg-opacity-30 z-30 md:hidden',
+            className: 'fixed inset-0 bg-black bg-opacity-30 z-30 lg:hidden',
             onClick: () => setIsMenüOpen(false)
           })
         );
@@ -3259,7 +3259,7 @@
           // Botón principal
           React.createElement('button', {
             onClick: () => setShowHelpMenü(!showHelpMenü),
-            className: 'w-14 h-14 bg-white rounded-full shadow-lg flex items-center justify-center text-2xl font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 border-2 border-gray-200'
+            className: 'help-circle-glass text-2xl font-bold transition-all duration-300 transform hover:scale-110'
           }, '?'),
           
           // Gesto/Botón para acoplar (dock)
