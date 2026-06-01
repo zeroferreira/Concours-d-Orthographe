@@ -293,6 +293,62 @@
           error: 500
         }
       };
+    // Función de acumulador de deletreo inteligente letra por letra (Solución 1 - Sin bloqueo y con capitalización por voz)
+    const getProgressiveSpellingText = (prevText, result, targetWord) => {
+      if (result === 'DELETE') {
+        return prevText.slice(0, -1);
+      }
+      if (result === 'CLEAR') {
+        return '';
+      }
+      if (!result || !targetWord) {
+        return prevText;
+      }
+
+      const base = prevText;
+      const target = targetWord.toLowerCase();
+      
+      const spokenLetters = result.toLowerCase();
+      const nextExpectedIndex = base.length;
+      
+      // Si el alumno sigue deletreando más allá del límite de la palabra
+      if (nextExpectedIndex >= target.length) {
+        // Cualquier letra extra es incorrecta y se agrega directamente en el mismo formato hablado
+        return base + result[0];
+      }
+      
+      const nextExpectedLetter = target[nextExpectedIndex];
+      
+      if (nextExpectedLetter) {
+        // Tomamos el primer carácter hablado
+        const spokenChar = spokenLetters[0];
+        
+        // Si coincide con la letra esperada, usamos el carácter exacto pronunciado (respetando si dijo "capital")
+        if (spokenChar === nextExpectedLetter) {
+          let newText = base + result[0];
+          
+          // Si el resultado de voz tiene más caracteres correctos consecutivos, los añadimos
+          let tempMatch = newText.toLowerCase();
+          let idx = 1;
+          while (idx < spokenLetters.length && tempMatch.length < target.length) {
+            const expected = target[tempMatch.length];
+            if (spokenLetters[idx] === expected) {
+              newText += result[idx] || expected;
+              tempMatch += expected;
+            } else {
+              break;
+            }
+            idx++;
+          }
+          return newText;
+        } 
+        // Si es incorrecto, simplemente agregamos la letra incorrecta (con la forma en que se capturó)
+        else {
+          return base + result[0];
+        }
+      }
+      
+      return base;
     };
 
     // Función de reconocimiento con procesamiento inmediato
@@ -456,38 +512,8 @@
                 base = prev.substring(0, prev.length - lastInterimResult.length);
             }
 
-            // DEDUPLICACIÓN INTELIGENTE (Crucial para Android)
-            // Verificar si 'result' ya está al final de 'base'
-            // Esto sucede si el motor envía texto acumulado ("ca") cuando ya teníamos "c"
-            
-            let textToAdd = result;
-            
-            // Caso 1: Duplicado exacto (el motor re-envía lo último)
-            if (base.endsWith(result)) {
-                textToAdd = '';
-            } 
-            // Caso 2: Solapamiento parcial (ej: base="c", result="ca" -> agregar solo "a")
-            else {
-                // Buscar el solapamiento más largo posible al final de 'base'
-                for (let i = Math.min(base.length, result.length); i > 0; i--) {
-                    const suffix = base.slice(-i);
-                    const prefix = result.slice(0, i);
-                    if (suffix === prefix) {
-                        textToAdd = result.slice(i);
-                        break;
-                    }
-                }
-            }
-
-            let newText = base;
-            
-            if (result === 'DELETE') {
-              newText = base.slice(0, -1);
-            } else if (result === 'CLEAR') {
-              newText = '';
-            } else if (textToAdd) {
-              newText = base + textToAdd;
-            }
+            const targetWord = currentWordRef.current?.word || '';
+            const newText = getProgressiveSpellingText(base, result, targetWord);
             
             lastInterimResult = ''; // Limpiamos el provisional
             return newText;
@@ -5450,7 +5476,11 @@
             isCorrect: isCorrect,
             levelName: selectedLevel ? (levels[selectedLevel]?.name || '') : '',
             usedWordsCount: usedWords.length,
-            totalWordsCount: selectedLevel ? (levels[selectedLevel]?.words.length || 0) : 0
+            totalWordsCount: selectedLevel ? (levels[selectedLevel]?.words.length || 0) : 0,
+            showExample: showExample,
+            showDefinition: showDefinition,
+            currentExample: currentExample,
+            currentDefinition: currentDefinition
           });
         };
         
@@ -5465,7 +5495,7 @@
         return () => {
           bc.close();
         };
-      }, [currentWord, spokenText, isListening, isCorrect, selectedLevel, usedWords]);
+      }, [currentWord, spokenText, isListening, isCorrect, selectedLevel, usedWords, showExample, showDefinition, currentExample, currentDefinition]);
 
       //  1. Ve a portal.azure.com → busca "Speech Service" → Crear recurso
       //  2. Elige la región (ej: eastus) y el plan F0 (gratuito)

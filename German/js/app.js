@@ -849,6 +849,62 @@
           error: 500
         }
       };
+    // Función de acumulador de deletreo inteligente letra por letra (Solución 1 - Sin bloqueo y con capitalización por voz)
+    const getProgressiveSpellingText = (prevText, result, targetWord) => {
+      if (result === 'DELETE') {
+        return prevText.slice(0, -1);
+      }
+      if (result === 'CLEAR') {
+        return '';
+      }
+      if (!result || !targetWord) {
+        return prevText;
+      }
+
+      const base = prevText;
+      const target = targetWord.toLowerCase();
+      
+      const spokenLetters = result.toLowerCase();
+      const nextExpectedIndex = base.length;
+      
+      // Si el alumno sigue deletreando más allá del límite de la palabra
+      if (nextExpectedIndex >= target.length) {
+        // Cualquier letra extra es incorrecta y se agrega directamente en el mismo formato hablado
+        return base + result[0];
+      }
+      
+      const nextExpectedLetter = target[nextExpectedIndex];
+      
+      if (nextExpectedLetter) {
+        // Tomamos el primer carácter hablado
+        const spokenChar = spokenLetters[0];
+        
+        // Si coincide con la letra esperada, usamos el carácter exacto pronunciado (respetando si dijo "capital")
+        if (spokenChar === nextExpectedLetter) {
+          let newText = base + result[0];
+          
+          // Si el resultado de voz tiene más caracteres correctos consecutivos, los añadimos
+          let tempMatch = newText.toLowerCase();
+          let idx = 1;
+          while (idx < spokenLetters.length && tempMatch.length < target.length) {
+            const expected = target[tempMatch.length];
+            if (spokenLetters[idx] === expected) {
+              newText += result[idx] || expected;
+              tempMatch += expected;
+            } else {
+              break;
+            }
+            idx++;
+          }
+          return newText;
+        } 
+        // Si es incorrecto, simplemente agregamos la letra incorrecta (con la forma en que se capturó)
+        else {
+          return base + result[0];
+        }
+      }
+      
+      return base;
     };
 
     // Función de reconocimiento con procesamiento inmediato
@@ -991,7 +1047,7 @@
               setSpokenText('');
               console.log('🧹 Limpiando texto');
             } else if (result) {
-              setSpokenText(prev => prev + result);
+              setSpokenText(prev => getProgressiveSpellingText(prev, result, currentWordRef.current?.word || ''));
               console.log('🔤 Letras agregadas:', result);
             }
             lastProcessedLength = currentText.length;
@@ -1012,7 +1068,7 @@
             } else if (result === 'CLEAR') {
               setSpokenText('');
             } else if (result) {
-              setSpokenText(prev => prev + result);
+              setSpokenText(prev => getProgressiveSpellingText(prev, result, currentWordRef.current?.word || ''));
             }
           }
           lastProcessedLength = 0;
@@ -1838,7 +1894,11 @@
           isCorrect: isCorrect,
           levelName: selectedLevel ? (levels[selectedLevel]?.name || '') : '',
           usedWordsCount: usedWords.length,
-          totalWordsCount: selectedLevel ? (levels[selectedLevel]?.words.length || 0) : 0
+          totalWordsCount: selectedLevel ? (levels[selectedLevel]?.words.length || 0) : 0,
+          showExample: showExample,
+          showDefinition: showDefinition,
+          currentExample: currentExample,
+          currentDefinition: currentDefinition
         });
       };
       
@@ -1853,7 +1913,7 @@
       return () => {
         bc.close();
       };
-    }, [currentWord, spokenText, isListening, isCorrect, selectedLevel, usedWords]);
+    }, [currentWord, spokenText, isListening, isCorrect, selectedLevel, usedWords, showExample, showDefinition, currentExample, currentDefinition]);
 
       // ─── Azure TTS – Voces Neurales Microsoft ──────────────────────────────
       // Pasos para activar:

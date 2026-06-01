@@ -104,7 +104,7 @@
     .target-word {
       font-size: 4.5rem;
       font-weight: 900;
-      text-transform: uppercase;
+      text-transform: none;
       background: linear-gradient(135deg, #a5f3fc 0%, #60a5fa 50%, #818cf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -275,6 +275,15 @@
     <div id="game-content" style="display: none; width: 100%; text-align: center;">
       <div class="subtitle">Word to Spell</div>
       <div class="target-word" id="target-word-display"></div>
+      <!-- Definition & Example display under the target word -->
+      <div id="info-container" style="margin-top: -1rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem; align-items: center; justify-content: center; width: 100%;">
+        <div id="definition-display" style="display: none; font-size: 1.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.85); background: rgba(255, 255, 255, 0.04); padding: 0.8rem 2rem; border-radius: 16px; border: 1.5px solid rgba(255, 255, 255, 0.08); max-width: 85%; line-height: 1.4; box-shadow: 0 10px 30px rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
+          <strong style="color: #60a5fa; font-weight: 800; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 0.05em; margin-right: 0.5rem;">Definition:</strong> <span id="definition-text"></span>
+        </div>
+        <div id="example-display" style="display: none; font-size: 1.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.85); background: rgba(255, 255, 255, 0.04); padding: 0.8rem 2rem; border-radius: 16px; border: 1.5px solid rgba(255, 255, 255, 0.08); max-width: 85%; line-height: 1.4; box-shadow: 0 10px 30px rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
+          <strong style="color: #fbbf24; font-weight: 800; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 0.05em; margin-right: 0.5rem;">Example:</strong> <span id="example-text"></span>
+        </div>
+      </div>
       <div class="slots-container" id="slots-wrapper"></div>
       <div style="display: flex; justify-content: center;" id="alert-wrapper"></div>
     </div>
@@ -315,8 +324,28 @@
       waitingScreen.style.display = 'none';
       gameContent.style.display = 'block';
 
-      // Update Target Word
-      targetWordDisplay.textContent = state.currentWord.word.toUpperCase();
+      // Update Target Word (Keep original casing to support proper nouns)
+      targetWordDisplay.textContent = state.currentWord.word;
+
+      // Update Definition display
+      const definitionDisplay = document.getElementById('definition-display');
+      const definitionText = document.getElementById('definition-text');
+      if (state.showDefinition && state.currentDefinition) {
+        definitionText.innerHTML = state.currentDefinition.replace(/\*\*(.*?)\*\*/g, '<strong style="color: #60a5fa; font-weight: 800;">$1</strong>');
+        definitionDisplay.style.display = 'block';
+      } else {
+        definitionDisplay.style.display = 'none';
+      }
+
+      // Update Example display
+      const exampleDisplay = document.getElementById('example-display');
+      const exampleText = document.getElementById('example-text');
+      if (state.showExample && state.currentExample) {
+        exampleText.innerHTML = state.currentExample.replace(/\*\*(.*?)\*\*/g, '<strong style="color: #fbbf24; font-weight: 800;">$1</strong>');
+        exampleDisplay.style.display = 'block';
+      } else {
+        exampleDisplay.style.display = 'none';
+      }
 
       // Update Header
       headerTitle.textContent = `${state.levelName} - Contest`;
@@ -329,9 +358,10 @@
       slotsWrapper.innerHTML = '';
       const target = state.currentWord.word.toLowerCase();
       const spoken = (state.spokenText || '').toLowerCase().trim();
+      const maxLength = Math.max(target.length, spoken.length);
 
-      for (let i = 0; i < target.length; i++) {
-        const targetLetter = target[i];
+      for (let i = 0; i < maxLength; i++) {
+        const targetLetter = target[i] || '';
         const spokenLetter = spoken[i] || '';
 
         const slot = document.createElement('div');
