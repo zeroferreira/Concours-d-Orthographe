@@ -146,6 +146,8 @@
     const [showDebug, setShowDebug] = useState(false);
     const [debugLogs, setDebugLogs] = useState([]);
     const debugLogsRef = React.useRef([]);
+    const debugTapCountRef = React.useRef(0);
+    const debugLastTapRef = React.useRef(0);
     const addDebugLog = React.useCallback((type, message, data) => {
       const entry = {
         id: Date.now() + Math.random(),
@@ -156,6 +158,19 @@
       };
       debugLogsRef.current = [entry, ...debugLogsRef.current].slice(0, 80);
       setDebugLogs([...debugLogsRef.current]);
+    }, []);
+    // Activar consola de debug con 5 toques rápidos en la esquina superior izquierda
+    const handleDebugTap = React.useCallback(() => {
+      const now = Date.now();
+      if (now - debugLastTapRef.current > 1500) {
+        debugTapCountRef.current = 0; // Reset si pasó más de 1.5s desde el último toque
+      }
+      debugLastTapRef.current = now;
+      debugTapCountRef.current += 1;
+      if (debugTapCountRef.current >= 5) {
+        debugTapCountRef.current = 0;
+        setShowDebug(v => !v);
+      }
     }, []);
 
     // Estados para el sistema de Ayuda y Reportes
@@ -7258,12 +7273,28 @@
         }),
         currentScreen === 'admin' && React.createElement(AdminScreen),
         
-        // ===================== DEBUG CONSOLE (solo admin) =====================
-        isAdminLogged && React.createElement(React.Fragment, null,
-          // Botón para abrir/cerrar debug
-          React.createElement('button', {
-            onClick: () => setShowDebug(v => !v),
-            title: 'Consola de Reconocimiento de Voz',
+        // ===================== DEBUG CONSOLE (gesto secreto: 5 toques en esquina superior izquierda) =====================
+        // Zona invisible de activación (esquina superior izquierda)
+        React.createElement('div', {
+          onClick: handleDebugTap,
+          onTouchEnd: (e) => { e.preventDefault(); handleDebugTap(); },
+          style: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '56px',
+            height: '56px',
+            zIndex: 9999,
+            cursor: 'default',
+            WebkitTapHighlightColor: 'transparent'
+          }
+        }),
+        
+        React.createElement(React.Fragment, null,
+          // Botón para cerrar debug (solo visible cuando la consola está abierta)
+          showDebug && React.createElement('button', {
+            onClick: () => setShowDebug(false),
+            title: 'Cerrar Consola de Debug',
             style: {
               position: 'fixed',
               bottom: '80px',
@@ -7272,7 +7303,7 @@
               width: '40px',
               height: '40px',
               borderRadius: '50%',
-              background: showDebug ? '#7c3aed' : 'rgba(30,20,60,0.85)',
+              background: '#7c3aed',
               border: '2px solid rgba(124,58,237,0.6)',
               color: '#fff',
               fontSize: '18px',
