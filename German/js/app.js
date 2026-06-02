@@ -12,6 +12,28 @@
       const Menü = () => React.createElement('span', null, '📋');
       const Game = () => React.createElement('span', null, '🎮');
 
+    const renderPhonetic = (phonetic) => {
+      if (!phonetic) return null;
+      if (phonetic.includes(' - ')) {
+        const parts = phonetic.split(' - ');
+        const ukPhonetic = parts[0].trim();
+        const usPhonetic = parts[1].trim();
+        
+        return React.createElement('div', { className: 'flex items-center justify-center gap-6 mt-2' },
+          React.createElement('div', { className: 'flex flex-col items-center' },
+            React.createElement('div', { className: 'text-sm text-yellow-300 font-mono tracking-wider font-semibold' }, ukPhonetic),
+            React.createElement('div', { className: 'mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-black/40 border border-white/20 shadow-md text-xs cursor-default select-none', title: 'UK Pronunciation' }, '🇬🇧')
+          ),
+          React.createElement('div', { className: 'text-slate-500 font-bold text-sm self-start mt-0.5' }, '—'),
+          React.createElement('div', { className: 'flex flex-col items-center' },
+            React.createElement('div', { className: 'text-sm text-yellow-300 font-mono tracking-wider font-semibold' }, usPhonetic),
+            React.createElement('div', { className: 'mt-1 flex items-center justify-center w-6 h-6 rounded-full bg-black/40 border border-white/20 shadow-md text-xs cursor-default select-none', title: 'US Pronunciation' }, '🇺🇸')
+          )
+        );
+      }
+      return React.createElement('div', { className: 'text-sm text-yellow-300/80 font-mono tracking-wider font-semibold' }, phonetic);
+    };
+
     
     
     // === DYNAMIC TRANSFORMS WRAPPER (PRECISE COORDINATES SYSTEM) ===
@@ -2646,9 +2668,7 @@
                             React.createElement('div', { 
                               className: 'text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400 mb-1 drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]' 
                             }, currentWord.word),
-                            React.createElement('div', { 
-                              className: 'text-sm text-yellow-300/80 font-mono tracking-wider font-semibold' 
-                            }, currentWord.phonetic || '')
+                            renderPhonetic(currentWord.phonetic || '')
                           ),
                           
                           // Knöpfe
