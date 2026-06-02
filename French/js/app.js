@@ -463,7 +463,7 @@
 
         const ChangeLanguageButton = () => {
           return React.createElement('a', {
-            href: '../index.html',
+            href: window.location.protocol === 'file:' ? '../index.html' : 'https://spellingbee-portal.vercel.app/',
             className: 'bg-white bg-opacity-10 backdrop-blur-md rounded-full border border-yellow-400 border-opacity-40 hover:bg-yellow-400 hover:text-black transition-all flex items-center justify-center text-yellow-400 hover:border-yellow-400 flex-shrink-0 font-bold text-[11px] px-4 uppercase tracking-wider gap-3',
             title: 'Changer de langue',
             style: { height: '38px' }
@@ -675,7 +675,7 @@
                 }`
               }, '🏅 Gagnants'),
               React.createElement('a', {
-                href: '../index.html',
+                href: window.location.protocol === 'file:' ? '../index.html' : 'https://spellingbee-portal.vercel.app/',
                 className: 'w-full text-left px-4 py-3 rounded-xl font-bold transition-all duration-300 text-yellow-400 hover:bg-white hover:bg-opacity-10 hover:text-yellow-300 block border border-dashed border-yellow-400/30 mt-2'
               }, '🌐 Autre langue ?'),
               React.createElement('div', { className: 'py-2 flex gap-4 justify-center items-center border-t border-white border-opacity-10 mt-2 pt-4' },
