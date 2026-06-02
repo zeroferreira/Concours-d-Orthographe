@@ -279,9 +279,9 @@
           interimResults: true,
           maxAlternatives: 1,
           timeouts: {
-            restart: 1000,
-            retry: 3000,
-            error: 1500
+            restart: 50,
+            retry: 500,
+            error: 200
           }
         };
       }
@@ -291,9 +291,9 @@
         interimResults: true,
         maxAlternatives: 1,
         timeouts: {
-          restart: 300,
-          retry: 1000,
-          error: 500
+          restart: 50,
+          retry: 500,
+          error: 200
         }
       };
     };
