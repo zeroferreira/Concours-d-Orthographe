@@ -544,8 +544,16 @@
             
             // Si es una única palabra de longitud > 1 (no letras individuales separadas por espacios)
             if (wordsInTranscript.length === 1 && wordsInTranscript[0].length > 1) {
-              if (cleanTranscript === cleanTarget) {
-                console.log('🚫 Palabra completa detectada al inicio/final, ignorando:', transcript);
+              const targetPrefix = cleanTarget.slice(0, cleanTranscript.length);
+              const dist = typeof levenshteinDistance === 'function' ? levenshteinDistance(cleanTranscript, targetPrefix) : 999;
+              const maxAllowedDist = Math.max(1, Math.floor(cleanTranscript.length * 0.25));
+              
+              const isTargetPrefix = cleanTarget.startsWith(cleanTranscript) || 
+                                     cleanTranscript.startsWith(cleanTarget) || 
+                                     dist <= maxAllowedDist;
+
+              if (isTargetPrefix) {
+                console.log('🚫 Palabra completa o fragmento hablado ignorado:', transcript);
                 addDebugLog('info', `🚫 Palabra completa ignorada: "${transcript}"`);
                 continue;
               }
