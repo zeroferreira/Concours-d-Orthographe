@@ -296,6 +296,7 @@
           error: 500
         }
       };
+    };
     // Función de acumulador de deletreo inteligente letra por letra (Solución 1 - Sin bloqueo y con capitalización por voz)
     const getProgressiveSpellingText = (prevText, result, targetWord) => {
       if (result === 'DELETE') {
@@ -7726,7 +7727,7 @@
 
       const ChangeLanguageButton = () => {
         return React.createElement('a', {
-          href: 'https://spellingbee-portal.vercel.app/',
+          href: '../index.html',
           className: 'bg-white bg-opacity-10 backdrop-blur-md rounded-full border border-yellow-400 border-opacity-40 hover:bg-yellow-400 hover:text-black transition-all flex items-center justify-center text-yellow-400 hover:border-yellow-400 flex-shrink-0 font-bold text-[11px] px-4 uppercase tracking-wider gap-3',
           title: 'Change language',
           style: { height: '38px' }
@@ -7980,7 +7981,7 @@
               }`
             }, '🏅 Winners'),
             React.createElement('a', {
-              href: 'https://spellingbee-portal.vercel.app/',
+              href: '../index.html',
               className: 'w-full text-left px-4 py-3 rounded-xl font-bold transition-all duration-300 text-yellow-400 hover:bg-white hover:bg-opacity-10 hover:text-yellow-300 block border border-dashed border-yellow-400/30 mt-2'
             }, '🌐 Other language?'),
             React.createElement('div', { className: 'py-2 flex gap-4 justify-center items-center' },

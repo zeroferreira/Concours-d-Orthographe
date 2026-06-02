@@ -462,7 +462,7 @@
 
         const ChangeLanguageButton = () => {
           return React.createElement('a', {
-            href: 'https://spellingbee-portal.vercel.app/',
+            href: '../index.html',
             className: 'bg-white bg-opacity-10 backdrop-blur-md rounded-full border border-yellow-400 border-opacity-40 hover:bg-yellow-400 hover:text-black transition-all flex items-center justify-center text-yellow-400 hover:border-yellow-400 flex-shrink-0 font-bold text-[11px] px-4 uppercase tracking-wider gap-3',
             title: 'Sprache ändern',
             style: { height: '38px' }
@@ -683,7 +683,7 @@
                 }`
               }, '⚙️ Admin'),
               React.createElement('a', {
-                href: 'https://spellingbee-portal.vercel.app/',
+                href: '../index.html',
                 className: 'w-full text-left px-4 py-3 rounded-lg font-bold transition-all duration-300 text-yellow-400 hover:bg-gray-800 hover:text-yellow-300 block border border-dashed border-yellow-400/30 mt-2'
               }, '🌐 Andere Sprache ?'),
               React.createElement('div', { className: 'flex flex-col gap-2 px-4 py-2 border-t border-gray-800 mt-2' },
@@ -849,6 +849,7 @@
           error: 500
         }
       };
+    };
     // Función de acumulador de deletreo inteligente letra por letra (Solución 1 - Sin bloqueo y con capitalización por voz)
     const getProgressiveSpellingText = (prevText, result, targetWord) => {
       if (result === 'DELETE') {
@@ -2471,6 +2472,8 @@
                         `${voice.name} (${voice.lang})`
                       )
                     )
+                  )
+                )
               ),
               React.createElement('div', { className: 'flex items-center gap-2' },
                 gameMode === 'contest' && React.createElement('button', {
