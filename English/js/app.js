@@ -344,21 +344,28 @@
           }
         }
 
-        if (hasError) {
-          console.log('❌ Error detectado (letra incorrecta).');
+        // Solo mostrar error cuando el usuario ya deletreó la palabra completa
+        // (misma cantidad de letras o más). Así evitamos falsos positivos
+        // durante resultados interinos del reconocimiento de voz.
+        if (hasError && cleanSpoken.length >= target.length) {
+          console.log('❌ Error detectado (palabra completa incorrecta).');
           setIsCorrect(false);
           setShowErrorModal(true);
-          if (recognition) {
-             try {
-               recognition.manualStop();
-             } catch(e) { console.log('Error al detener recognition:', e); }
-          }
+          // ✅ NO detenemos el micrófono en error — el alumno puede seguir
+          // deletreando y el proyector sigue mostrando las letras en tiempo real.
+          // El mic solo se detiene al completar la palabra correctamente.
+        } else if (cleanSpoken.length < target.length && hasError) {
+          // Error parcial (letra incorrecta durante el deletreo) —
+          // solo marcar visualmente, NO detener el micrófono.
+          console.log('⚠️ Letra incorrecta detectada, el deletreo continúa...');
+          setIsCorrect(false);
+          // No mostramos modal, solo el color rojo en la letra incorrecta.
         } else if (cleanSpoken === target) {
           console.log('✅ ¡Coincidencia exacta detectada!');
           setIsCorrect(true);
           setShowSuccessModal(true);
           
-          // Detener reconocimiento de forma segura
+          // Detener reconocimiento solo al completar correctamente
           if (recognition) {
              try {
                recognition.manualStop();
@@ -5574,12 +5581,21 @@
       useEffect(() => {
         const bc = new BroadcastChannel('spelling_bee_sync');
         const broadcastState = () => {
+          // Solo enviamos isCorrect al proyector cuando la palabra ya está
+          // completamente deletreada (correcto o incorrecto con todas las letras).
+          // Si el deletreo sigue en progreso, enviamos null para que el proyector
+          // no muestre "❌ TRY AGAIN" antes de tiempo.
+          const cleanSpoken = (spokenText || '').toLowerCase().replace(/\s+/g, '');
+          const targetLen = currentWord?.word?.replace(/\s+/g, '').length || 0;
+          const spellingComplete = cleanSpoken.length >= targetLen && targetLen > 0;
+          const projectorIsCorrect = spellingComplete ? isCorrect : null;
+
           bc.postMessage({
             type: 'STATE_UPDATE',
             currentWord: currentWord,
             spokenText: spokenText,
             isListening: isListening,
-            isCorrect: isCorrect,
+            isCorrect: projectorIsCorrect,
             levelName: selectedLevel ? (levels[selectedLevel]?.name || '') : '',
             usedWordsCount: usedWords.length,
             totalWordsCount: selectedLevel ? (levels[selectedLevel]?.words.length || 0) : 0,
