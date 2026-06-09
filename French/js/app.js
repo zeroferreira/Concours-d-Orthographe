@@ -717,6 +717,81 @@
     // Admin & Precise Layout States
     const [isAdminLogged, setIsAdminLogged] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [isOfflineMode, setIsOfflineMode] = useState(() => {
+      return localStorage.getItem('bee_fr_offline_mode') === 'true';
+    });
+    const [showOfflinePanel, setShowOfflinePanel] = useState(false);
+    const [offlineStatus, setOfflineStatus] = useState(() => {
+      return localStorage.getItem('bee_fr_offline_status') || 'unprepared';
+    });
+
+    useEffect(() => {
+      localStorage.setItem('bee_fr_offline_mode', isOfflineMode);
+    }, [isOfflineMode]);
+
+    useEffect(() => {
+      localStorage.setItem('bee_fr_offline_status', offlineStatus);
+    }, [offlineStatus]);
+
+    useEffect(() => {
+      const handleInstallPrompt = (e) => {
+        e.preventDefault();
+        window.deferredPrompt = e;
+      };
+      window.addEventListener('beforeinstallprompt', handleInstallPrompt);
+      return () => window.removeEventListener('beforeinstallprompt', handleInstallPrompt);
+    }, []);
+
+    const startResourceDownload = async () => {
+      setOfflineStatus('downloading');
+      try {
+        const cache = await caches.open('spelling-bee-fr-offline-v1');
+        const resources = [
+          './',
+          './index.html',
+          './css/style.css',
+          './js/app.js',
+          './spelling-data.js',
+          './IMG/Abeja.png',
+          './IMG/trofeo.png',
+          './IMG/brazo.png',
+          './IMG/libro.png',
+          './IMG/medalla.png'
+        ];
+        
+        for (const res of resources) {
+          try {
+            await cache.add(res);
+          } catch (e) {
+            console.warn(`No se pudo cachear: ${res}`, e);
+          }
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        setOfflineStatus('ready');
+      } catch (err) {
+        console.error('Error al guardar en caché:', err);
+        alert('Erreur lors du téléchargement des ressources. Réessayez.');
+        setOfflineStatus('unprepared');
+      }
+    };
+
+    const clearOfflineResources = async () => {
+      try {
+        await caches.delete('spelling-bee-fr-offline-v1');
+        if ('serviceWorker' in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          for (const reg of regs) {
+            await reg.unregister();
+          }
+        }
+        setOfflineStatus('unprepared');
+        setIsOfflineMode(false);
+        alert('Ressources locales supprimées avec succès.');
+      } catch (err) {
+        console.error('Error al borrar caché:', err);
+      }
+    };
 
     const [themeConfig, setThemeConfig] = useState({
       mode: localStorage.getItem('bee_fr_theme') || 'night',
@@ -1123,11 +1198,11 @@
               const dist = typeof levenshteinDistance === 'function' ? levenshteinDistance(cleanTranscript, targetPrefix) : 999;
               const maxAllowedDist = Math.max(1, Math.floor(cleanTranscript.length * 0.25));
               
-              const isTargetPrefix = cleanTarget.startsWith(cleanTranscript) || 
-                                     cleanTranscript.startsWith(cleanTarget) || 
-                                     dist <= maxAllowedDist;
+              // Solo ignorar si el fragmento tiene una longitud similar o idéntica a la palabra completa
+              const isFullWord = cleanTranscript.length >= Math.max(3, cleanTarget.length - 1) && 
+                                 (cleanTranscript === cleanTarget || dist <= maxAllowedDist);
 
-              if (isTargetPrefix) {
+              if (isFullWord) {
                 console.log('🚫 Palabra completa o fragmento hablado ignorado:', transcript);
                 if (typeof addDebugLog === 'function') addDebugLog('info', `🚫 Palabra completa ignorada: "${transcript.trim()}"`);
                 continue;
@@ -1136,9 +1211,9 @@
           }
           
           if (isFinal) {
-            finalTranscript += transcript;
+            finalTranscript += (finalTranscript ? ' ' : '') + transcript;
           } else {
-            interimTranscript += transcript;
+            interimTranscript += (interimTranscript ? ' ' : '') + transcript;
           }
         }
         
@@ -2069,7 +2144,7 @@
           'majuscule': 'CAPITAL', 'capital': 'CAPITAL'
         };
         
-        const words = transcript.toLowerCase().replace(/[^a-z\s]/g, '').split(/\s+/);
+        const words = transcript.toLowerCase().replace(/[^a-zàâæçéèêëîïôœùûüÿ\s]/g, '').split(/\s+/);
         let letters = '';
         let nextUpper = false;
         
@@ -5852,6 +5927,10 @@
       };
 
       const speak = (text) => {
+        if (isOfflineMode) {
+          _speakFallback(text);
+          return;
+        }
         const activeVoiceName = selectedVoice && selectedVoice.isAzure ? selectedVoice.azureVoiceName : AZURE_VOICE;
         const cacheKey = `${text.toLowerCase().trim()}_${activeVoiceName}`;
 
@@ -7252,6 +7331,96 @@
 
 
 
+      const OfflinePanel = () => {
+        return React.createElement('div', {
+          className: 'fixed inset-0 z-[3000] flex items-center justify-center bg-black/60 backdrop-blur-md animate-fadeIn'
+        },
+          React.createElement('div', {
+            className: 'bg-[#120e24] border border-purple-500/20 w-full max-w-md p-6 rounded-3xl shadow-2xl relative text-center mx-4 text-white'
+          },
+            // Botón cerrar
+            React.createElement('button', {
+              onClick: () => setShowOfflinePanel(false),
+              className: 'absolute top-4 right-4 text-slate-400 hover:text-white text-xl font-bold font-mono'
+            }, '×'),
+            
+            React.createElement('h3', { className: 'text-2xl font-black text-white mb-2 Space-Grotesk' }, '🔌 PANNEAU HORS LIGNE'),
+            React.createElement('p', { className: 'text-xs text-slate-400 mb-6 font-light' }, 
+              'Téléchargez et gérez les ressources de l\'application pour pouvoir utiliser le mode hors ligne en cas d\'urgence.'
+            ),
+            
+            // Indicador de Estado
+            React.createElement('div', { className: 'bg-black/30 border border-white/5 rounded-2xl p-4 mb-6 text-left flex items-center justify-between' },
+              React.createElement('span', { className: 'text-sm font-semibold text-slate-300' }, 'État des ressources :'),
+              offlineStatus === 'unprepared' && React.createElement('span', { className: 'text-xs bg-rose-500/10 text-rose-400 border border-rose-500/20 px-3 py-1 rounded-full font-bold' }, '❌ Non préparé'),
+              offlineStatus === 'downloading' && React.createElement('span', { className: 'text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full font-bold animate-pulse' }, '⏳ Téléchargement...'),
+              offlineStatus === 'ready' && React.createElement('span', { className: 'text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-bold' }, '✅ Préparé')
+            ),
+            
+            // Acciones principales
+            React.createElement('div', { className: 'space-y-3' },
+              // Botón 1: Activar y Descargar
+              offlineStatus !== 'ready' && React.createElement('button', {
+                onClick: () => {
+                  const pass = prompt("Mot de passe administrateur :");
+                  if (pass === atob('MTQxNTEzMCo=')) {
+                    startResourceDownload();
+                  } else if (pass !== null) {
+                    alert("Mot de passe incorrect");
+                  }
+                },
+                disabled: offlineStatus === 'downloading',
+                className: `w-full py-3 px-4 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 ${
+                  offlineStatus === 'downloading'
+                    ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white shadow-lg shadow-cyan-500/20 hover:scale-[1.01]'
+                }`
+              }, offlineStatus === 'downloading' ? 'Téléchargement...' : 'Activer et télécharger les ressources'),
+              
+              // Botón 2: Instalar (PWA)
+              React.createElement('button', {
+                onClick: () => {
+                  if (window.deferredPrompt) {
+                    window.deferredPrompt.prompt();
+                    window.deferredPrompt.userChoice.then((choiceResult) => {
+                      if (choiceResult.outcome === 'accepted') {
+                        console.log('PWA installed successfully');
+                      }
+                      window.deferredPrompt = null;
+                    });
+                  } else {
+                    alert('L\'installation n\'est pas disponible pour le moment.');
+                  }
+                },
+                className: 'w-full py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:scale-[1.01]'
+              }, '📥 Installer l\'application'),
+              
+              // Interruptor Modo Offline
+              offlineStatus === 'ready' && React.createElement('div', { className: 'border border-white/5 bg-black/20 rounded-xl p-4 flex items-center justify-between' },
+                React.createElement('div', { className: 'text-left' },
+                  React.createElement('div', { className: 'text-sm font-bold text-white' }, 'Mode hors ligne'),
+                  React.createElement('div', { className: 'text-[10px] text-slate-400 font-light' }, 'Forcer l\'utilisation de la voix native sans internet')
+                ),
+                React.createElement('button', {
+                  onClick: () => setIsOfflineMode(!isOfflineMode),
+                  className: `w-14 h-8 rounded-full transition-colors duration-300 relative ${isOfflineMode ? 'bg-emerald-500' : 'bg-slate-700'}`
+                },
+                  React.createElement('div', {
+                    className: `w-6 h-6 rounded-full bg-white absolute top-1 transition-all duration-300 ${isOfflineMode ? 'left-7' : 'left-1'}`
+                  })
+                )
+              ),
+              
+              // Botón 3: Borrar caché / Desactivar
+              offlineStatus === 'ready' && React.createElement('button', {
+                onClick: clearOfflineResources,
+                className: 'w-full py-2.5 px-4 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 rounded-xl font-bold text-xs text-rose-400 transition-all duration-300 mt-4'
+              }, '🗑️ Désinstaller / Effacer les ressources locales')
+            )
+          )
+        );
+      };
+
       // Agregar log para verificar que el componente se renderiza
       console.log('Rendering SpellingBeeGame, currentScreen:', currentScreen);
       
@@ -7300,15 +7469,44 @@
         currentScreen === 'winners' && React.createElement(WinnersScreen),
         currentScreen === 'wordList' && React.createElement(WordListScreen),
         currentScreen === 'admin' && React.createElement(AdminScreen),
+        showOfflinePanel && React.createElement(OfflinePanel, {}),
         
         // Botón Flotante de Ayuda
         React.createElement('div', {
-          className: `help-button-container ${helpDocked ? 'help-button-docked' : ''}`
+          className: `help-button-container ${helpDocked ? 'help-button-docked' : ''}`,
+          style: {
+            display: 'flex',
+            gap: '10px',
+            alignItems: 'center'
+          }
         },
+          // Botón Offline
+          React.createElement('button', {
+            onClick: () => setShowOfflinePanel(true),
+            title: isOfflineMode ? 'Mode hors ligne activé' : 'Panneau de contrôle hors ligne',
+            className: 'help-circle-glass text-xl font-bold transition-all duration-300 transform hover:scale-110 inline-flex items-center justify-center',
+            style: {
+              borderColor: isOfflineMode 
+                ? 'rgba(239, 68, 68, 0.6)' 
+                : offlineStatus === 'ready' 
+                  ? 'rgba(16, 185, 129, 0.6)' 
+                  : offlineStatus === 'downloading' 
+                    ? 'rgba(245, 158, 11, 0.6)' 
+                    : 'rgba(255, 255, 255, 0.1)',
+              boxShadow: isOfflineMode 
+                ? '0 0 15px rgba(239, 68, 68, 0.4)' 
+                : offlineStatus === 'ready' 
+                  ? '0 0 15px rgba(16, 185, 129, 0.4)' 
+                  : offlineStatus === 'downloading' 
+                    ? '0 0 15px rgba(245, 158, 11, 0.4)' 
+                    : 'none'
+            }
+          }, isOfflineMode ? '📴' : offlineStatus === 'downloading' ? '⏳' : '🌐'),
+
           // Botón principal
           React.createElement('button', {
             onClick: () => setShowHelpMenu(!showHelpMenu),
-            className: 'help-circle-glass text-2xl font-bold transition-all duration-300 transform hover:scale-110'
+            className: 'help-circle-glass text-2xl font-bold transition-all duration-300 transform hover:scale-110 inline-flex items-center justify-center'
           }, '?'),
           
           // Gesto/Botón para acoplar (dock)
