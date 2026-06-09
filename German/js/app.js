@@ -1270,8 +1270,8 @@
               // Verificación en tiempo real si coincide con la palabra completa
               if (newText.toLowerCase().trim() === targetWord.toLowerCase()) {
                 setIsCorrect(true);
-                if (recognition && recognition.manualStop) {
-                  recognition.manualStop();
+                if (recognitionInstance && recognitionInstance.manualStop) {
+                  recognitionInstance.manualStop();
                 }
               }
               
@@ -1828,6 +1828,16 @@
       'q': 'q', 'r': 'r', 's': 's', 't': 't', 'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x',
       'y': 'y', 'z': 'z', 'ä': 'ä', 'ö': 'ö', 'ü': 'ü', 'ß': 'ß',
       
+      // Mapeo especial para vocales y diacríticos alemanes pronunciados por hablantes de español
+      'an': 'a', 'am': 'a', 'ab': 'a', 'as': 'a', 'als': 'a', 'hat': 'a',
+      'es': 'e', 'en': 'e', 'ey': 'e',
+      'in': 'i', 'im': 'i', 'ist': 'i', 'is': 'i', 'ihm': 'i', 'it': 'i',
+      'oder': 'o', 'oft': 'o', 'ob': 'o',
+      'und': 'u', 'uns': 'u', 'unter': 'u', 'un': 'u',
+      
+      // Umlauts y vacilaciones (äh, öh, üh) muy comunes
+      'äh': 'ä', 'öh': 'ö', 'üh': 'ü',
+      
       // Pronunciaciones en alemán y homófonos transcribibles por el motor
       'ah': 'a', 
       'bay': 'b', 'beh': 'b', 'be': 'b', 'bei': 'b',
@@ -2256,7 +2266,7 @@
         setIsCorrect(null); // Limpiar el estado de corrección
         
         // Detener reconocimiento de voz si está activo para evitar capturar ruido en la transición
-        if (isListening && recognition) {
+        if (recognition && recognition.manualStop) {
           try {
             recognition.manualStop();
           } catch(e) { console.log('Error al detener en selectRandomWord:', e); }
@@ -2288,6 +2298,14 @@
         setShowDefinition(false);
         setShowExample(false);
         setSpokenText(''); // Limpiar el texto deletreado
+        setIsCorrect(null); // Limpiar el estado de corrección
+        
+        // Detener reconocimiento de voz si está activo
+        if (recognition && recognition.manualStop) {
+          try {
+            recognition.manualStop();
+          } catch(e) { console.log('Error al detener en resetGame:', e); }
+        }
       };
 
       const generateExample = (word) => {

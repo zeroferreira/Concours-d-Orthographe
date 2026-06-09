@@ -1287,8 +1287,8 @@
               // Verificación en tiempo real si coincide con la palabra completa
               if (newText.toLowerCase().trim() === targetWord.toLowerCase()) {
                 setIsCorrect(true);
-                if (recognition && recognition.manualStop) {
-                  recognition.manualStop();
+                if (recognitionInstance && recognitionInstance.manualStop) {
+                  recognitionInstance.manualStop();
                 }
               }
               
@@ -6034,7 +6034,7 @@
         setIsCorrect(null); // Limpiar el estado de corrección
         
         // Detener reconocimiento de voz si está activo para evitar capturar ruido en la transición
-        if (isListening && recognition) {
+        if (recognition && recognition.manualStop) {
           try {
             recognition.manualStop();
           } catch(e) { console.log('Error al detener en selectRandomWord:', e); }
@@ -6066,6 +6066,14 @@
         setShowDefinition(false);
         setShowExample(false);
         setSpokenText(''); // Limpiar el texto deletreado
+        setIsCorrect(null); // Limpiar el estado de corrección
+        
+        // Detener reconocimiento de voz si está activo
+        if (recognition && recognition.manualStop) {
+          try {
+            recognition.manualStop();
+          } catch(e) { console.log('Error al detener en resetGame:', e); }
+        }
       };
 
       const HomeScreen = ({ isEditMode }) => {
