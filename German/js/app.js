@@ -1084,8 +1084,8 @@
       // Configuraciones avanzadas de calidad
       try {
         // Intentar configuraciones de calidad de audio
-        recognitionInstance.audioTrack = true;
-        recognitionInstance.serviceURI = ''; // Forzar procesamiento local cuando sea posible
+        // recognitionInstance.audioTrack = true; // Comentado para evitar problemas en algunos dispositivos
+        // recognitionInstance.serviceURI = ''; // Comentado para usar el servicio por defecto
       } catch (e) {
         console.log('Configuraciones avanzadas no disponibles:', e);
       }
@@ -1819,32 +1819,63 @@
         .replace(/[^a-z]/g, '');
     };
 
-    // Mapeo de pronunciaciones y comandos alemanes
+    // Mapeo de pronunciaciones y comandos alemanes optimizado para hablantes de español de México
     const enhancedGermanLetterMap = {
       'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f', 'g': 'g', 'h': 'h',
       'i': 'i', 'j': 'j', 'k': 'k', 'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'p': 'p',
       'q': 'q', 'r': 'r', 's': 's', 't': 't', 'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x',
       'y': 'y', 'z': 'z', 'ä': 'ä', 'ö': 'ö', 'ü': 'ü', 'ß': 'ß',
-      'ah': 'a', 'bay': 'b', 'beh': 'b', 'tsay': 'c', 'ceh': 'c', 'day': 'd', 'deh': 'd',
-      'eh': 'e', 'eff': 'f', 'gay': 'g', 'geh': 'g', 'hah': 'h', 'ee': 'i', 'yot': 'j', 'jot': 'j',
-      'kah': 'k', 'ell': 'l', 'emm': 'm', 'enn': 'n', 'oh': 'o', 'pay': 'p', 'peh': 'p',
-      'koo': 'q', 'kuh': 'q', 'err': 'r', 'ess': 's', 'tay': 't', 'teh': 't', 'oo': 'u',
-      'fow': 'v', 'vau': 'v', 'vay': 'w', 'weh': 'w', 'iks': 'x', 'üpsilon': 'y', 'ypsilon': 'y',
+      
+      // Pronunciaciones en alemán y homófonos transcribibles por el motor
+      'ah': 'a', 
+      'bay': 'b', 'beh': 'b', 'be': 'b', 'bei': 'b',
+      'tsay': 'c', 'ceh': 'c', 'ce': 'c', 'zeh': 'c', 'ze': 'c', 'zehn': 'c',
+      'day': 'd', 'deh': 'd', 'de': 'd', 'der': 'd', 'die': 'd', 'den': 'd', 'dem': 'd',
+      'eh': 'e', 'er': 'e',
+      'eff': 'f', 'elf': 'f',
+      'gay': 'g', 'geh': 'g', 'ge': 'g',
+      'hah': 'h', 'ha': 'h', 'haar': 'h',
+      'ee': 'i', 'ich': 'i', 'ihr': 'i',
+      'yot': 'j', 'jot': 'j',
+      'kah': 'k', 'ka': 'k',
+      'ell': 'l', 'el': 'l',
+      'emm': 'm', 'em': 'm',
+      'enn': 'n', 'en': 'n', 'ein': 'n',
+      'oh': 'o',
+      'pay': 'p', 'peh': 'p', 'pe': 'p',
+      'koo': 'q', 'kuh': 'q', 'ku': 'q',
+      'err': 'r',
+      'ess': 's', 'es': 's',
+      'tay': 't', 'teh': 't', 'te': 't', 'tee': 't',
+      'oo': 'u', 'uh': 'u', 'um': 'u',
+      'fow': 'v', 'vau': 'v', 'pfau': 'v',
+      'vay': 'w', 'weh': 'w', 'we': 'w', 'wer': 'w',
+      'iks': 'x', 'ix': 'x',
+      'üpsilon': 'y', 'ypsilon': 'y',
       'tset': 'z', 'zet': 'z', 'zett': 'z',
-      'umlaut a': 'ä', 'ae': 'ä', 'a umlaut': 'ä',
-      'umlaut o': 'ö', 'oe': 'ö', 'o umlaut': 'ö',
-      'umlaut u': 'ü', 'ue': 'ü', 'u umlaut': 'ü',
-      'eszett': 'ß', 'scharfes s': 'ß', 'beta': 'ß',
-      'umlauta': 'ä', 'aumlaut': 'ä',
-      'umlauto': 'ö', 'oumlaut': 'ö',
-      'umlautu': 'ü', 'uumlaut': 'ü',
-      'scharfess': 'ß',
+      
+      // Diacríticos alemanes
+      'umlaut a': 'ä', 'ae': 'ä', 'a umlaut': 'ä', 'umlauta': 'ä', 'aumlaut': 'ä',
+      'umlaut o': 'ö', 'oe': 'ö', 'o umlaut': 'ö', 'umlauto': 'ö', 'oumlaut': 'ö',
+      'umlaut u': 'ü', 'ue': 'ü', 'u umlaut': 'ü', 'umlautu': 'ü', 'uumlaut': 'ü',
+      'eszett': 'ß', 'scharfes s': 'ß', 'beta': 'ß', 'scharfess': 'ß',
+      
+      // Nombres de letras en español (para alumnos de México)
+      'efe': 'f', 'jota': 'j', 'equis': 'x', 'i griega': 'y', 'ye': 'y',
+      'ele': 'l', 'eme': 'm', 'ene': 'n', 'erre': 'r', 'ere': 'r', 'ese': 's',
+      'uve': 'v', 've': 'v', 'doble ve': 'w', 'doble uve': 'w', 'zeta': 'z',
+      'ce': 'c', 'de': 'd', 'pe': 'p', 'te': 't', 'ka': 'k', 'cu': 'q',
+      'ge': 'g', 'hache': 'h',
+
+      // Alfabeto fonético alemán / Deletreo deletreado
       'anton': 'a', 'berta': 'b', 'cäsar': 'c', 'dora': 'd', 'emil': 'e',
       'friedrich': 'f', 'gustav': 'g', 'heinrich': 'h', 'ida': 'i', 'julius': 'j',
       'kaufmann': 'k', 'ludwig': 'l', 'martha': 'm', 'nordpol': 'n', 'otto': 'o',
       'paula': 'p', 'quelle': 'q', 'richard': 'r', 'samuel': 's', 'theodor': 't',
       'ulrich': 'u', 'viktor': 'v', 'wilhelm': 'w', 'xanthippe': 'x',
       'ypsilon': 'y', 'zacharias': 'z',
+      
+      // Correspondencias en inglés como alternativa (como fallback)
       'ay': 'a', 'bee': 'b', 'see': 'c', 'sea': 'c', 'dee': 'd',
       'gee': 'g', 'aitch': 'h', 'eye': 'i', 'jay': 'j', 'kay': 'k',
       'el': 'l', 'em': 'm', 'en': 'n', 'pee': 'p', 'cue': 'q',
@@ -1855,6 +1886,8 @@
       'kilo': 'k', 'lima': 'l', 'mike': 'm', 'november': 'n', 'oscar': 'o',
       'papa': 'p', 'quebec': 'q', 'romeo': 'r', 'sierra': 's', 'tango': 't',
       'uniform': 'u', 'victor': 'v', 'whiskey': 'w', 'xray': 'x', 'yankee': 'y', 'zulu': 'z',
+      
+      // Comandos de control
       'löschen': 'DELETE', 'loeschen': 'DELETE', 'loschen': 'DELETE',
       'zurück': 'DELETE', 'zurueck': 'DELETE', 'entfernen': 'DELETE',
       'leer': 'CLEAR', 'neu': 'CLEAR', 'anfang': 'CLEAR', 'von vorn': 'CLEAR', 'vonvorn': 'CLEAR',

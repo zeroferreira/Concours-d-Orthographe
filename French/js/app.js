@@ -1101,8 +1101,8 @@
       // Configuraciones avanzadas de calidad
       try {
         // Intentar configuraciones de calidad de audio
-        recognitionInstance.audioTrack = true;
-        recognitionInstance.serviceURI = ''; // Forzar procesamiento local cuando sea posible
+        // recognitionInstance.audioTrack = true; // Comentado para evitar problemas en algunos dispositivos
+        // recognitionInstance.serviceURI = ''; // Comentado para usar el servicio por defecto
       } catch (e) {
         console.log('Configuraciones avanzadas no disponibles:', e);
       }
@@ -2113,7 +2113,7 @@
       const processSpokenInput = (transcript) => {
         console.log('🔤 Procesando input:', transcript);
         
-        // Mapeo mejorado de letras
+        // Mapeo mejorado de letras para francés, optimizado para hablantes de español de México
         const letterMap = {
           // Letras básicas
           'a': 'a', 'b': 'b', 'c': 'c', 'd': 'd', 'e': 'e', 'f': 'f', 'g': 'g', 'h': 'h',
@@ -2121,14 +2121,40 @@
           'q': 'q', 'r': 'r', 's': 's', 't': 't', 'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x',
           'y': 'y', 'z': 'z',
           
-          // Prononciations françaises
-          'ah': 'a', 'bé': 'b', 'bay': 'b', 'cé': 'c', 'say': 'c', 'dé': 'd', 'day': 'd',
-          'euh': 'e', 'effe': 'f', 'eff': 'f', 'gé': 'g', 'zhay': 'g', 'ache': 'h', 'ash': 'h',
-          'ee': 'i', 'ji': 'j', 'zhee': 'j', 'ka': 'k', 'kah': 'k', 'elle': 'l', 'ell': 'l',
-          'emme': 'm', 'emm': 'm', 'enne': 'n', 'enn': 'n', 'oh': 'o', 'pé': 'p', 'pay': 'p',
-          'qu': 'q', 'koo': 'q', 'erre': 'r', 'err': 'r', 'esse': 's', 'ess': 's', 'té': 't',
-          'tay': 't', 'oo': 'u', 'vé': 'v', 'vay': 'v', 'dooblevé': 'w', 'ixe': 'x', 'iks': 'x',
-          'igrec': 'y', 'zède': 'z', 'zed': 'z',
+          // Prononciations françaises & homophones transcrits par le moteur de reconnaissance
+          'ah': 'a', 'à': 'a', 'as': 'a',
+          'bé': 'b', 'beh': 'b', 'bay': 'b', 'bée': 'b',
+          'cé': 'c', 'say': 'c', 'ces': 'c', 'ses': 'c', 'c\'est': 'c', 'sait': 'c', 'se': 'c',
+          'dé': 'd', 'deh': 'd', 'day': 'd', 'des': 'd', 'dès': 'd', 'de': 'd',
+          'euh': 'e', 'he': 'e', 'eux': 'e',
+          'effe': 'f', 'eff': 'f', 'est-ce': 'f',
+          'gé': 'g', 'zhay': 'g', 'je': 'g', 'j\'ai': 'g', 'jet': 'g', 'geai': 'g',
+          'ache': 'h', 'ash': 'h', 'hache': 'h',
+          'ee': 'i', 'il': 'i', 'y': 'i',
+          'ji': 'j', 'zhee': 'j', 'j': 'j', 'g': 'j',
+          'ka': 'k', 'kah': 'k', 'cas': 'k', 'qu\'a': 'k',
+          'elle': 'l', 'ell': 'l', 'ailes': 'l',
+          'emme': 'm', 'emm': 'm', 'aime': 'm',
+          'enne': 'n', 'enn': 'n', 'haine': 'n', 'l\'aine': 'n',
+          'oh': 'o', 'au': 'o', 'aux': 'o', 'eau': 'o', 'eaux': 'o',
+          'pé': 'p', 'pay': 'p', 'pet': 'p', 'paie': 'p',
+          'qu': 'q', 'koo': 'q', 'cul': 'q', 'queue': 'q',
+          'erre': 'r', 'err': 'r', 'air': 'r', 'aire': 'r', 'ère': 'r',
+          'esse': 's', 'ess': 's',
+          'té': 't', 'tay': 't', 'tes': 't', 'thé': 't', 't\'es': 't',
+          'oo': 'u', 'u': 'u', 'ou': 'u', 'où': 'u', 'eu': 'u',
+          'vé': 'v', 'vay': 'v', 'vais': 'v', 'vert': 'v', 'vers': 'v', 've': 'v',
+          'dooblevé': 'w', 'double vé': 'w', 'double v': 'w', 'double-vé': 'w',
+          'ixe': 'x', 'iks': 'x', 'yks': 'x',
+          'igrec': 'y', 'i grec': 'y', 'y grec': 'y',
+          'zède': 'z', 'zed': 'z', 'zeta': 'z', 'sept': 'z', 'cette': 'z',
+
+          // Nombres de letras en español (por si deletrean en español)
+          'efe': 'f', 'jota': 'j', 'equis': 'x', 'i griega': 'y', 'ye': 'y',
+          'ele': 'l', 'eme': 'm', 'ene': 'n', 'erre': 'r', 'ere': 'r', 'ese': 's',
+          'uve': 'v', 've': 'v', 'doble ve': 'w', 'doble uve': 'w', 'zeta': 'z',
+          'ce': 'c', 'de': 'd', 'pe': 'p', 'te': 't', 'ka': 'k', 'cu': 'q',
+          'ge': 'g', 'hache': 'h',
           
           // Alphabet phonétique NATO
           'alpha': 'a', 'bravo': 'b', 'charlie': 'c', 'delta': 'd', 'echo': 'e',
