@@ -1498,7 +1498,8 @@
           if (isMobile) {
             // En móviles, intentar obtener permisos de micrófono primero
             try {
-              await navigator.mediaDevices.getUserMedia({ audio: true });
+              const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+              stream.getTracks().forEach(track => track.stop()); // Liberar micrófono de inmediato
               console.log('✅ Permisos de micrófono obtenidos');
             } catch (permError) {
               console.error('❌ Error de permisos:', permError);
@@ -1512,6 +1513,7 @@
           if (newRecognition) {
             setRecognition(newRecognition);
             setShouldKeepListening(true);
+            shouldKeepListeningRef.current = true; // Sincronización inmediata
             
             // Iniciar con delay optimizado
           const config = optimizeForMobile();
