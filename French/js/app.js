@@ -2043,33 +2043,157 @@
         return sequences;
       };
 
+    // Función de normalización de transcripción para robustez en deletreo (Francés)
+    const normalizeSpokenTranscript = (transcript) => {
+      let cleaned = (transcript || '')
+        .toLowerCase()
+        .replace(/[’']/g, ' ')
+        // Mantener caracteres franceses y guiones
+        .replace(/[^a-zàâæçéèêëîïôœùûüÿ\s-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      // Mapear pronunciaciones de letras acentuadas (Agudo, Grave, Circunflejo y Cédille)
+      // Agudo: é
+      cleaned = cleaned
+        .replace(/\be\s+accent\s+aigu\b/g, 'é')
+        .replace(/\baccent\s+aigu\s+e\b/g, 'é')
+        .replace(/\be\s+aigu\b/g, 'é')
+        .replace(/\béguy\b/g, 'é')
+        .replace(/\bégu\b/g, 'é')
+        // Variaciones en español para é
+        .replace(/\be\s+(con\s+)?acento\s+agudo\b/g, 'é')
+        .replace(/\be\s+(con\s+)?tilde\b/g, 'é')
+        .replace(/\be\s+acento\b/g, 'é')
+        .replace(/\bacento\s+agudo\s+e\b/g, 'é')
+        .replace(/\btilde\s+e\b/g, 'é');
+
+      // Grave: è, à, ù
+      cleaned = cleaned
+        .replace(/\be\s+accent\s+grave\b/g, 'è')
+        .replace(/\baccent\s+grave\s+e\b/g, 'è')
+        .replace(/\be\s+grave\b/g, 'è')
+        .replace(/\ba\s+accent\s+grave\b/g, 'à')
+        .replace(/\baccent\s+grave\s+a\b/g, 'à')
+        .replace(/\ba\s+grave\b/g, 'à')
+        .replace(/\bu\s+accent\s+grave\b/g, 'ù')
+        .replace(/\baccent\s+grave\s+u\b/g, 'ù')
+        .replace(/\bu\s+grave\b/g, 'ù')
+        // Variaciones en español para è, à, ù
+        .replace(/\be\s+(con\s+)?acento\s+grave\b/g, 'è')
+        .replace(/\bacento\s+grave\s+e\b/g, 'è')
+        .replace(/\ba\s+(con\s+)?acento\s+grave\b/g, 'à')
+        .replace(/\bacento\s+grave\s+a\b/g, 'à')
+        .replace(/\bu\s+(con\s+)?acento\s+grave\b/g, 'ù')
+        .replace(/\bacento\s+grave\s+u\b/g, 'ù');
+
+      // Circunflejo: â, ê, î, ô, û
+      cleaned = cleaned
+        .replace(/\ba\s+accent\s+circonflexe\b/g, 'â')
+        .replace(/\baccent\s+circonflexe\s+a\b/g, 'â')
+        .replace(/\ba\s+circonflexe\b/g, 'â')
+        .replace(/\be\s+accent\s+circonflexe\b/g, 'ê')
+        .replace(/\baccent\s+circonflexe\s+e\b/g, 'ê')
+        .replace(/\be\s+circonflexe\b/g, 'ê')
+        .replace(/\bi\s+accent\s+circonflexe\b/g, 'î')
+        .replace(/\baccent\s+circonflexe\s+i\b/g, 'î')
+        .replace(/\bi\s+circonflexe\b/g, 'î')
+        .replace(/\bo\s+accent\s+circonflexe\b/g, 'ô')
+        .replace(/\baccent\s+circonflexe\s+o\b/g, 'ô')
+        .replace(/\bo\s+circonflexe\b/g, 'ô')
+        .replace(/\bu\s+accent\s+circonflexe\b/g, 'û')
+        .replace(/\baccent\s+circonflexe\s+u\b/g, 'û')
+        .replace(/\bu\s+circonflexe\b/g, 'û')
+        // Variaciones en español y fonéticas (circunflejo, circunflex, cincunflejo, cincunflex)
+        .replace(/\ba\s+(con\s+)?acento\s+ci[rn]cunfle[jx]o?\b/g, 'â')
+        .replace(/\ba\s+ci[rn]cunfle[jx]o?\b/g, 'â')
+        .replace(/\bacento\s+ci[rn]cunfle[jx]o?\s+a\b/g, 'â')
+        .replace(/\be\s+(con\s+)?acento\s+ci[rn]cunfle[jx]o?\b/g, 'ê')
+        .replace(/\be\s+ci[rn]cunfle[jx]o?\b/g, 'ê')
+        .replace(/\bacento\s+ci[rn]cunfle[jx]o?\s+e\b/g, 'ê')
+        .replace(/\bi\s+(con\s+)?acento\s+ci[rn]cunfle[jx]o?\b/g, 'î')
+        .replace(/\bi\s+ci[rn]cunfle[jx]o?\b/g, 'î')
+        .replace(/\bacento\s+ci[rn]cunfle[jx]o?\s+i\b/g, 'î')
+        .replace(/\bo\s+(con\s+)?acento\s+ci[rn]cunfle[jx]o?\b/g, 'ô')
+        .replace(/\bo\s+ci[rn]cunfle[jx]o?\b/g, 'ô')
+        .replace(/\bacento\s+ci[rn]cunfle[jx]o?\s+o\b/g, 'ô')
+        .replace(/\bu\s+(con\s+)?acento\s+ci[rn]cunfle[jx]o?\b/g, 'û')
+        .replace(/\bu\s+ci[rn]cunfle[jx]o?\b/g, 'û')
+        .replace(/\bacento\s+ci[rn]cunfle[jx]o?\s+u\b/g, 'û');
+
+      // Cédille: ç
+      cleaned = cleaned
+        .replace(/\bc\s+cedille\b/g, 'ç')
+        .replace(/\bcedille\s+c\b/g, 'ç')
+        .replace(/\bcedille\b/g, 'ç')
+        .replace(/\bc\s+cédille\b/g, 'ç')
+        .replace(/\bcédille\s+c\b/g, 'ç')
+        .replace(/\bcédille\b/g, 'ç')
+        // Variaciones en español
+        .replace(/\bc\s+(con\s+)?cedilla\b/g, 'ç')
+        .replace(/\bcedilla\s+c\b/g, 'ç')
+        .replace(/\bcedilla\b/g, 'ç');
+
+      // Otros comandos
+      cleaned = cleaned
+        .replace(/\bdouble\s+ve\b/g, 'doubleve')
+        .replace(/\bdouble\s+v\b/g, 'doubleve')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      return cleaned;
+    };
+
+    // Función para ignorar la palabra completa pronunciada al inicio o al final del deletreo
+    const cleanWordSpokenAtStartOrEnd = (transcript, targetWord) => {
+      if (!transcript || !targetWord) return transcript;
+      
+      const cleanTarget = targetWord.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '').trim();
+      let cleaned = transcript.trim();
+      
+      const words = cleaned.split(/\s+/);
+      if (words.length > 1) {
+        const firstWord = words[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '');
+        if (firstWord === cleanTarget || (cleanTarget.length > 2 && levenshteinDistance(firstWord, cleanTarget) <= 1)) {
+          words.shift();
+          console.log(`🚫 Palabra inicial "${firstWord}" ignorada de la transcripción.`);
+        }
+      }
+      
+      if (words.length > 1) {
+        const lastWord = words[words.length - 1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '');
+        if (lastWord === cleanTarget || (cleanTarget.length > 2 && levenshteinDistance(lastWord, cleanTarget) <= 1)) {
+          words.pop();
+          console.log(`🚫 Palabra final "${lastWord}" ignorada de la transcripción.`);
+        }
+      }
+      
+      return words.join(' ');
+    };
+
       // Función para detectar si el input parece deletreo
       const isLikelySpelling = (transcript) => {
-        const words = transcript.toLowerCase().split(/\s+/);
-        
-        // Criterios para detectar deletreo:
-        // 1. Palabras cortas (1-3 caracteres típicamente)
-        // 2. Pausas entre palabras (indicativo de deletreo)
-        // 3. Patrones conocidos de pronunciación de letras
+        const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+        const normalized = normalizeSpokenTranscript(cleanedTranscript);
+        if (!normalized) return false;
+
+        const words = normalized.split(/\s+/).filter(Boolean);
+        if (!words.length) return false;
         
         let spellingIndicators = 0;
         
         for (const word of words) {
-          // Palabras de 1-3 caracteres son más probables de ser deletreo
           if (word.length <= 3) spellingIndicators++;
           
-          // Palabras que suenan como letras en francés
-          if (['ah', 'bé', 'bay', 'cé', 'say', 'dé', 'day', 'euh', 'effe', 'gé', 'zhay', 'ache', 'ash', 'ee', 'ji', 'zhee', 'ka', 'kah', 'elle', 'emme', 'enne', 'oh', 'pé', 'pay', 'qu', 'koo', 'erre', 'esse', 'té', 'tay', 'oo', 'vé', 'vay', 'ixe', 'igrec', 'zède'].includes(word)) {
+          if (['ah', 'bé', 'beh', 'bay', 'bée', 'cé', 'say', 'ces', 'ses', "c'est", 'sait', 'se', 'dé', 'deh', 'day', 'des', 'dès', 'de', 'euh', 'he', 'eux', 'effe', 'eff', 'est-ce', 'gé', 'zhay', 'je', "j'ai", 'jet', 'geai', 'ache', 'ash', 'hache', 'ee', 'il', 'y', 'ji', 'zhee', 'j', 'g', 'ka', 'kah', 'cas', "qu'a", 'elle', 'ell', 'ailes', 'emme', 'emm', 'aime', 'enne', 'enn', 'haine', "l'aine", 'oh', 'au', 'aux', 'eau', 'eaux', 'pé', 'pay', 'pet', 'paie', 'qu', 'koo', 'cul', 'queue', 'erre', 'err', 'air', 'aire', 'ère', 'esse', 'ess', 'té', 'tay', 'tes', 'thé', "t'es", 'oo', 'u', 'ou', 'où', 'eu', 'vé', 'vay', 'vais', 'vert', 'vers', 've', 'dooblevé', 'double vé', 'double v', 'double-vé', 'ixe', 'iks', 'yks', 'igrec', 'i grec', 'y grec', 'zède', 'zed', 'zeta', 'sept', 'cette', 'é', 'è', 'à', 'ù', 'â', 'ê', 'î', 'ô', 'û', 'ç'].includes(word)) {
             spellingIndicators += 2;
           }
           
-          // Alfabeto NATO
           if (['alpha', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'golf', 'hotel', 'india', 'juliet', 'kilo', 'lima', 'mike', 'november', 'oscar', 'papa', 'quebec', 'romeo', 'sierra', 'tango', 'uniform', 'victor', 'whiskey', 'xray', 'yankee', 'zulu'].includes(word)) {
             spellingIndicators += 2;
           }
         }
         
-        // Si más del 60% de las palabras parecen deletreo, procesar
         const spellingRatio = spellingIndicators / words.length;
         return spellingRatio > 0.6;
       };
@@ -2077,7 +2201,6 @@
       // Función para detectar si el input contiene palabras completas
       const containsCompleteWords = (transcript) => {
         const commonWords = [
-          // Mots communs français qui ne sont pas de l'épellation
           'bonjour', 'salut', 'merci', 'oui', 'non', "d'accord", 'mais', 'donc', 'avec',
           'pour', 'dans', 'sur', 'plus', 'moins', 'tout', 'rien', 'faire', 'aller',
           'être', 'avoir', 'dire', 'voir', 'bien', 'mal', 'très', 'aussi', 'alors',
@@ -2085,9 +2208,12 @@
           'pourquoi', 'quand', 'parce', 'entre', 'sous', 'vers', 'chez', 'pendant'
         ];
         
-        const words = transcript.toLowerCase().split(/\s+/);
+        const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+        const normalized = normalizeSpokenTranscript(cleanedTranscript);
+        if (!normalized) return false;
+
+        const words = normalized.split(/\s+/).filter(Boolean);
         
-        // Si detecta palabras completas de más de 3 letras, probablemente no es deletreo
         for (const word of words) {
           if (word.length > 3 && commonWords.includes(word)) {
             console.log('🚫 Palabra completa detectada, ignorando:', word);
@@ -2095,14 +2221,13 @@
           }
         }
         
-        // Detectar frases típicas de conversación
         const conversationPhrases = [
           'comment vas-tu', "c'est quoi", 'je ne sais pas', 'aide moi',
           'merci beaucoup', 'excusez-moi', 'je suis désolé', 'quel temps',
           'bonne nuit', 'bon soir', 'à plus tard', 'enchanté'
         ];
         
-        const fullText = transcript.toLowerCase();
+        const fullText = normalized.toLowerCase();
         for (const phrase of conversationPhrases) {
           if (fullText.includes(phrase)) {
             console.log('🚫 Frase conversacional detectada, ignorando:', phrase);
@@ -2124,6 +2249,9 @@
           'i': 'i', 'j': 'j', 'k': 'k', 'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'p': 'p',
           'q': 'q', 'r': 'r', 's': 's', 't': 't', 'u': 'u', 'v': 'v', 'w': 'w', 'x': 'x',
           'y': 'y', 'z': 'z',
+          
+          // Letras acentuadas y especiales francesas
+          'é': 'é', 'è': 'è', 'à': 'à', 'ù': 'ù', 'â': 'â', 'ê': 'ê', 'î': 'î', 'ô': 'ô', 'û': 'û', 'ç': 'ç',
           
           // Prononciations françaises & homophones transcrits par le moteur de reconnaissance
           'ah': 'a', 'à': 'a', 'as': 'a',
@@ -2174,7 +2302,9 @@
           'majuscule': 'CAPITAL', 'capital': 'CAPITAL'
         };
         
-        const words = transcript.toLowerCase().replace(/[^a-zàâæçéèêëîïôœùûüÿ\s]/g, '').split(/\s+/);
+        const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+        const normalized = normalizeSpokenTranscript(cleanedTranscript);
+        const words = normalized.split(/\s+/).filter(Boolean);
         let letters = '';
         let nextUpper = false;
         
@@ -2198,7 +2328,7 @@
             }
             letters += charToAdd;
             console.log('🔤 Letra detectada:', cleanWord, '->', charToAdd);
-          } else if (cleanWord.length === 1 && /[a-z]/.test(cleanWord)) {
+          } else if (cleanWord.length === 1 && /[a-zàâæçéèêëîïôœùûüÿ]/.test(cleanWord)) {
             let charToAdd = cleanWord;
             if (nextUpper) {
               charToAdd = charToAdd.toUpperCase();
@@ -6430,7 +6560,11 @@
           let letterClass = 'inline-block text-lg sm:text-xl lg:text-2xl font-mono font-bold mx-1 px-2 py-2 rounded-lg transition-all duration-300 ';
           
           if (i < spoken.length) {
-            if (spokenLetter.toLowerCase() === targetLetter.toLowerCase()) {
+            const isMatch = spokenLetter.toLowerCase() === targetLetter.toLowerCase() || 
+                            (/[a-zàâæçéèêëîïôœùûüÿ]/i.test(spokenLetter) && 
+                             /[a-zàâæçéèêëîïôœùûüÿ]/i.test(targetLetter) && 
+                             normalizeForCompare(spokenLetter) === normalizeForCompare(targetLetter));
+            if (isMatch) {
               letterClass += 'text-green-700 bg-green-100 border-2 border-green-300';
             } else {
               letterClass += 'text-red-700 bg-red-100 border-2 border-red-300 animate-pulse';

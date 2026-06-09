@@ -1053,6 +1053,16 @@
       return matrix[str2.length][str1.length];
     };
 
+    // Mapeo mejorado de letras con variaciones de pronunciación en inglés
+    const normalizeForCompare = (text) => {
+      return (text || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[’']/g, '')
+        .replace(/[^a-z]/g, '');
+    };
+
     // Función para validar contexto de deletreo
     const validateSpellingContext = (input, context) => {
       // Lista de palabras comunes que NO son letras del alfabeto
@@ -1502,9 +1512,37 @@
         return sequences;
       };
 
+      // Función para ignorar la palabra completa pronunciada al inicio o al final del deletreo
+      const cleanWordSpokenAtStartOrEnd = (transcript, targetWord) => {
+        if (!transcript || !targetWord) return transcript;
+        
+        const cleanTarget = targetWord.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '').trim();
+        let cleaned = transcript.trim();
+        
+        const words = cleaned.split(/\s+/);
+        if (words.length > 1) {
+          const firstWord = words[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '');
+          if (firstWord === cleanTarget || (cleanTarget.length > 2 && levenshteinDistance(firstWord, cleanTarget) <= 1)) {
+            words.shift();
+            console.log(`🚫 Palabra inicial "${firstWord}" ignorada de la transcripción.`);
+          }
+        }
+        
+        if (words.length > 1) {
+          const lastWord = words[words.length - 1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '');
+          if (lastWord === cleanTarget || (cleanTarget.length > 2 && levenshteinDistance(lastWord, cleanTarget) <= 1)) {
+            words.pop();
+            console.log(`🚫 Palabra final "${lastWord}" ignorada de la transcripción.`);
+          }
+        }
+        
+        return words.join(' ');
+      };
+
       // Función para detectar si el input parece deletreo
       const isLikelySpelling = (transcript) => {
-        const words = transcript.toLowerCase().split(/\s+/);
+        const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+        const words = cleanedTranscript.toLowerCase().split(/\s+/);
         
         // Criterios para detectar deletreo:
         // 1. Palabras cortas (1-3 caracteres típicamente)
@@ -1557,7 +1595,8 @@
           'pretty', 'fairly', 'extremely', 'completely', 'totally', 'absolutely'
         ];
         
-        const words = transcript.toLowerCase().split(/\s+/);
+        const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+        const words = cleanedTranscript.toLowerCase().split(/\s+/);
         
         // Si detecta palabras completas de más de 3 letras, probablemente no es deletreo
         for (const word of words) {
@@ -1576,7 +1615,7 @@
           'see you later', 'talk to you', 'nice to meet'
         ];
         
-        const fullText = transcript.toLowerCase();
+        const fullText = cleanedTranscript.toLowerCase();
         for (const phrase of conversationPhrases) {
           if (fullText.includes(phrase)) {
             console.log('🚫 Frase conversacional detectada, ignorando:', phrase);
@@ -1622,7 +1661,8 @@
           'hyphen': '-', 'dash': '-', '-': '-'
         };
         
-        const cleanTranscript = (transcript || '')
+        const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+        const cleanTranscript = (cleanedTranscript || '')
           .toLowerCase()
           .replace(/-/g, ' - ')
           .replace(/[^a-z\s-]/g, '');
@@ -6555,7 +6595,11 @@
           let letterClass = 'inline-block text-lg sm:text-xl lg:text-2xl font-mono font-bold mx-1 px-2 py-2 rounded-lg transition-all duration-300 ';
           
           if (i < spoken.length) {
-            if (spokenLetter.toLowerCase() === targetLetter.toLowerCase()) {
+            const isMatch = spokenLetter.toLowerCase() === targetLetter.toLowerCase() || 
+                            (/[a-z]/i.test(spokenLetter) && 
+                             /[a-z]/i.test(targetLetter) && 
+                             normalizeForCompare(spokenLetter) === normalizeForCompare(targetLetter));
+            if (isMatch) {
               letterClass += 'text-green-700 bg-green-100 border-2 border-green-300';
             } else {
               letterClass += 'text-red-700 bg-red-100 border-2 border-red-300 animate-pulse';

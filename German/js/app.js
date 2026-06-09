@@ -1963,9 +1963,37 @@
         .trim();
     };
 
+    // Función para ignorar la palabra completa pronunciada al inicio o al final del deletreo
+    const cleanWordSpokenAtStartOrEnd = (transcript, targetWord) => {
+      if (!transcript || !targetWord) return transcript;
+      
+      const cleanTarget = targetWord.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '').trim();
+      let cleaned = transcript.trim();
+      
+      const words = cleaned.split(/\s+/);
+      if (words.length > 1) {
+        const firstWord = words[0].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '');
+        if (firstWord === cleanTarget || (cleanTarget.length > 2 && levenshteinDistance(firstWord, cleanTarget) <= 1)) {
+          words.shift();
+          console.log(`🚫 Palabra inicial "${firstWord}" ignorada de la transcripción.`);
+        }
+      }
+      
+      if (words.length > 1) {
+        const lastWord = words[words.length - 1].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '');
+        if (lastWord === cleanTarget || (cleanTarget.length > 2 && levenshteinDistance(lastWord, cleanTarget) <= 1)) {
+          words.pop();
+          console.log(`🚫 Palabra final "${lastWord}" ignorada de la transcripción.`);
+        }
+      }
+      
+      return words.join(' ');
+    };
+
     // Función para detectar si el input contiene palabras completas en alemán
     const containsCompleteWords = (transcript) => {
-      const normalized = normalizeSpokenTranscript(transcript);
+      const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+      const normalized = normalizeSpokenTranscript(cleanedTranscript);
       if (!normalized) return false;
 
       const tokens = normalized.split(/\s+/).filter(Boolean);
@@ -1994,7 +2022,8 @@
 
     // Función para detectar si el input parece deletreo en alemán
     const isLikelySpelling = (transcript) => {
-      const normalized = normalizeSpokenTranscript(transcript);
+      const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+      const normalized = normalizeSpokenTranscript(cleanedTranscript);
       if (!normalized) return false;
 
       const tokens = normalized.split(/\s+/).filter(Boolean);
@@ -2019,7 +2048,8 @@
     const processSpokenInput = (transcript) => {
       console.log('🔤 Procesando input:', transcript);
 
-      const normalized = normalizeSpokenTranscript(transcript);
+      const cleanedTranscript = cleanWordSpokenAtStartOrEnd(transcript, currentWordRef.current?.word);
+      const normalized = normalizeSpokenTranscript(cleanedTranscript);
       const words = normalized.split(/\s+/).filter(Boolean);
 
       let letters = '';
@@ -2686,7 +2716,11 @@
           let letterClass = 'inline-block text-lg sm:text-xl lg:text-2xl font-mono font-extrabold mx-1 px-3 py-2 rounded-xl transition-all duration-300 ';
           
           if (i < spoken.length) {
-            if (spokenLetter.toLowerCase() === targetLetter.toLowerCase()) {
+            const isMatch = spokenLetter.toLowerCase() === targetLetter.toLowerCase() || 
+                            (/[a-zäöüß]/i.test(spokenLetter) && 
+                             /[a-zäöüß]/i.test(targetLetter) && 
+                             normalizeForCompare(spokenLetter) === normalizeForCompare(targetLetter));
+            if (isMatch) {
               letterClass += 'text-emerald-400 bg-emerald-500/10 border-2 border-emerald-500/30 shadow-[0_0_10px_rgba(16,185,129,0.2)]';
             } else {
               letterClass += 'text-rose-400 bg-rose-500/10 border-2 border-rose-500/30 shadow-[0_0_10px_rgba(244,63,94,0.2)] animate-pulse';
