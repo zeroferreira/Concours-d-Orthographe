@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
     :root {
@@ -96,11 +98,16 @@
       50% { transform: translateY(-10px) rotate(4deg); }
     }
 
-    /* Gear Pulse Animation */
-    .gear-spin {
-      animation: spin 14s linear infinite;
+    /* Pulse Glow Loader ring */
+    .loader-ring {
+      border: 3px solid rgba(251, 191, 36, 0.15);
+      border-top: 3px solid #fbbf24;
+      border-radius: 50%;
+      animation: spinRing 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     }
-    @keyframes spin {
+
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
@@ -129,9 +136,16 @@
       box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
     }
 
-    /* Progress bar glow */
-    .progress-bar-glow {
-      box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+    /* Animated Dynamic Loading Dots */
+    .loading-dots::after {
+      content: '.';
+      animation: dots 1.5s steps(5, end) infinite;
+    }
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60% { content: '...'; }
+      80%, 100% { content: ''; }
     }
 
     /* Fade Transition */
@@ -173,15 +187,11 @@
       
       <!-- Top Status Badge & Icon -->
       <div class="relative mb-6">
+        <!-- Glowing Loader Ring Container around Bee Logo -->
+        <div class="absolute -inset-2 rounded-full loader-ring"></div>
+
         <div class="w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center bg-black/50 border border-yellow-400/30 rounded-full p-3 backdrop-blur-lg shadow-[0_0_35px_rgba(251,191,36,0.25)]">
-          <img src="img/Abeja.png" onerror="this.onerror=null; this.src='English/img/Abeja.png';" alt="Spelling Bee Logo" class="w-16 h-16 sm:w-20 sm:h-20 object-contain bee-logo">
-        </div>
-        <!-- Floating Gear Indicator -->
-        <div class="absolute -bottom-1 -right-1 bg-yellow-500 text-black p-2 rounded-full shadow-lg border border-black/40">
-          <svg class="w-5 h-5 gear-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
+          <img src="English/img/Abeja.png" onerror="this.onerror=null; this.src='../English/img/Abeja.png';" alt="Spelling Bee Logo" class="w-16 h-16 sm:w-20 sm:h-20 object-contain bee-logo">
         </div>
       </div>
 
@@ -195,22 +205,24 @@
       <div id="content-area" class="fade-content w-full flex flex-col items-center">
         <!-- Main Heading -->
         <h1 id="main-title" class="text-3xl sm:text-5xl font-black tracking-tight mb-4 Space-Grotesk">
-          ESTAMOS <span class="title-shimmer">OPTIMIZANDO</span> LA PLATAFORMA
+          ACTUALIZANDO <span class="title-shimmer">SERVIDOR</span>
         </h1>
 
         <!-- Subtitle / Explanation -->
         <p id="main-desc" class="text-gray-300 max-w-xl text-base sm:text-lg font-light leading-relaxed mb-8">
-          Estamos realizando importantes ajustes y mejoras de rendimiento para brindarte la mejor experiencia en las plataformas de Spelling Bee. Volveremos a estar disponibles muy pronto.
+          Estamos aplicando mejoras de seguridad, optimización de base de datos y nuevas funciones. La plataforma se restablecerá automáticamente en breve.
         </p>
 
-        <!-- Progress Section -->
-        <div class="w-full max-w-md bg-black/40 border border-white/10 rounded-2xl p-5 backdrop-blur-sm mb-6">
-          <div class="flex justify-between items-center text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-            <span id="progress-label">Estado de la actualización</span>
-            <span class="text-yellow-400">92%</span>
+        <!-- Live Loading Status Block -->
+        <div class="w-full max-w-md bg-black/40 border border-white/10 rounded-2xl p-5 backdrop-blur-sm mb-6 flex flex-col items-center">
+          <div class="flex items-center gap-3 text-sm font-semibold text-yellow-400 tracking-wide mb-3">
+            <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+            <span id="step-label" class="loading-dots">Optimizando módulos y recursos</span>
           </div>
-          <div class="w-full bg-gray-800/80 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/5">
-            <div class="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-300 h-full rounded-full progress-bar-glow" style="width: 92%;"></div>
+
+          <!-- Pulsing Status Bar -->
+          <div class="w-full bg-gray-800/80 rounded-full h-2.5 overflow-hidden p-0.5 border border-white/5 relative">
+            <div id="loading-bar" class="bg-gradient-to-r from-yellow-500 via-amber-400 to-yellow-300 h-full rounded-full transition-all duration-700 ease-out" style="width: 45%;"></div>
           </div>
         </div>
 
@@ -229,45 +241,71 @@
     &copy; 2026 SPELLING BEE PLATFORM. ALL RIGHTS RESERVED.
   </footer>
 
-  <!-- Script for Dynamic Languages and Particles -->
+  <!-- Script for Dynamic Languages and Loader Steps -->
   <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
     // Dictionary of translations
     const i18n = {
       es: {
         pill: "SISTEMA EN MANTENIMIENTO",
-        title: "ESTAMOS <span class='title-shimmer'>OPTIMIZANDO</span> LA PLATAFORMA",
-        desc: "Estamos realizando importantes ajustes y mejoras de rendimiento para brindarte la mejor experiencia en las plataformas de Spelling Bee. Volveremos a estar disponibles muy pronto.",
-        progressLabel: "Estado de la actualización",
+        title: "ACTUALIZANDO <span class='title-shimmer'>SERVIDOR</span>",
+        desc: "Estamos aplicando mejoras de seguridad, optimización de base de datos y nuevas funciones. La plataforma se restablecerá automáticamente en breve.",
+        steps: [
+          "Optimizando módulos y recursos",
+          "Sincronizando bases de datos",
+          "Verificando seguridad de la red",
+          "Preparando interfaz multilingüe"
+        ],
         note: "Agradecemos tu paciencia mientras completamos estos ajustes exclusivos."
       },
       en: {
         pill: "SYSTEM UNDER MAINTENANCE",
-        title: "WE ARE <span class='title-shimmer'>UPGRADING</span> THE PLATFORM",
-        desc: "We are currently conducting scheduled updates and performance enhancements to provide you with the best Spelling Bee experience. We will be back online shortly.",
-        progressLabel: "Upgrade Progress",
+        title: "UPGRADING <span class='title-shimmer'>SERVER</span>",
+        desc: "We are applying security enhancements, database optimizations, and new features. The platform will automatically resume shortly.",
+        steps: [
+          "Optimizing modules and assets",
+          "Synchronizing databases",
+          "Verifying network security",
+          "Preparing multilingual interface"
+        ],
         note: "Thank you for your patience while we complete these exclusive enhancements."
       },
       fr: {
         pill: "SYSTÈME EN MAINTENANCE",
-        title: "NOUS <span class='title-shimmer'>AMÉLIORONS</span> LA PLATEFORME",
-        desc: "Nous effectuons actuellement des mises à jour importantes et des améliorations de performances. Notre plateforme sera de nouveau disponible très bientôt.",
-        progressLabel: "Progression de la mise à jour",
+        title: "MISE À JOUR DU <span class='title-shimmer'>SERVEUR</span>",
+        desc: "Nous appliquons des améliorations de sécurité, d'optimisation de base de données et de nouvelles fonctionnalités. La plateforme redémarrera sous peu.",
+        steps: [
+          "Optimisation des modules et ressources",
+          "Synchronisation des bases de données",
+          "Vérification de la sécurité réseau",
+          "Préparation de l'interface multilingue"
+        ],
         note: "Merci de votre patience pendant que nous finalisons ces ajustements."
       },
       de: {
         pill: "SYSTEM WIRD GEWARTET",
-        title: "WIR <span class='title-shimmer'>OPTIMIEREN</span> DIE PLATTFORM",
-        desc: "Wir führen derzeit geplante Wartungsarbeiten und Leistungsoptimierungen durch, um Ihnen das beste Erlebnis zu bieten. Wir sind in Kürze wieder da.",
-        progressLabel: "Fortschritt der Aktualisierung",
+        title: "SERVER <span class='title-shimmer'>WIRD AKTUALISIERT</span>",
+        desc: "Wir führen Sicherheitsverbesserungen, Datenbank-Optimierungen und neue Funktionen ein. Die Plattform wird in Kürze automatisch wiederhergestellt.",
+        steps: [
+          "Module und Ressourcen werden optimiert",
+          "Datenbanken werden synchronisiert",
+          "Netzwerksicherheit wird überprüft",
+          "Mehrsprachige Benutzeroberfläche wird vorbereitet"
+        ],
         note: "Vielen Dank für Ihre Geduld während dieser exklusiven Optimierungen."
       }
     };
 
+    let currentLang = 'es';
+    let stepIndex = 0;
+
     function setLanguage(lang) {
+      currentLang = lang;
       const content = document.getElementById('content-area');
       content.classList.add('fade-out');
 
-      // Update Active tab styling
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
         btn.classList.add('text-gray-400');
@@ -284,12 +322,27 @@
         document.getElementById('status-pill').textContent = data.pill;
         document.getElementById('main-title').innerHTML = data.title;
         document.getElementById('main-desc').textContent = data.desc;
-        document.getElementById('progress-label').textContent = data.progressLabel;
         document.getElementById('main-note').textContent = data.note;
+        document.getElementById('step-label').textContent = data.steps[stepIndex % data.steps.length];
 
         content.classList.remove('fade-out');
       }, 200);
     }
+
+    // Dynamic Loading Progress Cycle
+    const loadingBar = document.getElementById('loading-bar');
+    const stepLabel = document.getElementById('step-label');
+
+    let currentWidth = 45;
+    setInterval(() => {
+      // Smooth pulse increment between 35% and 88%
+      currentWidth = 40 + Math.floor(Math.random() * 48);
+      loadingBar.style.width = `${currentWidth}%`;
+
+      // Cycle text steps
+      stepIndex = (stepIndex + 1) % i18n[currentLang].steps.length;
+      stepLabel.textContent = i18n[currentLang].steps[stepIndex];
+    }, 3200);
 
     // Generate Stars & Fireflies
     const starBg = document.getElementById('star-bg');
