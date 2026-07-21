@@ -14,8 +14,8 @@
   <style>
     :root {
       --gold-primary: #fbbf24;
-      --honey-glow: rgba(245, 158, 11, 0.65);
-      --honey-liquid: linear-gradient(180deg, #fef08a 0%, #f59e0b 45%, #d97706 85%, #b45309 100%);
+      --honey-glow: rgba(245, 158, 11, 0.4);
+      --honey-liquid: linear-gradient(180deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
     }
 
     body {
@@ -134,100 +134,29 @@
       position: relative;
     }
 
-    /* Honey Jar Glassmorphism Container */
+    /* Honey Tube Glassmorphism Container */
     .honey-jar-glass {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 
-        inset 0 2px 4px rgba(255, 255, 255, 0.4),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.6),
-        0 10px 25px rgba(0, 0, 0, 0.5),
-        0 0 20px rgba(245, 158, 11, 0.15);
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.6);
       position: relative;
       overflow: hidden;
       border-radius: 9999px;
     }
 
-    /* Liquid Honey Fill Effect - Smooth Progress Animation */
+    /* Liquid Honey Fill Effect - Pure Clean Gradient */
     .honey-fill {
       background: var(--honey-liquid);
       position: relative;
-      transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.5s linear;
       box-shadow: 
-        0 0 20px rgba(245, 158, 11, 0.85),
-        inset 0 2px 3px rgba(255, 255, 255, 0.7),
-        inset 0 -2px 4px rgba(180, 83, 9, 0.6);
+        inset 0 1px 2px rgba(255, 255, 255, 0.5),
+        0 0 12px rgba(245, 158, 11, 0.4);
       border-radius: 9999px;
-      min-width: 14px;
-    }
-
-    /* Surface Wave Animation on Honey Liquid */
-    .honey-fill::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 50%, rgba(255,255,255,0) 100%);
-      animation: honeyShine 3s ease-in-out infinite;
-    }
-
-    @keyframes honeyShine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    /* Lateral Dripping Honey Nozzle on Left */
-    .honey-nozzle {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .nozzle-pipe {
-      width: 12px;
-      height: 12px;
-      background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.1));
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-    }
-
-    /* Honey Drop falling from left side into the bar tube */
-    .falling-side-drop {
-      position: absolute;
-      left: 6px;
-      top: 0px;
-      width: 8px;
-      height: 10px;
-      background: radial-gradient(circle at 30% 30%, #fef08a, #f59e0b 70%, #d97706 100%);
-      border-radius: 50% 50% 50% 50% / 70% 70% 35% 35%;
-      box-shadow: 0 0 8px rgba(245, 158, 11, 0.9);
-      animation: dripSideFall 1.4s cubic-bezier(0.4, 0, 0.8, 1) infinite;
-      z-index: 10;
-      opacity: 0;
-    }
-
-    @keyframes dripSideFall {
-      0% {
-        transform: translate(0, 0) scale(0.4);
-        opacity: 0;
-      }
-      20% {
-        opacity: 1;
-        transform: translate(3px, 4px) scale(1);
-      }
-      80% {
-        opacity: 1;
-        transform: translate(12px, 8px) scale(1.1);
-      }
-      100% {
-        transform: translate(18px, 10px) scale(0.2);
-        opacity: 0;
-      }
     }
 
     /* Ceramic Floating Bee Badge */
@@ -387,27 +316,15 @@
           <!-- Step Text Label & Percentage Counter -->
           <div class="w-full flex justify-between items-center text-xs font-bold text-yellow-300 tracking-wider mb-4">
             <span class="flex items-center gap-2">
-              <i data-lucide="droplet" class="w-4 h-4 text-amber-400 fill-amber-400 animate-bounce"></i>
-              <span id="step-label" class="loading-dots">Llenando depósito de miel</span>
+              <span id="step-label" class="loading-dots">Optimizando módulos y recursos</span>
             </span>
-            <span id="honey-percentage" class="text-amber-300 font-mono text-sm">5%</span>
+            <span id="honey-percentage" class="text-amber-300 font-mono text-sm">0.0%</span>
           </div>
 
-          <!-- Glassmorphism Honey Bar Tube with Lateral Honey Dispenser -->
-          <div class="w-full flex items-center gap-2">
-            
-            <!-- Left Honey Dispenser Nozzle -->
-            <div class="honey-nozzle">
-              <div class="nozzle-pipe"></div>
-              <div class="falling-side-drop"></div>
-            </div>
-
-            <!-- Main Glass Tube -->
-            <div class="honey-jar-glass flex-grow h-6 p-0.5 relative flex items-center">
-              <!-- Filling Honey Liquid -->
-              <div id="loading-bar" class="honey-fill h-full" style="width: 5%;"></div>
-            </div>
-
+          <!-- Glassmorphism Clean Tube -->
+          <div class="honey-jar-glass w-full h-5 p-0.5 relative flex items-center">
+            <!-- Filling Honey Liquid -->
+            <div id="loading-bar" class="honey-fill h-full" style="width: 0.1%;"></div>
           </div>
 
         </div>
@@ -427,7 +344,7 @@
     &copy; 2026 SPELLING BEE PLATFORM. ALL RIGHTS RESERVED.
   </footer>
 
-  <!-- Script for Dynamic Languages and Slow Honey Filling -->
+  <!-- Script for 1-Month Slow Progress Calculation & Auto-Reset -->
   <script>
     // Initialize Lucide Icons
     lucide.createIcons();
@@ -439,7 +356,6 @@
         title: "ACTUALIZANDO <span class='title-shimmer'>SERVIDOR</span>",
         desc: "Estamos aplicando mejoras de seguridad, optimización de base de datos y nuevas funciones. La plataforma se restablecerá automáticamente en breve.",
         steps: [
-          "Llenando depósito de miel",
           "Optimizando módulos y recursos",
           "Sincronizando bases de datos",
           "Verificando seguridad de la red",
@@ -452,7 +368,6 @@
         title: "UPGRADING <span class='title-shimmer'>SERVER</span>",
         desc: "We are applying security enhancements, database optimizations, and new features. The platform will automatically resume shortly.",
         steps: [
-          "Filling honey reservoir",
           "Optimizing modules and assets",
           "Synchronizing databases",
           "Verifying network security",
@@ -465,7 +380,6 @@
         title: "MISE À JOUR DU <span class='title-shimmer'>SERVEUR</span>",
         desc: "Nous appliquons des améliorations de sécurité, d'optimisation de base de données et de nouvelles fonctionnalités. La plateforme redémarrera sous peu.",
         steps: [
-          "Remplissage del réservoir de miel",
           "Optimisation des modules et ressources",
           "Synchronisation des bases de données",
           "Vérification de la sécurité réseau",
@@ -478,7 +392,6 @@
         title: "SERVER <span class='title-shimmer'>WIRD AKTUALISIERT</span>",
         desc: "Wir führen Sicherheitsverbesserungen, Datenbank-Optimierungen und neue Funktionen ein. Die Plattform wird in Kürze automatisch wiederhergestellt.",
         steps: [
-          "Honigspeicher wird gefüllt",
           "Module und Ressourcen werden optimiert",
           "Datenbanken werden synchronisiert",
           "Netzwerksicherheit wird überprüft",
@@ -519,28 +432,33 @@
       }, 200);
     }
 
-    // Dynamic Slow Honey Fill Update (+1% every 750ms)
+    // 1 Month Cycle Progress Bar Calculation
     const loadingBar = document.getElementById('loading-bar');
     const stepLabel = document.getElementById('step-label');
     const honeyPercentage = document.getElementById('honey-percentage');
 
-    let currentWidth = 5;
+    const ONE_MONTH_MS = 30 * 24 * 60 * 60 * 1000; // 30 Days in milliseconds
 
-    setInterval(() => {
-      currentWidth += 1;
-      if (currentWidth > 98) {
-        currentWidth = 5;
+    function updateMonthProgress() {
+      const now = Date.now();
+      const progressMs = now % ONE_MONTH_MS;
+      const percentage = (progressMs / ONE_MONTH_MS) * 100;
+      
+      const formatted = percentage.toFixed(1);
+      loadingBar.style.width = `${Math.max(0.2, percentage)}%`;
+      honeyPercentage.textContent = `${formatted}%`;
+
+      // Cycle step texts smoothly
+      const currentStep = Math.floor((percentage / 100) * i18n[currentLang].steps.length);
+      if (currentStep !== stepIndex) {
+        stepIndex = currentStep;
+        stepLabel.textContent = i18n[currentLang].steps[stepIndex % i18n[currentLang].steps.length];
       }
+    }
 
-      loadingBar.style.width = `${currentWidth}%`;
-      honeyPercentage.textContent = `${currentWidth}%`;
-
-      // Update text step label every 20%
-      if (currentWidth % 20 === 0) {
-        stepIndex = (stepIndex + 1) % i18n[currentLang].steps.length;
-        stepLabel.textContent = i18n[currentLang].steps[stepIndex];
-      }
-    }, 750);
+    // Update every second for ultra clean progress
+    updateMonthProgress();
+    setInterval(updateMonthProgress, 1000);
 
     // Generate Stars & Fireflies
     const starBg = document.getElementById('star-bg');
